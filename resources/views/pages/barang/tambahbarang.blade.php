@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    <div class="col-lg-9  px-5">
+    <div class="col-lg-10 mx-auto px-5">
         <form action="/barang" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
@@ -19,7 +19,7 @@
                 <select class="form-select" aria-label="Default select example" name="id_kategori">
                     <option selected>Pilih Kategori</option>
                     @foreach ($kategori as $item)
-                        
+
                     <option value="{{$item->id}}">{{$item->kategori}}</option>
                     @endforeach
                   </select>
@@ -28,7 +28,7 @@
                 <label for="exampleInputEmail1" class="form-label">Masukkan minimum stok pemberitahuan</label>
                 <div class="input-group mb-3" id="exampleInputEmail1">
                     <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="minimstok">
-           
+
                 </div>
             </div>
             <div class="mb-3">
@@ -72,7 +72,10 @@
                 <input class="form-control form-control-sm" id="formFileSm" type="file" name="gambar">
               </div>
               <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">
+                  <span>Submit</span>
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
               </div>
         </form>
     </div>

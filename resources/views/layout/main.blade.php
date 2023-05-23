@@ -7,7 +7,7 @@
     <meta name="description" content="Propeller Admin Dashboard">
     <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
 
-    <title>Saudara Teknik</title>
+    <title>Toko Bobie</title>
 
     <!-- Google icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -44,6 +44,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
+    <script src="https://kit.fontawesome.com/cf4dce0a52.js" crossorigin="anonymous"></script>
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!--Google Analytics code-->
@@ -136,14 +137,14 @@
     </script>
     <script type="text/javascript" language="javascript" src="/components/datetimepicker/js/bootstrap-datetimepicker.js">
     </script>
-   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
     <!-- /build -->
     <script>
-        // Linked date and time picker 
-        // start date date and time picker 
+        // Linked date and time picker
+        // start date date and time picker
         $('#datepicker-default').datetimepicker();
         $(".auto-update-year").html(new Date().getFullYear());
     </script>

@@ -1,13 +1,7 @@
 @extends('layout.main')
 @section('content')
-
-
-
-
-
-
-    <div class="d-flex justify-content-center mt-2 ">
-        <div class="col-lg-12 bg-white  px-2 py-5">
+    <div class="col-lg-9 mx-auto mt-2">
+        <div style="border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="col-lg-12 bg-white px-4 py-4">
             <div class="fs-3 fw-semibold text-center mb-5">Piutang</div>
             <table class="table">
                 <thead>
@@ -44,8 +38,9 @@
                                 <td>@currency($item->total)</td>
 
                                 <td class="d-flex gap-2"> <a target="_blank" href="/pdf/{{ $item->id }}">
-                                        <div class=" btn-primary btn-sm text-white mb-1">
-                                            <i class="bi bi-printer"></i>
+                                        <div class="btn btn-primary text-white mb-1">
+                                            <span>Print</span>
+                                            <i class="fa-solid fa-print"></i>
                                         </div>
                                     </a>
                                     @component('components.modal')
@@ -53,8 +48,9 @@
                                         {{ $item->id }}
                                     @endslot
                                     @slot('icon')
-                                        <div type="submit" class=" btn-success btn-sm text-white mb-1">
-                                            <i class="bi bi-check"></i>
+                                        <div type="submit" class="btn btn-success text-white mb-1">
+                                            <span>Bayar</span>
+                                            <i class="fa-solid fa-file-invoice-dollar"></i>
                                         </div>
                                     @endslot
                                     @slot('isi')
@@ -68,9 +64,10 @@
                                                     <option value="non-tunai">Non-Tunai</option>
                                                 </select>
                                             </div>
-                                            <div class="d-flex justify-content-end">
+                                            <div class="d-flex justify-content-end mt-3">
                                                 <button type="submit" class="btn btn-success btn-sm">
-                                                    <i class="bi bi-check-lg"></i>
+                                                    <span>Submit</span>
+                                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
                                                 </button>
                                             </div>
                                         </form>
@@ -78,7 +75,7 @@
                                 @endcomponent
                                 </td>
 
-                            
+
                             </tr>
                         @endforeach
                     @endif

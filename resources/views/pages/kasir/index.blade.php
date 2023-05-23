@@ -1,167 +1,186 @@
 @extends('layout.main')
 @section('content')
-    <form action="/kasir" method="post" class="form-horizontal form-label-left" novalidate>
-        @csrf
-        <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Nama
-                Pembeli</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-                    data-validate-words="1" name="nama_pembeli" required="required" type="text">
-            </div>
+<div class="col-lg-10 mx-auto">
+  <div style="background-color: #b8a266; color: white; border-radius: 5px" class="py-3 px-4 col-md-3 my-4">
+    <i class="fa-solid fa-cart-flatbed"></i>
+    <span>Tabel Faktur Barang</span>
+  </div>
+  <form action="/kasir" method="post" class="form-horizontal form-label-left" novalidate>
+      @csrf
+      <div class="row row-cols-2">
+        <div class="col">
+          <div class="item form-group">
+              <label class="control-label" for="nama_pembeli">Nama Pembeli</label>
+              <div class="mb-2">
+                  <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" required="required" type="text">
+              </div>
+          </div>
+          <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
+              <div class="mb-2">
+                  <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="alamat" required="required" type="text">
+              </div>
+          </div>
+          <div class="item form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_beli">Tanggal Transaksi</label>
+              <div class="">
+                  <div class='input-group date' id='myDatepicker2'>
+                      <input type="date" name="tgl_beli" id="tgl_beli" class="form-control" required="required">
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+              </div>
+          </div>
         </div>
-        <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-                    data-validate-words="1" name="alamat" required="required" type="text">
-            </div>
+        <div class="col">
+          <div class="item form-group">
+              <div class="item form-group mb-2">
+                <label for="">Harga</label>
+                  <div class='input-group date' id='myDatepicker2'>
+                      <select class="form-select" aria-label="Default select example" id="tipe">
+                          <option selected>==Pilih Harga==</option>
+                          <option value="hargaeceran">Harga Eceran</option>
+                          <option value="hargagrosir">Harga Grosir</option>
+                          <option value="hargaretail">Harga Retail</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="item form-group mb-2">
+                <label for="">Pembayaran</label>
+                  <div class='input-group date' id='myDatepicker2'>
+                      <select class="form-select" aria-label="Default select example" name="jenispembayaran" onchange="bon()" id="jenispembayaran">
+                          <option selected>==Pilih Metode Pembayaran==</option>
+                          <option value="tunai">Tunai</option>
+                          <option value="non-tunai">Non-Tunai</option>
+                          <option value="belum-dibayar" >Belum Dibayar</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="d-none item form-group" id="bon">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal
+                      Jatuh Tempo</label>
+                  <div class="">
+                      <div class='input-group date' id='myDatepicker2'>
+                          <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required" pattern="\d{4}-\d{2}-\d{2}" >
+                          <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
         </div>
 
-        <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_beli">Tanggal
-                Transaksi</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class='input-group date' id='myDatepicker2'>
-                    <input type="date" name="tgl_beli" id="tgl_beli" class="form-control" required="required">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 mt-2">
-                <div class='input-group date' id='myDatepicker2'>
-                    <select class="form-select" aria-label="Default select example" id="tipe">
-                        <option selected>Pilih Harga</option>
-                        <option value="hargaeceran">Harga Eceran</option>
-                        <option value="hargagrosir">Harga Grosir</option>
-                        <option value="hargaretail">Harga Retail</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 mt-3">
-                <div class='input-group date' id='myDatepicker2'>
-                    <select class="form-select" aria-label="Default select example" name="jenispembayaran" onchange="bon()" id="jenispembayaran">
-                        <option selected>Pilih Metode Pembayaran</option>
-                        <option value="tunai">Tunai</option>
-                        <option value="non-tunai">Non-Tunai</option>
-                        <option value="belum-dibayar" >Belum Dibayar</option>
-                    </select>
-                </div>
-            </div>
-            <div class="d-none" id="bon">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal
-                    Jatuh Tempo</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class='input-group date' id='myDatepicker2'>
-                        <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required" pattern="\d{4}-\d{2}-\d{2}" >
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
 
-        <table id="prod" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th style="text-align: center" width="30%">Nama Barang</th>
-                    <th style="text-align: center" width="15%">Satuan</th>
-                    <th style="text-align: center" width="10%">Stok</th>
-                    <th style="text-align: center">Harga</th>
-                    <th style="text-align: center">jumlah</th>
+      <table style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="prod" class="table table-bordered bg-white mt-3 py-4 px-4">
+          <thead>
+              <tr >
+                  <th style="text-align: center" width="30%">Nama Barang</th>
+                  <th style="text-align: center" width="15%">Satuan</th>
+                  <th style="text-align: center" width="10%">Stok</th>
+                  <th style="text-align: center">Harga</th>
+                  <th style="text-align: center">jumlah</th>
+                  <th style="text-align: center">Subtotal</th>
+                  <th style="text-align: center">Aksi</th>
+              </tr>
+          </thead>
 
-                    <th style="text-align: center">Subtotal</th>
-                    <th style="text-align: center">Aksi</th>
+          <tfoot>
+              <tr>
+                  <td style="text-align:right; vertical-align: middle" colspan="5">
+                      <b>Grandtotal</b>
+                  </td>
+                  <td>
+                      <input id="grandtotal2" type="text" class="form-control grandtotal" readonly>
+                      <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
+                  </td>
+              </tr>
+              {{-- <tr>
+                  <td style="text-align:right; vertical-align: middle" colspan="5">
+                      <b>Bayar</b>
+                  </td>
+                  <td>
+                      <input id="bayar" name="pembayaran" type="text" class="form-control grandtotal"
+                          onchange="kembalian()">
+                  </td>
+              </tr>
+              <tr>
+                  <td style="text-align:right; vertical-align: middle" colspan="5">
+                      <b>Kembali</b>
+                  </td>
+                  <td>
+                      <input id="kembalian"  type="text" class="form-control grandtotal" readonly>
+                      <input id="kembali" name="kembalian" type="text" class="form-control grandtotal" hidden>
+                  </td>
+              </tr> --}}
+          </tfoot>
 
-                </tr>
-            </thead>
+          <tbody id="tbody">
+              <tr role="row" class="1" id="trow">
+                  <td>
+                      <select required="required" style="width:100%;" class="form-control nama_obat" id="nama1"
+                          name="nama[]" data-stok="#stok1" data-unit="#unit1" data-harga_jual="#harga_jual1"
+                          onchange="coba()">
 
-            <tfoot>
-                <tr>
-                    <td style="text-align:right; vertical-align: middle" colspan="5">
-                        <b>Grandtotal</b>
-                    </td>
-                    <td>
-                        <input id="grandtotal2" type="text" class="form-control grandtotal" readonly>
-                        <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
-                    </td>
-                </tr>
-                {{-- <tr>
-                    <td style="text-align:right; vertical-align: middle" colspan="5">
-                        <b>Bayar</b>
-                    </td>
-                    <td>
-                        <input id="bayar" name="pembayaran" type="text" class="form-control grandtotal"
-                            onchange="kembalian()">
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align:right; vertical-align: middle" colspan="5">
-                        <b>Kembali</b>
-                    </td>
-                    <td>
-                        <input id="kembalian"  type="text" class="form-control grandtotal" readonly>
-                        <input id="kembali" name="kembalian" type="text" class="form-control grandtotal" hidden>
-                    </td>
-                </tr> --}}
-            </tfoot>
+                          <option disabled selected value> </option>
+                          @foreach ($data as $item)
+                              <option value="{{ $item->id }}">{{ $item->nama }}
+                              </option>
+                          @endforeach
 
-            <tbody id="tbody">
-                <tr role="row" class="1" id="trow">
-                    <td>
-                        <select required="required" style="width:100%;" class="form-control nama_obat" id="nama1"
-                            name="nama[]" data-stok="#stok1" data-unit="#unit1" data-harga_jual="#harga_jual1"
-                            onchange="coba()">
-
-                            <option disabled selected value> </option>
-                            @foreach ($data as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama }}
-                                </option>
-                            @endforeach
-
-                            {{-- @foreach ($obat as $o)
-                      
-                  
-                  <option value=" {{$o->id_obat}} "> {{$o->nama_obat}} </option>
-                        @endforeach --}}
-                        </select>
-                    </td>
-                    <td>
-                        <input id="satuan1" name="stok[]" class="form-control stok" readonly="">
-                        <input id="modal1" name="modal[]" class="form-control stok" hidden>
-                    </td>
-                    <td><input id="stok1" name="unit[]" class="form-control" readonly=""></td>
-                    <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
-                            onchange="hitung()">
-                    </td>
-                    <td><input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
-                            required="required" onchange="hitung()">
-                    </td>
-                    <td><input id="subtotaltampil1"  class="form-control subtotal" readonly></td>
-                    <td><input id="subtotal1" name="subtotal[]" class="form-control subtotal" hidden
-                            onchange="hitungseluruh()"></td>
-                    <td><button id="1" class="btn btn-danger btn-sm hapus" type="button" onclick="hapus(this)">
-                            <span class="fa fa-trash"></span> Hapus</button>
-                    </td>
-                </tr>
-
-        </table>
+                          {{-- @foreach ($obat as $o)
 
 
-        <div class="ln_solid"></div>
-        <div class="form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <a href=""><button type="button" class="btn btn-danger">Batal</button></a>
-                <button id='addRow' class="btn btn-info" type="button" onclick="tambah()"><span
-                        class="fa fa-plus"></span> Tambah Produk</button>
-                <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                <button onclick="printDiv('prod')" class="btnprn btn">Print Preview</button>
+                <option value=" {{$o->id_obat}} "> {{$o->nama_obat}} </option>
+                      @endforeach --}}
+                      </select>
+                  </td>
+                  <td>
+                      <input id="satuan1" name="stok[]" class="form-control stok" readonly="">
+                      <input id="modal1" name="modal[]" class="form-control stok" hidden>
+                  </td>
+                  <td><input id="stok1" name="unit[]" class="form-control" readonly=""></td>
+                  <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
+                          onchange="hitung()">
+                  </td>
+                  <td><input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
+                          required="required" onchange="hitung()">
+                  </td>
+                  <td><input id="subtotaltampil1"  class="form-control subtotal" readonly></td>
+                  <td><input id="subtotal1" name="subtotal[]" class="form-control subtotal" hidden
+                          onchange="hitungseluruh()"></td>
+                  <td><button id="1" class="btn btn-danger btn-sm hapus" type="button" onclick="hapus(this)">
+                          <span class="fa fa-trash"></span> Hapus</button>
+                  </td>
+              </tr>
+      </table>
 
-            </div>
-        </div>
-    </form>
+      <div class="ln_solid"></div>
+      <div class="form-group d-flex justify-content-end">
+          <div class="d-flex gap-3">
+              {{-- <a href="">
+                <button type="button" class="btn btn-danger">
+                  <span>Batal</span>
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </a> --}}
+              <button style="color: white" id='addRow' class="btn btn-primary" type="button" onclick="tambah()">
+                <span>Tambah Produk</span>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+              <button id="send" type="submit" class="btn btn-success">
+                <span>Print Faktur</span>
+                <i class="fa-solid fa-print"></i>
+              </button>
+              {{-- <button onclick="printDiv('prod')" class="btnprn btn">Print Preview< /button> --}}
+          </div>
+      </div>
+  </form>
+</div>
+
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
