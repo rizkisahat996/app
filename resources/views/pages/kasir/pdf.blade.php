@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>PDF</title>
    
    
     <style>
@@ -95,7 +95,7 @@ font-weight:500 !important ;
 <body class="px-2 " onload="window.print()">
     @if ($count > 5)
         <div class="d-flex justify-content-between" id="tek">
-            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">SAUDARA TEKNIK</div>
+            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">BOBIE</div>
             <div class="fw-semibold fs-4" style="margin-left: 70%; width: 30%;" id="fak">FAKTUR PENJUALAN</div>
         </div>
         <table class="table table-borderless" id="info">
@@ -217,13 +217,13 @@ font-weight:500 !important ;
 
         </div>
         <div class="d-flex justify-content-between" style="margin-top: 8rem;" id="tek">
-            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">SAUDARA TEKNIK</div>
+            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">BOBIE</div>
             <div class="fw-semibold fs-4" style="margin-left: 70%; width: 30%;" id="fak">FAKTUR PENJUALAN</div>
         </div>
         <table class="table table-borderless" id="info">
             <tr>
                 <td  colspan="3" width="50%">
-                    Jl. Gatot Subroto KM.4, No.63,</td>
+                    Jl. Tanjung Raya Pasar 6 Helvetia Marelan ,</td>
                 
                 <td width="10%">Kepada</td>
                 <td width="5%">:&nbsp;</td>
@@ -337,13 +337,13 @@ font-weight:500 !important ;
         </div>
     @else
         <div class="d-flex justify-content-between" id="tek">
-            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">SAUDARA TEKNIK</div>
+            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">BOBIE</div>
             <div class="fw-semibold fs-4" style="margin-left: 70%; width: 30%;" id="fak">FAKTUR PENJUALAN</div>
         </div>
         <table class="table table-borderless" id="info">
             <tr>
                 <td  colspan="3" width="50%">
-                    Jl. Gatot Subroto KM.4, No.63,</td>
+                    Jl. Tanjung Raya Pasar 6 Helvetia Marelan ,</td>
                 
                 <td width="10%">Kepada</td>
                 <td width="5%">:&nbsp;</td>

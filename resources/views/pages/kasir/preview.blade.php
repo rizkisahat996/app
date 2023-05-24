@@ -21,7 +21,7 @@
           <h5 class="text-center">Preview</h5>
           <div class="mx-1 mt-3 py-5 px-5 bg-white">
               <div class="d-flex justify-content-between px-1 py-2" id="top">
-                  <div class="fw-bold fs-5">Saudara Teknik</div>
+                  <div class="fw-bold fs-5">BOBIE</div>
                   <div class="fw-bold fs-5">Faktur Penjualan</div>
               </div>
               <table class="table " id="tab">
