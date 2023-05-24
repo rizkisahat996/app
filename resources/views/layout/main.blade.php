@@ -1,4 +1,70 @@
 <!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" href="../asset/images/logos/favicon.png" />
+  <link rel="stylesheet" href="{{ asset('/asset/css/styles.min.css') }}" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      @include('components.sidebar')
+        </aside>
+        <!--  Sidebar End -->
+        
+        <!--  Main wrapper -->
+        <div class="body-wrapper">
+            <!--  Header Start -->
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
+                <i class="ti ti-bell-ringing"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!--  Header End -->
+      <div class="container-fluid">
+        <div class="row">
+          @yield('content')
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../asset/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../asset/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../asset/js/sidebarmenu.js"></script>
+  <script src="../asset/js/app.min.js"></script>
+  <script src="../asset/libs/simplebar/dist/simplebar.js"></script>
+</body>
+
+</html>
+
+{{-- <!doctype html>
 <html lang="">
 
 <head>
@@ -11,16 +77,7 @@
 
     <!-- Google icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Bootstrap css -->
-    <!-- build:[href] assets/css/ -->
-    <!-- /build -->
-
-    <!-- Propeller css -->
-    <!-- build:[href] assets/css/ -->
-    <!-- build:[href] assets/css/ -->
     <link rel="stylesheet" type="text/css" href="/assets/css/propeller.min.css">
-    <!-- /build -->
     <!-- /build -->
 
 
@@ -153,4 +210,4 @@
 
 </body>
 
-</html>
+</html> --}}
