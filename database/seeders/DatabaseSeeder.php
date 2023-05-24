@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
       'jabatan' => 'superadmin',
     ]);
 
-    DB::table('users')->insert([
-      'name' => Str::random(10),
-      'email' => Str::random(10) . '@gmail.com',
-      'password' => Hash::make('password'),
-      'jabatan' => Str::random(1) == 0 ? 'kasir' : 'admin',
-    ]);
+    // DB::table('users')->insert([
+    //   'name' => Str::random(10),
+    //   'email' => Str::random(10) . '@gmail.com',
+    //   'password' => Hash::make('password'),
+    //   'jabatan' => Str::random(1) == 0 ? 'kasir' : 'admin',
+    // ]);
   }
 }
