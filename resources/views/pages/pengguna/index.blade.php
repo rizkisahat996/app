@@ -9,7 +9,7 @@
     <div class="bg-white p-3">
         <div class="d-flex justify-content-start">
             <a href="/pengguna/create">
-                <div class=" btn-md btn-primary p-2 fs-6">Tambah Pengguna</div>
+                <div class="btn btn-primary p-2 fs-4">Tambah Pengguna</div>
             </a>
         </div>
                 <table class="table mt-5">
@@ -34,7 +34,7 @@
                         @else
                             @foreach ($data as $item)
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->jabatan }}</td>
@@ -47,7 +47,7 @@
                                                 @endslot
                                                 @slot('icon')
                                                     <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="bi bi-x"></i>
+                                                        <i class="ti ti-trash-x"></i>
                                                     </button>
                                                 @endslot
                                                 @slot('isi')
