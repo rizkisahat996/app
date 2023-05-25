@@ -15,9 +15,7 @@
                 laporan
             @endslot
             @slot('icon')
-                <div class="text-white  btn-success btn-md btn-primary fs-6 p-2">
-                    Ekspor Laporan Transaksi
-                </div>
+                <button type="button" class="btn btn-primary m-1 fs-3">Ekspor Laporan Transaksi</button>
             @endslot
             @slot('isi')
                 <form action="/laporan" method="POST">
@@ -48,8 +46,8 @@
             @endslot
         @endcomponent
         
-        <div class="text-white  btn-danger btn-md btn-primary fs-6 p-2">
-            <a href="eksport" class="mt-1">Ekspor Barang PDF</a>
+        <div class="text-white btn-danger btn-md btn-primary fs-3 p-2">
+            <a href="eksport" class="btn btn-secondary">Ekspor Barang PDF</a>
         </div>
         
     </div>

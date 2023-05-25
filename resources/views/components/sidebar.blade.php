@@ -11,8 +11,9 @@
     <!-- Sidebar navigation-->
     <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
         <ul id="sidebarnav" class="mt-4">
+          @if (auth()->user()->jabatan == 'superadmin')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/dashboard" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -20,7 +21,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/barang" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-warehouse"></i>
                 </span>
@@ -28,7 +29,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/pengguna" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -36,7 +37,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/penjualan" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-bank"></i>
                 </span>
@@ -44,7 +45,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/piutang" aria-expanded="false">
                 <span>
                   <i class="ti ti-brand-cashapp"></i>
                 </span>
@@ -52,7 +53,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/laporan" aria-expanded="false">
                 <span>
                   <i class="ti ti-checkup-list"></i>
                 </span>
@@ -60,7 +61,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/histori" aria-expanded="false">
                 <span>
                   <i class="ti ti-history"></i>
                 </span>
@@ -68,13 +69,47 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/logout" aria-expanded="false">
                 <span>
                   <i class="ti ti-door-exit"></i>
                 </span>
                 <span class="hide-menu">Logout</span>
               </a>
             </li>
+          @else
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/barang" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building-warehouse"></i>
+                </span>
+                <span class="hide-menu">Barang</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/penjualan" aria-expanded="false">
+                <span>
+                  <i class="ti ti-building-bank"></i>
+                </span>
+                <span class="hide-menu">Kasir</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/piutang" aria-expanded="false">
+                <span>
+                  <i class="ti ti-brand-cashapp"></i>
+                </span>
+                <span class="hide-menu">Hutang-Piutang</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/logout" aria-expanded="false">
+                <span>
+                  <i class="ti ti-door-exit"></i>
+                </span>
+                <span class="hide-menu">Logout</span>
+              </a>
+            </li>
+          @endif
           </ul>
         </nav>
         <!-- End Sidebar navigation -->
