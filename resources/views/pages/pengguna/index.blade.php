@@ -6,10 +6,19 @@
         color: white;
     }
 </style>
-    <div class="bg-white p-3">
+    <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1rem" class="py-3 px-4 mb-4 mt-3 col-sm-6 col-xl-4 col-lg-4 d-flex">
+      <div>
+        <i class="ti ti-user"></i>
+        <span>Manajemen Pengguna</span>
+      </div>
+    </div>
+    <div class="bg-white px-4 py-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
         <div class="d-flex justify-content-start">
             <a href="/pengguna/create">
-                <div class="btn btn-primary p-2 fs-4">Tambah Pengguna</div>
+                <div class="btn btn-primary p-2 fs-4">
+                  <i class="ti ti-user-plus"></i>
+                  <span>Tambah Pengguna</span>
+                </div>
             </a>
         </div>
                 <table class="table mt-5">
@@ -40,26 +49,26 @@
                                     <td>{{ $item->jabatan }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-        
+
                                             @component('components.modal')
                                                 @slot('target')
                                                     {{ $item->id }}
                                                 @endslot
                                                 @slot('icon')
                                                     <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="ti ti-trash-x"></i>
+                                                        <i class="ti ti-trash"></i>
+                                                        <span>Hapus</span>
                                                     </button>
                                                 @endslot
                                                 @slot('isi')
-                                                    <form action="/pengguna/{{ $item->id }}" method="POST">
+                                                    <form action="/pengguna/{{ $item->id }}" method="POST" class="py-4">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <div class="d-flex justify-content-center text-center">
-                                                            <h6>Apakah Anda yakin ingin menghapus Pengguna ini?</h6>
-                                                        </div>
-                                                        <div class="d-flex justify-content-end">
-                                                            <button type="submit" class="btn btn-success btn-sm">
-                                                                <i class="bi bi-check-lg"></i>
+                                                        <h3 style="text-align: center">Apakah Anda yakin ingin menghapus Pengguna ini?</h6>
+                                                        <div class="d-flex justify-content-center mt-4">
+                                                            <button type="submit" class="btn btn-danger">
+                                                                <i class="ti ti-trash"></i>
+                                                                <span>Hapus</span>
                                                             </button>
                                                         </div>
                                                     </form>
@@ -73,5 +82,5 @@
                     </tbody>
                 </table>
     </div>
-     
+
 @endsection

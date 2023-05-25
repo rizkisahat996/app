@@ -1,31 +1,32 @@
 @extends('layout.main')
 @section('content')
-<div class="col-lg-10 mx-auto">
-  <div style="background-color: #b8a266; color: white; border-radius: 5px" class="py-3 px-4 col-md-3 my-4">
-    <i class="fa-solid fa-cart-flatbed"></i>
-    <span>Tabel Faktur Barang</span>
+  <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
+    <div style="text-align: center">
+      <i class="ti ti-building-bank"></i>
+      <span>Kasir</span>
+    </div>
   </div>
   <form action="/kasir" method="post" class="form-horizontal form-label-left" novalidate>
       @csrf
-      <div class="row row-cols-2">
+      <div class="row row-cols-2 bg-white px-4 py-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
         <div class="col">
           <div class="item form-group">
               <label class="control-label" for="nama_pembeli">Nama Pembeli</label>
               <div class="mb-2">
-                  <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" required="required" type="text">
+                  <input placeholder="Masukan nama pembeli" style="background-color: white" id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" required="required" type="text">
               </div>
           </div>
           <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
               <div class="mb-2">
-                  <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="alamat" required="required" type="text">
+                  <input placeholder="Masukan alamat pembeli" style="background-color: white" id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="alamat" required="required" type="text">
               </div>
           </div>
           <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_beli">Tanggal Transaksi</label>
+            <label class="control-label" for="tgl_beli">Tanggal Transaksi</label>
               <div class="">
                   <div class='input-group date' id='myDatepicker2'>
-                      <input type="date" name="tgl_beli" id="tgl_beli" class="form-control" required="required">
+                      <input style="background-color: white" type="date" name="tgl_beli" id="tgl_beli" class="form-control" required="required">
                       <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                       </span>
@@ -38,7 +39,7 @@
               <div class="item form-group mb-2">
                 <label for="">Harga</label>
                   <div class='input-group date' id='myDatepicker2'>
-                      <select class="form-select" aria-label="Default select example" id="tipe">
+                      <select style="background-color: white" class="form-select" aria-label="Default select example" id="tipe">
                           <option selected>==Pilih Harga==</option>
                           <option value="hargaeceran">Harga Eceran</option>
                           <option value="hargagrosir">Harga Grosir</option>
@@ -49,7 +50,7 @@
               <div class="item form-group mb-2">
                 <label for="">Pembayaran</label>
                   <div class='input-group date' id='myDatepicker2'>
-                      <select class="form-select" aria-label="Default select example" name="jenispembayaran" onchange="bon()" id="jenispembayaran">
+                      <select style="background-color: white" class="form-select" aria-label="Default select example" name="jenispembayaran" onchange="bon()" id="jenispembayaran">
                           <option selected>==Pilih Metode Pembayaran==</option>
                           <option value="tunai">Tunai</option>
                           <option value="non-tunai">Non-Tunai</option>
@@ -58,11 +59,10 @@
                   </div>
               </div>
               <div class="d-none item form-group" id="bon">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal
-                      Jatuh Tempo</label>
+                  <label class="control-label" for="jatuh_tempo">Tanggal Jatuh Tempo</label>
                   <div class="">
                       <div class='input-group date' id='myDatepicker2'>
-                          <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required" pattern="\d{4}-\d{2}-\d{2}" >
+                          <input style="background-color: white" type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required" pattern="\d{4}-\d{2}-\d{2}" >
                           <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                           </span>
@@ -125,7 +125,7 @@
                           name="nama[]" data-stok="#stok1" data-unit="#unit1" data-harga_jual="#harga_jual1"
                           onchange="coba()">
 
-                          <option disabled selected value> </option>
+                          <option disabled selected value>--Pilih nama barang--</option>
                           @foreach ($data as $item)
                               <option value="{{ $item->id }}">{{ $item->nama }}
                               </option>
@@ -152,8 +152,11 @@
                   <td><input id="subtotaltampil1"  class="form-control subtotal" readonly></td>
                   <td><input id="subtotal1" name="subtotal[]" class="form-control subtotal" hidden
                           onchange="hitungseluruh()"></td>
-                  <td><button id="1" class="btn btn-danger btn-sm hapus" type="button" onclick="hapus(this)">
-                          <span class="fa fa-trash"></span> Hapus</button>
+                  <td>
+                    <button id="1" class="btn btn-danger hapus" type="button" onclick="hapus(this)">
+                      <i class="ti ti-trash"></i>
+                      <span>Hapus</span>
+                    </button>
                   </td>
               </tr>
       </table>
@@ -179,7 +182,6 @@
           </div>
       </div>
   </form>
-</div>
 
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
