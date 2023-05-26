@@ -1,10 +1,21 @@
 @extends('layout.main')
 @section('content')
-<div class="col-lg-10 mx-auto ">
-      <div style="background-color: #b8a266; border-radius: 5px; box-shadow: 1em; color: white" class="py-4 px-4 mb-3 mt-2 col-lg-4">
-        <i class="fa-solid fa-cart-flatbed"></i>
-        <span>Edit Barang</span>
-      </div>
+  <div class="mx-auto ">
+      <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1rem" class="py-3 px-4 mb-4 mt-3 col-sm-7 col-xl-4 col-lg-5 d-flex">
+          <div>
+            <a href="/barang">
+              <i class="ti ti-building-warehouse"></i>
+              <span>Gudang</span>
+            </a>
+          </div>
+          <div>
+            <i class="ti ti-chevron-right"></i>
+          </div>
+          <div>
+            <i class="ti ti-shopping-cart-plus"></i>
+            <span>Edit Barang</span>
+          </div>
+        </div>
       <form style="border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="bg-white py-4 px-4" action="/barang/{{ $barang->id }}" method="post" enctype="multipart/form-data">
           @csrf
           @method('PUT')

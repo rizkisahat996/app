@@ -51,6 +51,6 @@ Route::post('/laporan', [LaporanController::class, 'index'])->middleware('auth')
 Route::post('/laporan/laba', [LaporanController::class, 'laba'])->middleware('auth');
 Route::get('/laporan', [LaporanController::class, 'view'])->middleware('auth');
 
-Route::get('/test', function(){
-    return view('index');
+Route::get('/test', function () {
+  return view('index');
 });

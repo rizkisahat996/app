@@ -1,8 +1,12 @@
 @extends('layout.main')
 @section('content')
-    <div class="col-lg-9 mx-auto mt-2">
+      <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
+        <div style="text-align: center">
+          <i class="ti ti-brand-cashapp"></i>
+          <span>Piutang</span>
+        </div>
+      </div>
         <div style="border-radius: 5px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" class="col-lg-12 bg-white px-4 py-4">
-            <div class="fs-3 fw-semibold text-center mb-5">Piutang</div>
             <table class="table">
                 <thead>
                     <tr class="text-center">
@@ -19,7 +23,7 @@
                 <tbody>
                     @if ($transaksi->isEmpty())
                         <tr>
-                            <td colspan="5">
+                            <td colspan="8">
                                 <div class="d-flex text-muted justify-content-center text-center">
                                     Transaksi Belum Ada
                                 </div>
@@ -39,8 +43,8 @@
 
                                 <td class="d-flex gap-2"> <a target="_blank" href="/pdf/{{ $item->id }}">
                                         <div class="btn btn-primary text-white mb-1">
+                                            <i class="ti ti-printer"></i>
                                             <span>Print</span>
-                                            <i class="fa-solid fa-print"></i>
                                         </div>
                                     </a>
                                     @component('components.modal')
@@ -49,8 +53,8 @@
                                     @endslot
                                     @slot('icon')
                                         <div type="submit" class="btn btn-success text-white mb-1">
+                                            <i class="ti ti-cash"></i>
                                             <span>Bayar</span>
-                                            <i class="fa-solid fa-file-invoice-dollar"></i>
                                         </div>
                                     @endslot
                                     @slot('isi')
@@ -85,6 +89,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
 
 @endsection

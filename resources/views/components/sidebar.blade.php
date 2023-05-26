@@ -25,7 +25,7 @@
                 <span>
                   <i class="ti ti-building-warehouse"></i>
                 </span>
-                <span class="hide-menu">Barang</span>
+                <span class="hide-menu">Gudang</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -82,7 +82,7 @@
                 <span>
                   <i class="ti ti-building-warehouse"></i>
                 </span>
-                <span class="hide-menu">Barang</span>
+                <span class="hide-menu">Gudang</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -116,7 +116,7 @@
       </div>
       <!-- End Sidebar scroll-->
 
-   
+
    {{-- <aside
         class="pmd-sidebar sidebar-default pmd-sidebar-slide-push pmd-sidebar-left pmd-sidebar-open bg-fill-darkblue sidebar-with-icons   col-3"
         role="navigation" id="side" style="background-color: #4f4424 !important; widht: 100px !important; " >

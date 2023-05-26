@@ -1,9 +1,5 @@
 @extends('layout.main')
 @section('content')
-
-
-
-
     <div class="text-center fw-semibold fs-1">Histori Barang</div>
     <div class="d-flex justify-content-center ">
         <div class="col-lg-12 bg-white  p-5">

@@ -57,8 +57,7 @@
                 </div>
             </div>
             <div class="d-none" id="bon">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal
-                    Jatuh Tempo</label>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal Jatuh Tempo</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class='input-group date' id='myDatepicker2'>
                         <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required"
@@ -127,15 +126,15 @@
                                 <option value="{{ old('id_barang', $item->id_barang) }}" selected>
                                     {{ old('nama', $item->nama) }}</option>
                                 @foreach ($hasil as $barang)
-                                    
+
                                     @if ($barang->id !== old('id_barang', $item->id_barang))
                                         <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
                                     @endif
                                 @endforeach
 
                                 {{-- @foreach ($obat as $o)
-                      
-                  
+
+
                   <option value=" {{$o->id_obat}} "> {{$o->nama_obat}} </option>
                         @endforeach --}}
                             </select>
