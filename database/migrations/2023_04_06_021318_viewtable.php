@@ -13,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         DB::unprepared('
-        CREATE VIEW barang_minim_stok AS select `kasir`.`barangs`.`id` AS `id`,`kasir`.`barangs`.`nama` AS `nama`,
+        CREATE OR REPLACE VIEW barang_minim_stok AS select `kasir`.`barangs`.`id` AS `id`,`kasir`.`barangs`.`nama` AS `nama`,
         `kasir`.`barangs`.`satuan` AS `satuan`,`kasir`.`barangs`.`hargabeli` AS `hargabeli`,`kasir`.`barangs`.
         `hargaeceran` AS `hargaeceran`,`kasir`.`barangs`.`hargagrosir` AS `hargagrosir`,`kasir`.`barangs`.`hargaretail` AS `hargaretail`
         ,`kasir`.`barangs`.`stok` AS `stok`,`kasir`.`barangs`.`gambar` AS `gambar`,`kasir`.`barangs`.`created_at` AS `created_at`,
         `kasir`.`barangs`.`updated_at` AS `updated_at` from `kasir`.`barangs` where `kasir`.`barangs`.`stok` <= "10"');
         DB::unprepared('
-        CREATE VIEW stoksikit AS select `kasir`.`barangs`.`id` AS `id`,`kasir`.`barangs`.`nama` AS `nama`,`kasir`.`barangs`.`satuan` AS `satuan`,`kasir`.`barangs`.`hargabeli` AS `hargabeli`,`kasir`.`barangs`.`id_kategori` AS `id_kategori`,`kasir`.`barangs`.`minimstok` AS `minimstok`,`kasir`.`barangs`.`hargaeceran` AS `hargaeceran`,`kasir`.`barangs`.`hargagrosir` AS `hargagrosir`,`kasir`.`barangs`.`hargaretail` AS `hargaretail`,`kasir`.`barangs`.`stok` AS `stok`,`kasir`.`barangs`.`gambar` AS `gambar`,`kasir`.`barangs`.`created_at` AS `created_at`,`kasir`.`barangs`.`updated_at` AS `updated_at` from `kasir`.`barangs` where `kasir`.`barangs`.`minimstok` >= `kasir`.`barangs`.`stok`');
+        CREATE OR REPLACE VIEW stoksikit AS select `kasir`.`barangs`.`id` AS `id`,`kasir`.`barangs`.`nama` AS `nama`,`kasir`.`barangs`.`satuan` AS `satuan`,`kasir`.`barangs`.`hargabeli` AS `hargabeli`,`kasir`.`barangs`.`id_kategori` AS `id_kategori`,`kasir`.`barangs`.`minimstok` AS `minimstok`,`kasir`.`barangs`.`hargaeceran` AS `hargaeceran`,`kasir`.`barangs`.`hargagrosir` AS `hargagrosir`,`kasir`.`barangs`.`hargaretail` AS `hargaretail`,`kasir`.`barangs`.`stok` AS `stok`,`kasir`.`barangs`.`gambar` AS `gambar`,`kasir`.`barangs`.`created_at` AS `created_at`,`kasir`.`barangs`.`updated_at` AS `updated_at` from `kasir`.`barangs` where `kasir`.`barangs`.`minimstok` >= `kasir`.`barangs`.`stok`');
     }
 
     /**
