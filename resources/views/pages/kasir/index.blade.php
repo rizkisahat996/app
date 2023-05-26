@@ -171,12 +171,12 @@
                 </button>
               </a> --}}
               <button style="color: white" id='addRow' class="btn btn-primary" type="button" onclick="tambah()">
+                <i class="ti ti-plus"></i>
                 <span>Tambah Produk</span>
-                <i class="fa-solid fa-plus"></i>
               </button>
               <button id="send" type="submit" class="btn btn-success">
+                <i class="ti ti-printer"></i>
                 <span>Print Faktur</span>
-                <i class="fa-solid fa-print"></i>
               </button>
               {{-- <button onclick="printDiv('prod')" class="btnprn btn">Print Preview< /button> --}}
           </div>

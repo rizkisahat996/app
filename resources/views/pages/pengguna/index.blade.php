@@ -14,12 +14,12 @@
     </div>
     <div class="bg-white px-4 py-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
         <div class="d-flex justify-content-start">
-            <a href="/pengguna/create">
-                <div class="btn btn-primary p-2 fs-4">
-                  <i class="ti ti-user-plus"></i>
-                  <span>Tambah Pengguna</span>
-                </div>
-            </a>
+          <a href="/pengguna/create">
+            <button class="btn btn-primary p-2 fs-4">
+              <i class="ti ti-user-plus"></i>
+              <span>Tambah Pengguna</span>
+            </button>
+          </a>
         </div>
                 <table class="table mt-5">
                     <thead>
@@ -49,7 +49,6 @@
                                     <td>{{ $item->jabatan }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-
                                             @component('components.modal')
                                                 @slot('target')
                                                     {{ $item->id }}
