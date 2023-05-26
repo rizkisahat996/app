@@ -4,7 +4,7 @@
 
 
 
-    <div class="text-center fw-semibold fs-1">Histori Penjualan</div>
+    <div class="text-center fw-semibold fs-5">Histori Penjualan</div>
     <div class="d-flex justify-content-center ">
         <div class="col-lg-12 bg-white  p-5">
             <table class="table">

@@ -13,7 +13,7 @@
     <table style="word-wrap:break-word;">
         <thead>
             <tr>
-                <th style="word-wrap:break-word;word-wrap:break-word;text-align:center;font-weight:bold;font-size:xx-large" colspan="5">Laba Saudara Teknik</th>
+                <th style="word-wrap:break-word;word-wrap:break-word;text-align:center;font-weight:bold;font-size:xx-large" colspan="5">Laba Bobie</th>
               
             </tr>
             <tr>
