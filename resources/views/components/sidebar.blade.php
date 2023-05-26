@@ -1,8 +1,8 @@
 <!-- Sidebar scroll-->
-<div>
+<div style="background-color: #273248">
     <div class="brand-logo d-flex align-items-center justify-content-between">
       <a href="./index.html" class="text-nowrap logo-img">
-        <img src="../asset/images/logos/bobie-logo.png" width="180" alt="" />
+        <img src="../asset/images/logos/bobie-logo.png" width="100%" alt="" />
       </a>
       <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
         <i class="ti ti-x fs-8"></i>
@@ -13,7 +13,7 @@
         <ul id="sidebarnav" class="mt-4">
           @if (auth()->user()->jabatan == 'superadmin')
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/dashboard" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/dashboard" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -21,7 +21,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/barang" aria-expanded="false">
+              <a  style="color: white;" class="sidebar-link" href="/barang" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-warehouse"></i>
                 </span>
@@ -29,7 +29,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/pengguna" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/pengguna" aria-expanded="false">
                 <span>
                   <i class="ti ti-user"></i>
                 </span>
@@ -37,7 +37,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/penjualan" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/penjualan" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-bank"></i>
                 </span>
@@ -45,7 +45,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/piutang" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/piutang" aria-expanded="false">
                 <span>
                   <i class="ti ti-brand-cashapp"></i>
                 </span>
@@ -53,7 +53,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/laporan" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/laporan" aria-expanded="false">
                 <span>
                   <i class="ti ti-checkup-list"></i>
                 </span>
@@ -61,7 +61,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/histori" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/histori" aria-expanded="false">
                 <span>
                   <i class="ti ti-history"></i>
                 </span>
@@ -69,7 +69,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/logout" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/logout" aria-expanded="false">
                 <span>
                   <i class="ti ti-door-exit"></i>
                 </span>
@@ -78,7 +78,7 @@
             </li>
           @else
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/barang" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/barang" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-warehouse"></i>
                 </span>
@@ -86,7 +86,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/penjualan" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/penjualan" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-bank"></i>
                 </span>
@@ -94,7 +94,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/piutang" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/piutang" aria-expanded="false">
                 <span>
                   <i class="ti ti-brand-cashapp"></i>
                 </span>
@@ -102,7 +102,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="/logout" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/logout" aria-expanded="false">
                 <span>
                   <i class="ti ti-door-exit"></i>
                 </span>
