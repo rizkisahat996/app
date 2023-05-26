@@ -70,10 +70,14 @@
                   </div>
               </div>
           </div>
-
         </div>
-
+        <div class="mx-auto mt-5">
+          <div style="background-color: #ECECEC; border-radius: 5px" class="d-flex justify-center items-center pt-2 py-2">
+            <h5 style="color: #273248; text-align: center">Pastikan data yang anda masukan benar dan tidak ada kesalahan!.</h5>
+          </div>
+        </div>
       </div>
+
 
       <table style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="prod" class="table table-bordered bg-white mt-3 py-4 px-4">
           <thead>

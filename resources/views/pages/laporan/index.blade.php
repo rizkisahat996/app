@@ -12,21 +12,7 @@
         <div class="d-flex justify-content-center card border border-0 bg-white shadow-sm" style="background-color: #ffff !important" id="card">
             <img src="/assets/images/profile-pic.png" class="img-fluid" alt="...">
             <div class="card-body">
-            </div>
-        </div>
-        <div class="text-white rounded">
-            <div class="d-flex justify-content-center card border border-0 bg-white shadow-sm" style="background-color: #ffff !important" id="card">
-              <div class="card-body">
-                <p class="card-title text-dark text-center fw-bold" id="tes">Transaksi Hari Ini</p>
-                <a  class="text-center text-muted" style="text-decoration: none;">
-                    <p></p>
-                </a>
-              </div>
-            </div>
-        </div>
-    </div>
-    <div class="d-flex gap-5">
-
+              <div class="d-flex gap-5">
         @component('components.modal')
             @slot('target')
                 laporan
@@ -74,4 +60,8 @@
         </div> --}}
 
     </div>
+            </div>
+        </div>
+    </div>
+
 @endsection

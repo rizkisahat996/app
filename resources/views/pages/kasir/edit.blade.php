@@ -1,22 +1,24 @@
 @extends('layout.main')
 @section('content')
+<div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
+    <div style="text-align: center">
+      <i class="ti ti-building-bank"></i>
+      <span>Kasir Edit</span>
+    </div>
+  </div>
     <form action="/kasir/update/{{ $transaksi->id }}" method="post" class="form-horizontal form-label-left" novalidate>
         @csrf
-        <div class="item form-group">
+        {{-- <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Nama
                 Pembeli</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-                    data-validate-words="1" name="nama_pembeli" required="required"
-                    value="{{ old('nama', $transaksi->nama) }}" type="text">
+                <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" required="required"  value="{{ old('nama', $transaksi->nama) }}" type="text">
             </div>
         </div>
         <div class="item form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6"
-                    data-validate-words="1" name="alamat" required="required"
-                    value="{{ old('alamat', $transaksi->alamat) }}" type="text">
+                <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="alamat" required="required" value="{{ old('alamat', $transaksi->alamat) }}" type="text">
             </div>
         </div>
 
@@ -25,9 +27,7 @@
                 Transaksi</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class='input-group date' id='myDatepicker2'>
-                    <input type="date" name="tgl_beli"
-                        value="{{ old('created_at', $transaksi->created_at->format('Y-m-d')) }}" id="tgl_beli"
-                        class="form-control" required="required" readonly>
+                    <input type="date" name="tgl_beli" value="{{ old('created_at', $transaksi->created_at->format('Y-m-d')) }}" id="tgl_beli" class="form-control bg-white" required="required" readonly>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -45,7 +45,62 @@
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 mt-3">
                 <div class='input-group date' id='myDatepicker2'>
-                    <select class="form-select" aria-label="Default select example"
+
+                </div>
+            </div>
+            <div class="d-none" id="bon">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal Jatuh Tempo</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class='input-group date' id='myDatepicker2'>
+                        <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required" pattern="\d{4}-\d{2}-\d{2}">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+      <div class="row row-cols-2 bg-white px-4 py-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
+        <div class="col">
+          <div class="item form-group">
+              <label class="control-label" for="nama_pembeli">Nama Pembeli</label>
+              <div class="mb-2">
+                  <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" required="required"  value="{{ old('nama', $transaksi->nama) }}" type="text">
+              </div>
+          </div>
+          <div class="item form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
+              <div class="mb-2">
+                  <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="alamat" required="required" value="{{ old('alamat', $transaksi->alamat) }}" type="text">
+              </div>
+          </div>
+          <div class="item form-group">
+            <label class="control-label" for="tgl_beli">Tanggal Transaksi</label>
+              <div class="">
+                  <div class='input-group date' id='myDatepicker2'>
+                      <input type="date" name="tgl_beli" value="{{ old('created_at', $transaksi->created_at->format('Y-m-d')) }}" id="tgl_beli" class="form-control bg-white" required="required" readonly>
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="item form-group">
+              <div class="item form-group mb-2">
+                <label for="">Harga</label>
+                  <select class="form-select" aria-label="Default select example" id="tipe">
+                        <option selected>--Pilih Harga--</option>
+                        <option value="hargaeceran">Harga Eceran</option>
+                        <option value="hargagrosir">Harga Grosir</option>
+                        <option value="hargaretail">Harga Retail</option>
+                    </select>
+              </div>
+              <div class="item form-group mb-2">
+                <label for="">Pembayaran</label>
+                  <div class='input-group date' id='myDatepicker2'>
+                      <select class="form-select" aria-label="Default select example"
                         value="{{ old('jenispembayaran', $transaksi->jenispembayaran) }}" name="jenispembayaran"
                         onchange="bon()" id="jenispembayaran">
                         <option value="{{ old('jenispembayaran', $transaksi->jenispembayaran) }}" selected>
@@ -54,23 +109,23 @@
                         <option value="non-tunai">Non-Tunai</option>
                         <option value="belum-dibayar">Belum Dibayar</option>
                     </select>
-                </div>
-            </div>
-            <div class="d-none" id="bon">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal Jatuh Tempo</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class='input-group date' id='myDatepicker2'>
-                        <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required"
-                            pattern="\d{4}-\d{2}-\d{2}">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+                  </div>
+              </div>
+              <div class="d-none item form-group" id="bon">
+                  <label class="control-label" for="jatuh_tempo">Tanggal Jatuh Tempo</label>
+                  <div class="">
+                      <div class='input-group date' id='myDatepicker2'>
+                          <input style="background-color: white" type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required" pattern="\d{4}-\d{2}-\d{2}" >
+                          <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
-
-        <table id="prod" class="table table-bordered">
+      </div>
+        <table id="prod" class="table table-bordered bg-white mt-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
             <thead>
                 <tr>
                     <th style="text-align: center" width="30%">Nama Barang</th>
@@ -78,10 +133,8 @@
                     <th style="text-align: center" width="10%">Stok</th>
                     <th style="text-align: center">Harga</th>
                     <th style="text-align: center">jumlah</th>
-
                     <th style="text-align: center">Subtotal</th>
                     <th style="text-align: center">Aksi</th>
-
                 </tr>
             </thead>
 
@@ -163,18 +216,21 @@
                         </td>
                     </tr>
                 @endforeach
-
         </table>
 
-
         <div class="ln_solid"></div>
-        <div class="form-group">
-            <div class="col-md-6 col-md-offset-3">
-                <a href=""><button type="button" class="btn btn-danger">Batal</button></a>
-                <button id='addRow' class="btn btn-info" type="button" onclick="tambah()"><span
-                        class="fa fa-plus"></span> Tambah Produk</button>
-                <button id="send" type="submit" class="btn btn-success">Simpan</button>
-                <button onclick="printDiv('prod')" class="btnprn btn">Print Preview</button>
+        <div class="form-group form-group d-flex justify-content-end">
+            <div class="d-flex gap-3">
+                {{-- <a href=""><button type="button" class="btn btn-danger">Batal</button></a> --}}
+                <button id='addRow' class="btn btn-info" type="button" onclick="tambah()">
+                  <i class="ti ti-plus"></i>
+                  <span>Tambah Produk</span>
+                </button>
+                <button id="send" type="submit" class="btn btn-success">
+                  <i class="ti ti-device-floppy"></i>
+                  <span>Simpan</span>
+                </button>
+                {{-- <button onclick="printDiv('prod')" class="btnprn btn">Print Preview</button> --}}
 
             </div>
         </div>
