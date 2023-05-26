@@ -84,12 +84,12 @@
               </div>
               <div class="mb-3">
                 <label for="formFileSm" class="form-label">Masukkan Gambar</label>
-                <input required class="form-control form-control-sm" id="formFileSm" type="file" name="gambar">
+                <input class="form-control form-control-sm" id="formFileSm" type="file" name="gambar">
               </div>
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">
+                  <i class="ti ti-send"></i>
                   <span>Submit</span>
-                  <i class="fa-solid fa-paper-plane"></i>
                 </button>
               </div>
         </form>
