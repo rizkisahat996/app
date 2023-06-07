@@ -178,6 +178,7 @@
                 <i class="ti ti-plus"></i>
                 <span>Tambah Produk</span>
               </button>
+
               <button id="send" type="submit" class="btn btn-success">
                 <i class="ti ti-printer"></i>
                 <span>Print Faktur</span>

@@ -106,12 +106,36 @@
                                         <span>Edit</span>
                                       </div>
                                   </a>
-                                  <a target="" href="/kasir/delete/{{ $item->id }}">
+
+                                            @component('components.modal')
+                                                @slot('target')
+                                                    {{ $item->id }}
+                                                @endslot
+                                                @slot('icon')
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        <i class="ti ti-trash"></i>
+                                                        <span>Hapus</span>
+                                                    </button>
+                                                @endslot
+                                                @slot('isi')
+                                                    <div class="py-4">
+                                                        <h3 style="text-align: center">Apakah Anda yakin ingin Faktur ini?</h6>
+                                                        <div class="d-flex justify-content-center mt-4">
+                                                            <a href="/kasir/delete/{{ $item->id }}" class="btn btn-danger">
+                                                                <i class="ti ti-trash"></i>
+                                                                <span>Hapus</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                @endslot
+                                            @endcomponent
+
+                                  {{-- <a target="" href="/kasir/delete/{{ $item->id }}">
                                       <div class="btn btn-danger btn-sm text-white mb-1">
                                           <i class="ti ti-trash"></i>
                                           <span>Delete</span>
                                       </div>
-                                  </a>
+                                  </a> --}}
                               </td>
                           </tr>
                       @endforeach

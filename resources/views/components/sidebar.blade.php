@@ -2,7 +2,7 @@
 <div style="background-color: #273248">
     <div class="brand-logo d-flex align-items-center justify-content-between">
       <a href="./index.html" class="text-nowrap logo-img">
-        <img src="../asset/images/logos/bobie-logo.png" width="100%" alt="" />
+        <img src="{{ asset('asset/images/logos/bobie-logo.png') }}" width="100%" alt="" />
       </a>
       <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
         <i class="ti ti-x fs-8"></i>
