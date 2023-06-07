@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" media="all">
-    
+
 </head>
 
 <body>
@@ -50,7 +50,7 @@
                             <td ></td>
                         </tr>
                         @foreach ($item->barang as $data)
-                          
+
                                 <tr id="info">
                                     <th scope="row" class="text-center">{{$loop->iteration}}</th>
                                     <td class="text-center">{{$data->id}}</td>
@@ -58,7 +58,7 @@
                                     <td class="table-info text-center" style="background-color: #deeaf6">{{$data->satuan}}</td>
                                     <td class="table-warning text-center" style="background-color: #ffd865">@currency($data->hargaeceran) </td>
                                 </tr>
-                         
+
                         @endforeach
                     @endforeach
 

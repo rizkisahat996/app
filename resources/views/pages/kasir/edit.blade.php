@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 mt-2">
                 <div class='input-group date' id='myDatepicker2'>
-                    <select class="form-select" aria-label="Default select example" id="tipe">
+                    <select class="form-select" aria-label= "Default select example" id="tipe">
                         <option selected>Pilih Harga</option>
                         <option value="hargaeceran">Harga Eceran</option>
                         <option value="hargagrosir">Harga Grosir</option>
@@ -90,7 +90,7 @@
           <div class="item form-group">
               <div class="item form-group mb-2">
                 <label for="">Harga</label>
-                  <select class="form-select" aria-label="Default select example" id="tipe">
+                  <select class="form-select" aria-label="Default select example" id="tipe" required>
                         <option selected>--Pilih Harga--</option>
                         <option value="hargaeceran">Harga Eceran</option>
                         <option value="hargagrosir">Harga Grosir</option>
