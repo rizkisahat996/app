@@ -55,11 +55,12 @@
       </div>
     </div>
   </div>
-  <script src="../asset/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../asset/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../asset/js/sidebarmenu.js"></script>
-  <script src="../asset/js/app.min.js"></script>
-  <script src="../asset/libs/simplebar/dist/simplebar.js"></script>
+  @include('sweetalert::alert')
+  <script src="{{ asset('asset/libs/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('asset/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('asset/js/sidebarmenu.js') }}"></script>
+  <script src="{{ asset('asset/js/app.min.js') }}"></script>
+  <script src="{{ asset('asset/libs/simplebar/dist/simplebar.js') }}"></script>
 </body>
 
 </html>
