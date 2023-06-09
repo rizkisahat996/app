@@ -15,7 +15,7 @@ class Kasir
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->jabatan == 'superadmin' ||auth()->user()->jabatan == 'admin' ) {
+        if (auth()->user()->jabatan == 'kasir' ) {
             # code...
             return $next($request);
         }

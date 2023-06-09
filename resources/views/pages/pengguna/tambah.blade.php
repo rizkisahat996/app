@@ -34,7 +34,6 @@
             <select class="form-select" aria-label="Default select example" name="jabatan">
                 <option selected>--Pilih Jabatan--</option>
                 <option value="kasir">kasir</option>
-                <option value="admin">admin</option>
               </select>
           </div>
 

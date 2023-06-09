@@ -7,6 +7,7 @@
         }
     </style>
     <div class=" mx-auto">
+      @if (auth()->user()->jabatan == 'kasir')
       <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
         <div style="text-align: center">
           <i class="ti ti-building-bank"></i>
@@ -15,13 +16,20 @@
       </div>
       <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px" class="bg-white py-5 px-5">
           <div class="d-flex justify-content-start align-items-center me-5 gap-2">
-              <a href="/kasir">
-                  <div style="border-radius: 5px" class="btn btn-primary">
-                    <i class="ti ti-currency-dollar"></i>
-                    <span>Tambah Penjualan</span>
-                  </div>
-              </a>
+            <a href="/kasir">
+                <div style="border-radius: 5px" class="btn btn-primary">
+                  <i class="ti ti-currency-dollar"></i>
+                  <span>Tambah Penjualan</span>
+                </div>
+            </a>
+        </div>
+        @else
+        <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2 mt-4">
+            <div style="text-align: center">
+              <span>Daftar Penjualan</span>
+            </div>
           </div>
+        @endif
           <form>
               <div class="d-flex gap-3 justify-content-end align-items-end pb-5">
                 <div class="d-flex col-3">
@@ -100,6 +108,8 @@
                                           <span>Print</span>
                                       </div>
                                   </a>
+                                  @if (auth()->user()->jabatan == 'superadmin')
+                                      
                                   <a target="" href="/kasir/edit/{{ $item->id }}">
                                       <div class="btn btn-warning btn-sm text-white mb-1">
                                         <i class="ti ti-edit"></i>
@@ -129,13 +139,7 @@
                                                     </div>
                                                 @endslot
                                             @endcomponent
-
-                                  {{-- <a target="" href="/kasir/delete/{{ $item->id }}">
-                                      <div class="btn btn-danger btn-sm text-white mb-1">
-                                          <i class="ti ti-trash"></i>
-                                          <span>Delete</span>
-                                      </div>
-                                  </a> --}}
+                                  @endif
                               </td>
                           </tr>
                       @endforeach
