@@ -15,25 +15,25 @@ return new class extends Migration
             $table->string('id_barang');
             $table->string('action');
             $table->integer('hargabeli');
-            $table->integer('hargaeceran');
-            $table->integer('hargaretail');
+            $table->integer('untung');
+            $table->integer('hargajual');
             $table->integer('stok');
             $table->timestamps();
         });
         DB::unprepared('
         CREATE TRIGGER log_insert_barang AFTER INSERT ON `barangs` FOR EACH ROW BEGIN INSERT INTO log_barang (`id_barang`, `action`, `hargabeli` ,
-        `hargaeceran`, `hargaretail`,`stok`,  `created_at`,`updated_at`) 
-        VALUES (NEW.id, "Insert", NEW.hargabeli,NEW.hargaeceran,NEW.hargaretail,NEW.stok, now(), null); END
+        `untung`, `hargajual`,`stok`,  `created_at`,`updated_at`) 
+        VALUES (NEW.id, "Insert", NEW.hargabeli,NEW.untung,NEW.hargajual,NEW.stok, now(), null); END
         ');
         DB::unprepared('
         CREATE TRIGGER log_update_barang AFTER UPDATE ON `barangs` FOR EACH ROW BEGIN INSERT INTO log_barang (`id_barang`, `action`, `hargabeli` ,
-        `hargaeceran`, `hargaretail`,`stok`,  `created_at`,`updated_at`) 
-        VALUES (NEW.id, "UPDATE", NEW.hargabeli,NEW.hargaeceran,NEW.hargaretail,NEW.stok, now(), null); END
+        `untung`, `hargajual`,`stok`,  `created_at`,`updated_at`) 
+        VALUES (NEW.id, "UPDATE", NEW.hargabeli,NEW.untung,NEW.hargajual,NEW.stok, now(), null); END
         ');
         DB::unprepared('
         CREATE TRIGGER log_delete_barang AFTER DELETE ON `barangs` FOR EACH ROW BEGIN INSERT INTO log_barang (`id_barang`, `action`, `hargabeli` ,
-        `hargaeceran`, `hargaretail`,`stok`,  `created_at`,`updated_at`) 
-        VALUES (old.id, "delete", old.hargabeli,old.hargaeceran,old.hargaretail,old.stok, now(), null); END
+        `untung`, `hargajual`,`stok`,  `created_at`,`updated_at`) 
+        VALUES (old.id, "delete", old.hargabeli,old.untung,old.hargajual,old.stok, now(), null); END
         ');
     }
 

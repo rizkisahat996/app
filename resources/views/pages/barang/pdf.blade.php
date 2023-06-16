@@ -56,7 +56,7 @@
                                     <td class="text-center">{{$data->id}}</td>
                                     <td class="table-secondary" style="background-color: #d5dce4">{{$data->nama}}</td>
                                     <td class="table-info text-center" style="background-color: #deeaf6">{{$data->satuan}}</td>
-                                    <td class="table-warning text-center" style="background-color: #ffd865">@currency($data->hargaeceran) </td>
+                                    <td class="table-warning text-center" style="background-color: #ffd865">@currency($data->hargajual) </td>
                                 </tr>
 
                         @endforeach

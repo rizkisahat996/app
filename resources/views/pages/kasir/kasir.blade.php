@@ -34,7 +34,7 @@
               <div class="d-flex gap-3 justify-content-end align-items-end pb-5">
                 <div class="d-flex col-3">
                       <select class="form-select" aria-label="Default select example" name="jenispembayaran">
-                          <option value="" selected>Pilih Jenis Pembayaran</option>
+                          <option value="" selected>Semua Pembayaran</option>
                           <option value="tunai">Tunai</option>
                           <option value="non-tunai">Non-Tunai</option>
                           <option value="belum-dibayar">Belum Dibayar</option>

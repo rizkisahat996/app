@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('id_kategori');
             $table->foreign('id_kategori')->references('id')->on('kategoribarangs');
             $table->integer('minimstok');
-            $table->integer('hargaeceran');
-            $table->integer('hargagrosir');
-            $table->integer('hargaretail');
+            $table->integer('untung');
+            $table->integer('hargajual');
             $table->float('stok', 5, 1);
             $table->string('gambar')->nullable();
             $table->timestamps();
