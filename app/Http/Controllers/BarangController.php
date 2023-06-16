@@ -59,9 +59,8 @@ class BarangController extends Controller
       'id_kategori' => 'required',
       'minimstok' => 'required',
       'hargabeli' => 'required',
-      'hargaeceran' => 'required',
-      'hargagrosir' => 'required',
-      'hargaretail' => 'required',
+      'untung' => 'required',
+      'hargajual' => 'required',
       'stok' => 'required',
       'gambar' => 'file',
     ]);
@@ -75,9 +74,9 @@ class BarangController extends Controller
 
     // dd($data);
     $data['hargabeli'] = $data['hargabeli'] . "000";
-    $data['hargaeceran'] = $data['hargaeceran'] . "000";
-    $data['hargagrosir'] = $data['hargagrosir'] . "000";
-    $data['hargaretail'] = $data['hargaretail'] . "000";
+    $data['untung'] = $data['untung'] . "000";
+    $data['hargajual'] = $data['hargajual'] * 1000;
+    // dd($data);
 
     barang::insert($data);
     alert()->success('Berhasil', 'Berhasil Menambahkan Barang');
@@ -111,9 +110,8 @@ class BarangController extends Controller
     barang::where('id', $id)->update([
       'nama' => $request->nama,
       'hargabeli' => $request->hargabeli . "000",
-      'hargaeceran' => $request->hargaeceran . "000",
-      'hargagrosir' => $request->hargagrosir . "000",
-      'hargaretail' => $request->hargaretail . "000",
+      'untung' => $request->untung . "000",
+      'hargajual' => $request->hargajual . "000",
       'stok' => $request->stok
     ]);
     alert()->success('Berhasil', 'Berhasil Memperbarui Data');

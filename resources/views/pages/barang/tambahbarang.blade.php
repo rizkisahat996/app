@@ -47,37 +47,28 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
-                <div class="input-group mb-3" id="exampleInputEmail1">
-                    <span class="input-group-text">Rp.</span>
-                    <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli">
-                    <span class="input-group-text">.000</span>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Harga Eceran</label>
-                <div class="input-group mb-3" id="exampleInputEmail1">
-                    <span class="input-group-text">Rp.</span>
-                    <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargaeceran">
-                    <span class="input-group-text">.000</span>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Harga Grosir</label>
-                <div class="input-group mb-3" id="exampleInputEmail1">
-                    <span class="input-group-text">Rp.</span>
-                    <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargagrosir">
-                    <span class="input-group-text">.000</span>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Harga Retail</label>
-                <div class="input-group mb-3" id="exampleInputEmail1">
-                    <span class="input-group-text">Rp.</span>
-                    <input required type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargaretail">
-                    <span class="input-group-text">.000</span>
-                </div>
-            </div>
+              <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
+              <div class="input-group mb-3" id="exampleInputEmail1">
+                  <span class="input-group-text">Rp.</span>
+                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli">
+                  <span class="input-group-text">.000</span>
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Untung</label>
+              <div class="input-group mb-3" id="exampleInputEmail1">
+                  <span class="input-group-text">Rp.</span>
+                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung">
+                  <span class="input-group-text">.000</span>
+              </div>
+          </div>
+          <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Harga Jual <span>(termasuk ppn)</span></label>
+              <div class="input-group mb-3" id="exampleInputEmail1">
+                  <span class="input-group-text">Rp.</span>
+                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual">
+              </div>
+          </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Stok</label>
                 <input required type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" placeholder="Masukan stok yang akan di setor">
@@ -101,4 +92,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
+    
 @endpush

@@ -1,5 +1,5 @@
 <!-- Sidebar scroll-->
-<div style="background-color: #273248">
+<div style="background-color: #273248; height: 100%; overflow-y: scroll;">
     <div class="brand-logo d-flex align-items-center justify-content-between">
       <a href="/dashboard" class="text-nowrap logo-img">
         <img src="../asset/images/logos/bobie-logo.png" width="100%" alt="" />
@@ -21,19 +21,19 @@
               </a>
             </li>
             <li class="sidebar-item">
+              <a  style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
+                <span>
+                  <i class="ti ti-shovel"></i>
+                </span>
+                <span class="hide-menu">Nama Barang</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
               <a  style="color: white;" class="sidebar-link" href="/barang" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-warehouse"></i>
                 </span>
-                <span class="hide-menu">Gudang</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a style="color: white;" class="sidebar-link" href="/pengguna" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user"></i>
-                </span>
-                <span class="hide-menu">Manajemen Pengguna</span>
+                <span class="hide-menu">Stok Barang</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -41,7 +41,7 @@
                 <span>
                   <i class="ti ti-building-bank"></i>
                 </span>
-                <span class="hide-menu">Penjualan</span>
+                <span class="hide-menu">Kasir</span>
               </a>
             </li>
             <li class="sidebar-item">
@@ -53,9 +53,9 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a style="color: white;" class="sidebar-link" href="/laporan" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="/#" aria-expanded="false">
                 <span>
-                  <i class="ti ti-checkup-list"></i>
+                  <i class="ti ti-building-bank"></i>
                 </span>
                 <span class="hide-menu">Manajemen Laporan</span>
               </a>
@@ -66,6 +66,47 @@
                   <i class="ti ti-history"></i>
                 </span>
                 <span class="hide-menu">History Data</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
+                <span>
+                  <i class="ti ti-book-2"></i>
+                </span>
+                <span class="hide-menu">Nomor Surat</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
+                <span>
+                  <i class="ti ti-archive"></i>
+                </span>
+                <span class="hide-menu">Surat Keluar</span>
+              </a>
+            </li>
+            
+            <li class="sidebar-item">
+              <a style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
+                <span>
+                  <i class="ti ti-book"></i>
+                </span>
+                <span class="hide-menu">Surat Pemesanan Order</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a style="color: white;" class="sidebar-link" href="/pengguna" aria-expanded="false">
+                <span>
+                  <i class="ti ti-user"></i>
+                </span>
+                <span class="hide-menu">Data Karyawan</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a style="color: white;" class="sidebar-link" href="/laporan" aria-expanded="false">
+                <span>
+                  <i class="ti ti-checkup-list"></i>
+                </span>
+                <span class="hide-menu">Manajemen Laporan</span>
               </a>
             </li>
             <li class="sidebar-item">

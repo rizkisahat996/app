@@ -23,36 +23,27 @@
               <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
               <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama" value="{{ old('nama',$barang->nama) }}">
           </div>
-          <div class="mb-3">
+            <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" value="{{ old('hargabeli',Str::limit($barang->hargabeli, 3, "")) }}">
+                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli" value="{{ old('hargabeli',Str::limit($barang->hargabeli, 3, "")) }}">
                   <span class="input-group-text">.000</span>
               </div>
           </div>
           <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Harga Eceran</label>
+              <label for="exampleInputEmail1" class="form-label">Untung</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargaeceran" value="{{ old('hargaeceran',Str::limit($barang->hargaeceran, 3, "")) }}">
+                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung" value="{{ old('untung',Str::limit($barang->untung, 3, "")) }}">
                   <span class="input-group-text">.000</span>
               </div>
           </div>
           <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Harga Grosir</label>
+              <label for="exampleInputEmail1" class="form-label">Harga Jual <span>(termasuk ppn)</span></label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
-                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargagrosir" value="{{ old('hargagrosir',Str::limit($barang->hargagrosir, 3, "")) }}">
-                  <span class="input-group-text">.000</span>
-              </div>
-          </div>
-          <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Harga Retail</label>
-              <div class="input-group mb-3" id="exampleInputEmail1">
-                  <span class="input-group-text">Rp.</span>
-                  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargaretail" value="{{ old('hargaretail',Str::limit($barang->hargaretail, 3, "")) }}">
-                  <span class="input-group-text">.000</span>
+                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual" value="{{ old('hargajual',number_format($barang->hargajual, 0, ',', '.')) }}">
               </div>
           </div>
           <div class="mb-3">

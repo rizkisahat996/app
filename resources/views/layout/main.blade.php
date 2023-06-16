@@ -56,6 +56,31 @@
     </div>
   </div>
   @include('sweetalert::alert')
+  <script>
+    // Mengambil elemen input harga beli, untung, dan harga jual
+    const hargabeliInput = document.getElementById('hargabeli');
+    const untungInput = document.getElementById('untung');
+    const hargajualInput = document.getElementById('hargajual');
+
+    // Mendengarkan perubahan pada input harga beli dan untung
+    hargabeliInput.addEventListener('input', hitungHargaJual);
+    untungInput.addEventListener('input', hitungHargaJual);
+
+    // Fungsi untuk menghitung harga jual
+    function hitungHargaJual() {
+        // Mengambil nilai harga beli dan untung
+        const hargabeli = parseFloat(hargabeliInput.value);
+        const untung = parseFloat(untungInput.value);
+
+        // Menghitung harga jual termasuk PPN
+        const ppn = 0.11; // 11% atau 11 / 100
+        const hargaJual = hargabeli + untung + (hargabeli + untung) * ppn;
+
+        // Menetapkan nilai harga jual pada input dengan 3 digit desimal
+        hargajualInput.value = hargaJual.toFixed(3);
+    }
+</script>
+
   <script src="{{ asset('asset/libs/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('asset/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('asset/js/sidebarmenu.js') }}"></script>
