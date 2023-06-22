@@ -12,4 +12,9 @@ class transaksi extends Model
     public function relasi(){
         return $this->hasMany('App\Models\detailtransaksi', 'id_transaksi');
     }
+
+    public function pelanggan()
+    {
+        return $this->belongsTo(pelanggan::class, 'pelanggan_id');
+    }
 }

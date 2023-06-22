@@ -7,7 +7,6 @@
         }
     </style>
     <div class=" mx-auto">
-      @if (auth()->user()->jabatan == 'kasir')
       <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
         <div style="text-align: center">
           <i class="ti ti-building-bank"></i>
@@ -23,13 +22,6 @@
                 </div>
             </a>
         </div>
-        @else
-        <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2 mt-4">
-            <div style="text-align: center">
-              <span>Daftar Penjualan</span>
-            </div>
-          </div>
-        @endif
           <form>
               <div class="d-flex gap-3 justify-content-end align-items-end pb-5">
                 <div class="d-flex col-3">
@@ -77,6 +69,7 @@
                       <th scope="col">No.</th>
                       <th scope="col">Faktur</th>
                       <th scope="col">Nama Pembeli</th>
+                      <th scope="col">Perusahaan</th>
                       <th scope="col">Tanggal Pembeli</th>
                       <th scope="col">Total</th>
                       <th scope="col">Metode Pembayaran</th>
@@ -98,6 +91,7 @@
                               <th scope="row">{{ $loop->iteration }}</th>
                               <td>{{ $item->id }}</td>
                               <td>{{ $item->nama }}</td>
+                              <td>{{ $item->perusahaan }}</td>
                               <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                               <td>@currency($item->total)</td>
                               <td class="text-start ms-5 ps-5">{{ $item->jenispembayaran }}</td>

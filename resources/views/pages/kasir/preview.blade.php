@@ -32,7 +32,7 @@
                       <td width="10%"></td>
                       <td width="20%">Kepada</td>
                       <td width="5%">:</td>
-                      <td style="text-align: start">{{ $transaksi->nama }}</td>
+                      <td style="text-align: start">{{ $transaksi->pelanggan->nama }}</td>
                   </tr>
                   <tr class="">
                       <td width="20%">Tanggal Faktur</td>
@@ -41,7 +41,7 @@
                       <td width="10%"></td>
                       <td width="20%">Alamat</td>
                       <td width="5%">:</td>
-                      <td style="text-align: start">{{ $transaksi->alamat }}</td>
+                      <td style="text-align: start">{{ $transaksi->pelanggan->alamat }}</td>
                   </tr>
                   <tr class="">
                       <td width="20%">Tanggal Tempo</td>
@@ -51,6 +51,15 @@
                       <td width="20%">Metode Pembayaran</td>
                       <td width="5%">:</td>
                       <td style="text-align: start">{{ $transaksi->jenispembayaran }}</td>
+                  </tr>
+                  <tr class="">
+                      <td width="20%">Perusahaan</td>
+                      <td width="5%">:</td>
+                      <td>{{ $transaksi->pelanggan->perusahaan }}</td>
+                      <td width="10%"></td>
+                      <td width="20%"></td>
+                      <td width="5%"></td>
+                      <td style="text-align: start"></td>
                   </tr>
               </table>
           </div>

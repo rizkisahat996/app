@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\barang;
 use App\Models\transaksi;
 use App\Models\detailtransaksi;
+use App\Models\pelanggan;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Str;
@@ -22,7 +23,8 @@ class TransaksiController extends Controller
     {
        
         $data = barang::orderBy('nama')->get();
-        return view('pages.kasir.index', compact('data'));
+        $pelanggan = pelanggan::get();
+        return view('pages.kasir.index', compact('data', 'pelanggan'));
     }
 
     /**
@@ -42,7 +44,7 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        // try {
             //code...
             $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
             $hasil = $jumlah->count() + 1;
@@ -54,12 +56,13 @@ class TransaksiController extends Controller
             $uuid = str::uuid();
             transaksi::insert([
                 'id' => $id,
+                'pelanggan_id' => $request->pelanggan_id,
                 'kodefaktut'=> $uuid,
-                'nama' =>$request->nama_pembeli,
                 'jenispembayaran'=> $request->jenispembayaran,
                 'total'=>$request->grandtotal,
-                'alamat'=>$request->alamat,
+                'pembayaran'=>$request->pembayaran,
                 'user_id'=> Auth::user()->id,
+                'kembalian'=> $request->kembalian,
                 'jatuh_tempo' => $request->jatuh_tempo,
                 'created_at' => $request->tgl_beli,
             ]);
@@ -76,11 +79,11 @@ class TransaksiController extends Controller
             }
            
             return redirect()->route('preview', ['id' => $id]);
-        } catch (\Throwable  $e) {
-            // dd($e);
-            alert()->error('Gagal','Data yang anda masukkan tidak valid, Silahkan cek kembali');
-            return Redirect::back();
-        }
+        // } catch (\Throwable  $e) {
+        //     // dd($e);
+        //     alert()->error('Gagal','Data yang anda masukkan tidak valid, Silahkan cek kembali');
+        //     return Redirect::back();
+        // }
        
     }
 
@@ -115,7 +118,6 @@ class TransaksiController extends Controller
                 'nama' =>$request->nama_pembeli,
                 'jenispembayaran'=> $request->jenispembayaran,
                 'total'=>$request->grandtotal,
-                'alamat'=>$request->alamat,
                 'user_id'=> Auth::user()->id,
                 'jatuh_tempo' => $request->jatuh_tempo,
                 'created_at' => $request->tgl_beli,
@@ -191,23 +193,33 @@ class TransaksiController extends Controller
             return $pdf->download($transaksi['id'].'.pdf');
             // return view('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket'));
         }
-    public function penjualan(Request $request){
-        $data['tgl_awal'] = $request->query('tgl_awal');
-        $data['tgl_akhir'] = $request->query('tgl_akhir');
-        $data['jenispembayaran'] = $request->query('jenispembayaran');
-        //   dd($data['jenispembayaran']); 
-              $transaksi = DB::table('transaksis');
-              if ($data['tgl_awal']  ){
-                $transaksi->whereDate('created_at', '>=',  $data['tgl_awal']);}
-              if ($data['tgl_akhir']){
-                $transaksi->where('created_at', '<=',  $data['tgl_akhir']);}
-              if ($data['jenispembayaran']){
-                $transaksi->Where('jenispembayaran','=',$data['jenispembayaran']);}
-            //   ->where('jenispembayaran',$data['jenispembayaran'])->get();
+        public function penjualan(Request $request)
+        {
+            $data['tgl_awal'] = $request->query('tgl_awal');
+            $data['tgl_akhir'] = $request->query('tgl_akhir');
+            $data['jenispembayaran'] = $request->query('jenispembayaran');
+        
+            $transaksi = DB::table('transaksis')
+                ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+                ->select('transaksis.*', 'pelanggans.nama', 'pelanggans.perusahaan');
+        
+            if ($data['tgl_awal']) {
+                $transaksi->whereDate('created_at', '>=', $data['tgl_awal']);
+            }
+        
+            if ($data['tgl_akhir']) {
+                $transaksi->where('created_at', '<=', $data['tgl_akhir']);
+            }
+        
+            if ($data['jenispembayaran']) {
+                $transaksi->where('jenispembayaran', '=', $data['jenispembayaran']);
+            }
+        
             $hasil = $transaksi->get();
-            // dd($hasil);
-        return view('pages.kasir.kasir', compact('hasil', 'data'));
-    }
+        
+            return view('pages.kasir.kasir', compact('hasil', 'data'));
+        }
+        
     public function piutang(){
         $transaksi = transaksi::where('jenispembayaran','belum-dibayar')->orderBy('jatuh_tempo')->get();
         return view('pages.kasir.piutang', compact('transaksi'));

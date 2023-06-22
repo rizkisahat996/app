@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->uuid('kodefaktut');
-            $table->string('nama');
-            $table->string('alamat');
+            $table->foreignId('pelanggan_id');
+            $table->uuid('kodefaktut');     
             $table->enum('jenispembayaran', ['tunai', 'non-tunai','belum-dibayar']);
             $table->date('jatuh_tempo')->nullable();
             $table->integer('pembayaran')->nullable();

@@ -28,7 +28,6 @@
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
                   <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli" value="{{ old('hargabeli',Str::limit($barang->hargabeli, 3, "")) }}">
-                  <span class="input-group-text">.000</span>
               </div>
           </div>
           <div class="mb-3">
@@ -36,7 +35,6 @@
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
                   <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung" value="{{ old('untung',Str::limit($barang->untung, 3, "")) }}">
-                  <span class="input-group-text">.000</span>
               </div>
           </div>
           <div class="mb-3">

@@ -8,58 +8,6 @@
   </div>
     <form action="/kasir/update/{{ $transaksi->id }}" method="post" class="form-horizontal form-label-left" novalidate>
         @csrf
-        {{-- <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Nama
-                Pembeli</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" required="required"  value="{{ old('nama', $transaksi->nama) }}" type="text">
-            </div>
-        </div>
-        <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="alamat" required="required" value="{{ old('alamat', $transaksi->alamat) }}" type="text">
-            </div>
-        </div>
-
-        <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_beli">Tanggal
-                Transaksi</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class='input-group date' id='myDatepicker2'>
-                    <input type="date" name="tgl_beli" value="{{ old('created_at', $transaksi->created_at->format('Y-m-d')) }}" id="tgl_beli" class="form-control bg-white" required="required" readonly>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 mt-2">
-                <div class='input-group date' id='myDatepicker2'>
-                    <select class="form-select" aria-label= "Default select example" id="tipe">
-                        <option selected>Pilih Harga</option>
-                        <option value="hargaeceran">Harga Eceran</option>
-                        <option value="hargagrosir">Harga Grosir</option>
-                        <option value="hargaretail">Harga Retail</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 mt-3">
-                <div class='input-group date' id='myDatepicker2'>
-
-                </div>
-            </div>
-            <div class="d-none" id="bon">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jatuh_tempo">Tanggal Jatuh Tempo</label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class='input-group date' id='myDatepicker2'>
-                        <input type="date" name="jatuh_tempo" id="jatuh_tempo" class="form-control" required="required" pattern="\d{4}-\d{2}-\d{2}">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
       <div class="row row-cols-2 bg-white px-4 py-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
         <div class="col">
           <div class="item form-group">
@@ -88,15 +36,14 @@
         </div>
         <div class="col">
           <div class="item form-group">
-              {{-- <div class="item form-group mb-2">
-                <label for="">Harga</label>
-                  <select class="form-select" aria-label="Default select example" id="tipe" required>
+              <div class="item form-group mb-2">
+                  <select hidden class="form-select" aria-label="Default select example" id="tipe" required>
                         <option selected>--Pilih Harga--</option>
                         <option value="hargaeceran">Harga Eceran</option>
                         <option value="hargagrosir">Harga Grosir</option>
                         <option value="hargaretail">Harga Retail</option>
-                    </select>
-              </div> --}}
+                    </select>   
+              </div>
               <div class="item form-group mb-2">
                 <label for="">Pembayaran</label>
                   <div class='input-group date' id='myDatepicker2'>
@@ -148,24 +95,6 @@
                         <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
                     </td>
                 </tr>
-                {{-- <tr>
-                    <td style="text-align:right; vertical-align: middle" colspan="5">
-                        <b>Bayar</b>
-                    </td>
-                    <td>
-                        <input id="bayar" name="pembayaran" type="text" class="form-control grandtotal"
-                            onchange="kembalian()">
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align:right; vertical-align: middle" colspan="5">
-                        <b>Kembali</b>
-                    </td>
-                    <td>
-                        <input id="kembalian"  type="text" class="form-control grandtotal" readonly>
-                        <input id="kembali" name="kembalian" type="text" class="form-control grandtotal" hidden>
-                    </td>
-                </tr> --}}
             </tfoot>
 
             <tbody id="tbody">
@@ -240,208 +169,188 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         setInterval(function() {
-
-            hitung()
-            coba()
-            hitungseluruh()
-            kembalian()
-
-        }, 1000)
-
+            hitung();
+            coba();
+            hitungseluruh();
+            kembalian();
+        }, 1000);
+    
         function bon() {
-            var jenis = document.getElementById("jenispembayaran").value
+            var jenis = document.getElementById("jenispembayaran").value;
             if (jenis === String("belum-dibayar").valueOf()) {
-                var bon = document.getElementById("bon")
-                bon.classList.remove("d-none")
+                var bon = document.getElementById("bon");
+                bon.classList.remove("d-none");
             } else {
-                var bon = document.getElementById("bon")
-                bon.classList.add("d-none")
+                var bon = document.getElementById("bon");
+                bon.classList.add("d-none");
             }
         }
-        // var uang = document.getElementById("bayar")
-        var balek = document.getElementById("kembali")
-        var balektampil = document.getElementById("kembalian")
+    
+        var balek = document.getElementById("kembali");
+        var balektampil = document.getElementById("kembalian");
         balek.addEventListener("keyup", function(e) {
             balektampil.value = formatRupiah(balek.value, "Rp. ");
         });
-        // uang.addEventListener("keyup", function(e) {
-        // tambahkan 'Rp.' pada saat form di ketik
-        // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
-        // uang.placeholder = formatRupiah(this.value, "Rp. ");
-        // });
-
+    
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, "").toString(),
                 split = number_string.split(","),
                 sisa = split[0].length % 3,
                 rupiah = split[0].substr(0, sisa),
                 ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
+    
             // tambahkan titik jika yang di input sudah menjadi angka ribuan
             if (ribuan) {
                 separator = sisa ? "." : "";
                 rupiah += separator + ribuan.join(".");
             }
-
+    
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
-
+    
         function tambah() {
-
-            let a = document.querySelectorAll("#trow")
-
+            let a = document.querySelectorAll("#trow");
             setInterval(a.length, 100);
-            let panjang = a.length + 1
-
-            // let panjang = a.lenght
+            let panjang = a.length + 1;
+    
             var b = document.getElementById("trow");
-            var baru = b.cloneNode(true)
-
-            baru.querySelector("#harga1").id = 'harga' + panjang
-
-            baru.querySelector("#nama1").id = 'nama' + panjang
-
-            baru.querySelector("#stok1").id = 'stok' + panjang
-            baru.querySelector("#subtotal1").id = 'subtotal' + panjang
-            baru.querySelector("#subtotaltampil1").id = 'subtotaltampil' + panjang
-            baru.querySelector("#jumlah1").id = 'jumlah' + panjang
-            baru.querySelector("#modal1").id = 'modal' + panjang
-            baru.querySelector("#satuan1").id = 'satuan' + panjang
-            baru.querySelector(".hapus").id = panjang
-            baru.className = panjang
-
-
-
+            var baru = b.cloneNode(true);
+    
+            baru.querySelector("#harga1").id = 'harga' + panjang;
+            baru.querySelector("#nama1").id = 'nama' + panjang;
+            baru.querySelector("#stok1").id = 'stok' + panjang;
+            baru.querySelector("#subtotal1").id = 'subtotal' + panjang;
+            baru.querySelector("#subtotaltampil1").id = 'subtotaltampil' + panjang;
+            baru.querySelector("#jumlah1").id = 'jumlah' + panjang;
+            baru.querySelector("#modal1").id = 'modal' + panjang;
+            baru.querySelector("#satuan1").id = 'satuan' + panjang;
+            baru.querySelector(".hapus").id = panjang;
+            baru.className = panjang;
+    
             let bodya = document.getElementById("tbody");
-            bodya.appendChild(baru)
-
-
-            //   var childNodes = toDom(nama);
-            // console.log(nama.length)
-
-
-
-
-
+            bodya.appendChild(baru);
         }
-
+    
+        function incrementJumlah(id) {
+            let jumlah = document.getElementById('jumlah' + id);
+            let stok = document.getElementById('stok' + id);
+            let currentJumlah = parseInt(jumlah.value);
+            let currentStok = parseInt(stok.value);
+    
+            if (currentJumlah < currentStok) {
+                jumlah.value = currentJumlah + 1;
+                hitung();
+            }
+        }
+    
+        function decrementJumlah(id) {
+            let jumlah = document.getElementById('jumlah' + id);
+            let currentJumlah = parseInt(jumlah.value);
+    
+            if (currentJumlah > 1) {
+                jumlah.value = currentJumlah - 1;
+                hitung();
+            }
+        }
+    
         function kembalian() {
-            let a = document.getElementById("bayar").value
-            let uang = parseInt(a)
-            let total = parseInt(document.getElementById("grandtotal").value)
-            let kembali = uang - total
+            let a = document.getElementById("bayar").value;
+            let uang = parseInt(a);
+            let total = parseInt(document.getElementById("grandtotal").value);
+            let kembali = uang - total;
+    
             if (kembali < 0) {
                 var element = document.getElementById("uang");
                 element.classList.remove("d-none");
                 element.classList.add("d-flex");
             } else {
-
-                document.getElementById("kembali").value = kembali
+                document.getElementById("kembali").value = kembali;
                 balektampil.value = formatRupiah(balek.value, "Rp. ");
             }
-
-
         }
-
+    
         function hitung() {
-            let a = document.querySelectorAll("#trow")
+            let a = document.querySelectorAll("#trow");
             setInterval(a.length, 1000);
-            let panjang = a.length
+            let panjang = a.length;
+    
             for (let i = 1; i <= panjang; i++) {
-                let id = "jumlah" + i
-                let jual = "harga" + i
-                let total = "subtotal" + i
-                let tampil = "subtotaltampil" + i
-                let stk = "stok" + i
-                let jumlah = parseInt(document.getElementById(id).value)
-                let satuan = document.getElementById(jual).value
-                let stok = parseInt(document.getElementById(stk).value)
+                let id = "jumlah" + i;
+                let jual = "harga" + i;
+                let total = "subtotal" + i;
+                let tampil = "subtotaltampil" + i;
+                let stk = "stok" + i;
+                let jumlah = parseInt(document.getElementById(id).value);
+                let satuan = document.getElementById(jual).value;
+                let stok = parseInt(document.getElementById(stk).value);
+    
                 if (jumlah > stok) {
-                    document.getElementById(id).value = " "
-                    document.getElementById(id).placeholder = " "
+                    document.getElementById(id).value = " ";
+                    document.getElementById(id).placeholder = " ";
                     var element = document.getElementById("alert");
                     element.classList.remove("d-none");
                     element.classList.add("d-flex");
                 } else {
-
-                    let hasil = document.getElementById(id).value * satuan
-                    document.getElementById(total).value = hasil
+                    let hasil = document.getElementById(id).value * satuan;
+                    document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
                 }
             }
-
         }
-
+    
         function hapus(e) {
             e.parentNode.parentNode.remove();
         }
-
+    
         function coba() {
-
-
-            let a = document.querySelectorAll("#trow")
-            let tipe = document.getElementById('tipe').value
-            // console.log(tipe)
+            let a = document.querySelectorAll("#trow");
+            let tipe = document.getElementById('tipe').value;
             setInterval(a.length, 100);
-            let panjang = a.length
+    
+            let panjang = a.length;
+    
             for (let i = 1; i <= panjang; i++) {
-                let id = "#nama" + i
-                let stok = "#stok" + i
-                let harga = '#harga' + i
-                let unit = '#satuan' + i
-                let modal = '#modal' + i
-
+                let id = "#nama" + i;
+                let stok = "#stok" + i;
+                let harga = '#harga' + i;
+                let unit = '#satuan' + i;
+                let modal = '#modal' + i;
+    
                 $(id).each(function() {
                     var id = $(this).val();
-
+    
                     $.ajax({
                         type: 'get',
                         dataType: 'json',
                         url: "{{ url('/detail-barang-') }}" + id,
                         success: function(data) {
-                            document.querySelector(stok).placeholder = data.data.stok
-                            document.querySelector(stok).value = data.data.stok
-                            document.querySelector(unit).value = data.data.satuan
-                            // document.querySelector(harga).value = data.data.hargaretail
-                            // console.log(data.data.hargaeceran)
-                            let tes = document.querySelector(harga)
-                            let e = data.data.hargaeceran
-                            let d = data.data.hargagrosir
-                            let c = data.data.hargaretail
-
-                            document.querySelector(modal).value = data.data.hargabeli
-                            if (tipe.valueOf() === String("hargaeceran").valueOf()) {
-                                tes.value = e
-                            } else if (tipe.valueOf() === String("hargagrosir").valueOf()) {
-                                tes.value = d
-                            } else {
-                                tes.value = c
-                            }
+                            document.querySelector(stok).placeholder = data.data.stok;
+                            document.querySelector(stok).value = data.data.stok;
+                            document.querySelector(unit).value = data.data.satuan;
+    
+                            let tes = document.querySelector(harga);
+                            let c = data.data.hargajual;
+                            document.querySelector(modal).value = data.data.hargabeli;
+                            tes.value = c;
                         }
                     });
                 });
-
-
             }
-
         }
-
+    
         function hitungseluruh() {
-            let a = document.querySelectorAll("#trow")
+            let a = document.querySelectorAll("#trow");
             setInterval(a.length, 1000);
             let seluruh = 0;
-            let panjang = a.length
+            let panjang = a.length;
+    
             for (let i = 1; i <= panjang; i++) {
-                let total = "subtotal" + i
-
-                let jumlah = parseInt(document.getElementById(total).value)
-
-                seluruh = seluruh + jumlah
-                document.getElementById("grandtotal").value = seluruh
-                document.getElementById("grandtotal2").value = formatRupiah(document.getElementById("grandtotal").value,
-                    "Rp. ");
-
+                let total = "subtotal" + i;
+                let jumlah = parseInt(document.getElementById(total).value);
+                seluruh = seluruh + jumlah;
+                document.getElementById("grandtotal").value = seluruh;
+                document.getElementById("grandtotal2").value = formatRupiah(document.getElementById("grandtotal").value, "Rp. ");
             }
         }
     </script>

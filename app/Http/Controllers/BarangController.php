@@ -50,38 +50,46 @@ class BarangController extends Controller
    * Store a newly created resource in storage.
    */
   public function store(Request $request)
-  {
-    //   dd($request);
+{
     $data = $request->validate([
-      'id' => 'required',
-      'nama' => 'required|max:255',
-      'satuan' => 'required',
-      'id_kategori' => 'required',
-      'minimstok' => 'required',
-      'hargabeli' => 'required',
-      'untung' => 'required',
-      'hargajual' => 'required',
-      'stok' => 'required',
-      'gambar' => 'file',
+        'id' => 'required',
+        'nama' => 'required|max:255',
+        'satuan' => 'required',
+        'id_kategori' => 'required',
+        'minimstok' => 'required',
+        'hargabeli' => 'required',
+        'untung' => 'required',
+        'hargajual' => 'required',
+        'stok' => 'required',
+        'gambar' => 'file',
     ]);
-    if ($request->file('gambar')) {
-      # code...
-      $file = $request->file('gambar');
-      $filename = date('YmdHi') . $file->getClientOriginalName();
-      $file->move(public_path('public/Image'), $filename);
-      $data['gambar'] = $filename;
+
+    // Mendapatkan kode barang dari input pengguna
+    $kodeBarang = $request->input('id');
+
+    // Mengecek apakah kode barang sudah ada dalam database
+    if (barang::where('id', $kodeBarang)->exists()) {
+        // Jika kode barang sudah ada, beri pesan kesalahan
+        return back()->with('error', 'Kode barang sudah ada dalam database.');
     }
 
-    // dd($data);
-    $data['hargabeli'] = $data['hargabeli'] . "000";
-    $data['untung'] = $data['untung'] . "000";
-    $data['hargajual'] = $data['hargajual'] * 1000;
-    // dd($data);
+    if ($request->file('gambar')) {
+        $file = $request->file('gambar');
+        $filename = date('YmdHi') . $file->getClientOriginalName();
+        $file->move(public_path('public/Image'), $filename);
+        $data['gambar'] = $filename;
+    }
+
+    $data['hargabeli'] = $data['hargabeli'];
+    $data['untung'] = $data['untung'];
+    $data['hargajual'] = $data['hargajual'];
 
     barang::insert($data);
+
     alert()->success('Berhasil', 'Berhasil Menambahkan Barang');
     return redirect('/barang');
-  }
+}
+
 
   /**
    * Display the specified resource.
@@ -111,7 +119,7 @@ class BarangController extends Controller
       'nama' => $request->nama,
       'hargabeli' => $request->hargabeli . "000",
       'untung' => $request->untung . "000",
-      'hargajual' => $request->hargajual . "000",
+      'hargajual' => $request->hargajual * 1000,
       'stok' => $request->stok
     ]);
     alert()->success('Berhasil', 'Berhasil Memperbarui Data');

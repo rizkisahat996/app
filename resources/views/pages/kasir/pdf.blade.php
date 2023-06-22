@@ -8,9 +8,15 @@
    
    
     <style>
+        @import url('https://fonts.cdnfonts.com/css/cooper-black');
+
         body * {
             font-family: 'Times New Roman', Times, serif;
             
+        }
+
+        h1{
+            font-family: 'Cooper Black', sans-serif;
         }
 
         .page-break {
@@ -27,7 +33,6 @@
         }
 
         #barang td {
-           padding: 2 2 2 2 !important;
             text-align: center !important;
             font-size: 15px;
         }
@@ -48,7 +53,6 @@ padding-top:4rem;
 }
     #total{
             text-align: center !important;
-            border: 1px solid rgba(0, 0, 0, 0.49);
             border-collapse: collapse
         }
         .page-break {
@@ -61,13 +65,14 @@ padding-top:4rem;
         }
       
         #barang thead  tr th{
-            border: 1px solid rgba(0, 0, 0, 0.49);
             border-spacing: -1px;
-width = 100% !important;
+            background-color: #B6EE05;
+            color: white;
+            font-size: 20px;
+            width = 100% !important;
         }
 
         #barang tbody {
-            border: 0.5px solid rgba(0, 0, 0, 0.49);
             
         }
 
@@ -82,53 +87,73 @@ padding :        0 0 0 0 !important;
             margin-left: 2rem !important;
         }
         #bar tr td{
-            border: 0.5px solid rgba(0, 0, 0, 0.49) !important 
+            border-bottom: 1px solid #000000;
+        background-image: linear-gradient(to right, #000000 50%, transparent 50%);
+        background-repeat: repeat-x;
+        background-position: bottom;
+        background-size: 8px 1px;
         }
 #tek {
 font-weight:500 !important ;
+text-align: center;
+text-decoration: underline;
 }
-
+.dash-2 {
+    border: none;
+    height: 5px;
+    background: #B6EE05;
+    background: repeating-linear-gradient(90deg, #B6EE05 0, #B6EE05 5px, transparent 5px, transparent 15px);
+    transform: skew(-45deg);
+    transform-origin: top left;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  .pp{
+    margin-bottom: 2px;
+    margin-top: 2px;
+  }
         @media print {}
     </style>
 </head>
 
 <body class="px-2 " onload="window.print()">
-    @if ($count > 5)
-        <div class="d-flex justify-content-between" id="tek">
-            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">BOBIE</div>
-            <div class="fw-semibold fs-4" style="margin-left: 70%; width: 30%;" id="fak">FAKTUR PENJUALAN</div>
+    <div>
+        <h1>BOBIE</h1>
+        <div class="pp">
+            <p class="pp">Hp. 0812 6455 677</p>
+            <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
+            <p class="pp">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
+    </div>
+    <hr>
+        <div class="d-flex" id="tek">
+            <h2><i>FAKTUR</i></h2>
         </div>
         <table class="table table-borderless" id="info">
             <tr>
-                <td  colspan="3" width="50%">
-                    Jl. Gatot Subroto KM.4, No.63,</td>
-                
-                <td width="10%">Kepada</td>
-                <td width="5%">:&nbsp;</td>
+                <td width="15%"><b>Kepada Yth,</b><br>&nbsp;</td>
+                <td>{{ $transaksi->pelanggan->nama }}
+                    <br> {{ $transaksi->pelanggan->perusahaan }}
+                </td>
+                <td style="text-align: right;">
+                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->id }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td width="15%">&nbsp;</td>
                 <td>{{ $transaksi->nama }}</td>
+                <td style="text-align: right;">
+                    <div style="display: inline-block; text-align: left;">Medan, {{ $transaksi->created_at->format('d-m-Y') }}</div>
+                </td>
             </tr>
             <tr>
-                <td  colspan="3" width="50%">
-                    Medan, 0821-6291-9393</td>
-                
                     <td rowspan="2">Alamat</td>
-                    <td rowspan="2">:&nbsp;</td>
-                    <td rowspan="2">{{ $transaksi->alamat }}</td>
+                    <td rowspan="2">{{ $transaksi->pelanggan->alamat }}</td>
             </tr>
             <tr>
-                <td >Nomor Faktur</td>
-                <td width="3%">:&nbsp;</td>
-                <td>{{ $transaksi->id }}</td>
+                <td></td>
             </tr>
             <tr>
                 <td>Tanggal Faktur</td>
-                <td>:&nbsp;</td>
                 <td>{{ $transaksi->created_at->format('d-m-Y') }}</td>
-                
-                <td>Petugas</td>
-                <td>:&nbsp;</td>
-                <td>Imelda</td>
-                
             </tr>
             <tr>
                 @if (($transaksi->jatuh_tempo == null))
@@ -146,257 +171,15 @@ font-weight:500 !important ;
                 
             </tr>
         </table>
-        <table class="table table-borderless" id="barang" style="width: 100%; ">
+        <table class="table table-borderless" id="barang" style="width: 100%; height:100px">
             <thead>
-                <tr class="fw-semibold">
-                    <th>No.</th>
-                    <th>Nama Barang</th>
-                    <th>Jumlah</th>
-                    <th>Satuan</th>
-                    <th>Harga</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            @php
-                $nomor = 1;
-            @endphp
-            <tbody class="" id="bar">
-                @foreach ($detail->slice(0, 5) as $item)
-                    <tr>
-                        <td id="bar">{{ $nomor }}</td>
-                        <td id="bar">{{ $item->nama }}</td>
-                        <td id="bar">{{ $item->jumlah }}</td>
-                        <td id="bar">{{ $item->satuan }}</td>
-                        <td id="bar">@currency($item->harga_jual)</td>
-                        <td id="bar">@currency($item->subtotal)</td>
-                    </tr>
-                    @php
-                        $nomor++;
-                    @endphp
-                @endforeach
-
-            </tbody>
-            <tfoot>
-                <tr class="">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td id="total"  class="text-end fw-semibold" style=" style="text-align: right;font-weight:500">Total&nbsp;:</td>
-                    <td id="total" class="text-center fw-semibold" style="font-weight:500">@currency($transaksi->total)</td>
-                </tr>
-            </tfoot>
-        </table>
-        <table class="table table-borderless" id="fott">
-            <tr id="bawah">
-                <td class="text-center" style="text-align: center;">Penerima</td>
-                <td class="text-center" style="text-align: center;" ><span style=" margin-left:4rem;">Petugas</span> </td>
-                <td  class="" style="text-align: start; margin-left:5rem;"><span
-                        style="font-size: 17px;margin-left:4rem;text-decoration:underline"> Transfer via:</span> <br>
-                        
-                </td>
-            </tr>
-
-            <tr>
-                <td class="text-center" style="text-align: center;padding-top:3rem">{{ $transaksi->nama }}</td>
-                <td class="text-center" style="text-align: center;padding-top:3rem"><span style="text-align: center; margin-left:4rem;">Imelda </span></td>
-                <td>
-                    <span style="font-size: 13px ;margin-left:4rem;">
-                        BRI - 133301001293531
-                       </span> 
-                       </span> <br> <span style="font-size: 13px ;padding-left:4rem;">
-                        BSI - 723053270</span>
-        <br> <span style="font-size: 13px ;padding-left:4rem;">
-                        AN - IMELDA</span>
-                </td>
-            </tr>
-        </table>
-        <div id="ket">
-            <div class="text-start fw-semibold">Keterangan</div>
-            <div class="text-start ">-{{$ket ?? ''}}</div>
-
-        </div>
-        <div class="d-flex justify-content-between" style="margin-top: 8rem;" id="tek">
-            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">BOBIE</div>
-            <div class="fw-semibold fs-4" style="margin-left: 70%; width: 30%;" id="fak">FAKTUR PENJUALAN</div>
-        </div>
-        <table class="table table-borderless" id="info">
-            <tr>
-                <td  colspan="3" width="50%">
-                    Jl. Tanjung Raya Pasar 6 Helvetia Marelan ,</td>
-                
-                <td width="10%">Kepada</td>
-                <td width="5%">:&nbsp;</td>
-                <td>{{ $transaksi->nama }}</td>
-            </tr>
-            <tr>
-                <td  colspan="3" width="50%">
-                    Medan, 0821-6291-9393</td>
-                
-                    <td rowspan="2">Alamat</td>
-                    <td rowspan="2">:&nbsp;</td>
-                    <td rowspan="2">{{ $transaksi->alamat }}</td>
-            </tr>
-            <tr>
-                <td >Nomor Faktur</td>
-                <td width="3%">:&nbsp;</td>
-                <td>{{ $transaksi->id }}</td>
-            </tr>
-            <tr>
-                <td>Tanggal Faktur</td>
-                <td>:&nbsp;</td>
-                <td>{{ $transaksi->created_at->format('d-m-Y') }}</td>
-                
-                <td>Petugas</td>
-                <td>:&nbsp;</td>
-                <td>Imelda</td>
-                
-            </tr>
-            <tr>
-                @if (($transaksi->jatuh_tempo == null))
-                <td></td>
-                <td></td>
-                <td></td>
-                @else
-                <td>Tanggal Tempo</td>
-                <td>:</td>
-                <td>{{ Carbon\Carbon::parse($transaksi->jatuh_tempo)->format('d-m-Y') }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                @endif
-                
-            </tr>
-        </table>
-        <table class="table table-borderless " id="barang" style="width: 100%; ">
-            <thead>
-                <tr class="fw-semibold">
-                    <th>No.</th>
-                    <th>Nama Barang</th>
-                    <th>Jumlah</th>
-                    <th>Satuan</th>
-                    <th>Harga</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody id="bar">
-                @foreach ($detail->slice(5, $count+2) as $item)
-                    <tr>
-                        <td>{{ $nomor }}</td>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->jumlah }}</td>
-                        <td>{{ $item->satuan }}</td>
-                        <td>@currency($item->harga_jual)</td>
-                        <td>@currency($item->subtotal)</td>
-                    </tr>
-                    @php
-                        $nomor++;
-                    @endphp
-                    @endforeach
-
-            </tbody>
-            <tfoot>
-                <tr class="">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td id="total"  class="text-end fw-semibold" style="font-weight:500">Total&nbsp;:</td>
-                    <td id="total" class="text-center fw-semibold" style="font-weight:500">@currency($transaksi->total)</td>
-                </tr>
-            </tfoot>
-        </table>
-      	<table class="table table-borderless" id="fott">
-            <tr id="bawah">
-                <td class="text-center" style="text-align: center;" >Penerima</td>
-                <td class="text-center" style="text-align: center;" ><span style=" margin-left:4rem;">Petugas</span> </td>
-                <td  class="" style="text-align: start; margin-left:5rem;"><span
-                        style="font-size: 17px;margin-left:4rem;text-decoration:underline"> Transfer via:</span> <br>
-                        
-                </td>
-            </tr>
-
-            <tr>
-                <td class="text-center" style="text-align: center;padding-top:3rem">{{ $transaksi->nama }}</td>
-                <td class="text-center" style="text-align: center;padding-top:3rem"><span style="text-align: center; margin-left:4rem;">Imelda </span></td>
-                <td>
-                    <span style="font-size: 13px ;margin-left:4rem;">
-                        BRI - 133301001293531
-                       </span> 
-                       </span> <br> <span style="font-size: 13px ;padding-left:4rem;">
-                        BSI - 723053270</span>
-        <br> <span style="font-size: 13px ;padding-left:4rem;">
-                        AN - IMELDA</span>
-                </td>
-            </tr>
-        </table>
-        <div id="ket">
-            <div class="text-start fw-semibold">Keterangan</div>
-            <div class="text-start ">-{{$ket ?? ''}}</div>
-
-        </div>
-    @else
-        <div class="d-flex justify-content-between" id="tek">
-            <div class="fw-semibold fs-4" style="float: left; width: 25%; ">BOBIE</div>
-            <div class="fw-semibold fs-4" style="margin-left: 70%; width: 30%;" id="fak">FAKTUR PENJUALAN</div>
-        </div>
-        <table class="table table-borderless" id="info">
-            <tr>
-                <td  colspan="3" width="50%">
-                    Jl. Tanjung Raya Pasar 6 Helvetia Marelan ,</td>
-                
-                <td width="10%">Kepada</td>
-                <td width="5%">:&nbsp;</td>
-                <td>{{ $transaksi->nama }}</td>
-            </tr>
-            <tr>
-                <td  colspan="3" width="50%">
-                    Medan, 0821-6291-9393</td>
-                
-                    <td rowspan="2">Alamat</td>
-                    <td rowspan="2">:&nbsp;</td>
-                    <td rowspan="2">{{ $transaksi->alamat }}</td>
-            </tr>
-            <tr>
-                <td >Nomor Faktur</td>
-                <td width="3%">:&nbsp;</td>
-                <td>{{ $transaksi->id }}</td>
-            </tr>
-            <tr>
-                <td>Tanggal Faktur</td>
-                <td>:&nbsp;</td>
-                <td>{{ $transaksi->created_at->format('d-m-Y') }}</td>
-                
-                <td>Petugas</td>
-                <td>:&nbsp;</td>
-                <td>Imelda</td>
-                
-            </tr>
-            <tr>
-                @if (($transaksi->jatuh_tempo == null))
-                <td></td>
-                <td></td>
-                <td></td>
-                @else
-                <td>Tanggal Tempo</td>
-                <td>:</td>
-                <td>{{ Carbon\Carbon::parse($transaksi->jatuh_tempo)->format('d-m-Y') }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                @endif
-                
-            </tr>
-        </table>
-        <table class="table table-borderless" id="barang" style="width: 100%; ">
-            <thead>
-                <tr class="fw-semibold">
-                    <th>No.</th>
-                    <th>Nama Barang</th>
-                    <th>Jumlah</th>
-                    <th>Satuan</th>
-                    <th>Harga</th>
-                    <th>Subtotal</th>
+                <tr>
+                    <th width="10%">No.</th>
+                    <th width="30%">Nama Barang</th>
+                    <th width="10%">Volume</th>
+                    <th width="10%">Satuan</th>
+                    <th width="20%">Harga</th>
+                    <th width="20%">Jumlah</th>
                 </tr>
             </thead>
             <tbody id="bar">
@@ -418,42 +201,46 @@ font-weight:500 !important ;
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td id="total"  class="text-end fw-semibold" style="text-align: right;font-weight:500">Total&nbsp;:</td>
-                    <td id="total" class="text-center fw-semibold"style="font-weight:500">@currency($transaksi->total)</td>
+                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">Jumlah Total&nbsp;:</td>
+                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->total)</td>
+                </tr>
+                <tr class="">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">Bayar&nbsp;:</td>
+                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">bayar</td>
+                </tr>
+                <tr class="">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Sisa&nbsp;:</td>
+                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">sisa</td>
                 </tr>
             </tfoot>
+            
         </table>
-	<table class="table table-borderless" id="fott">
-        <tr id="bawah">
-            <td class="text-center" style="text-align: center;">Penerima</td>
-            <td class="text-center" style="text-align: center;" ><span style=" margin-left:4rem;">Petugas</span> </td>
-            <td  class="" style="text-align: start; margin-left:5rem;"><span
-                    style="font-size: 17px;margin-left:4rem;text-decoration:underline"> Transfer via:</span> <br>
-                    
-            </td>
-        </tr>
-
-        <tr>
-            <td class="text-center" style="text-align: center;padding-top:3rem">{{ $transaksi->nama }}</td>
-            <td class="text-center" style="text-align: center;padding-top:3rem"><span style="text-align: center; margin-left:4rem;">Imelda </span></td>
-            <td>
-                <span style="font-size: 13px ;margin-left:4rem;">
-                    BRI - 133301001293531
-                   </span> 
-                   </span> <br> <span style="font-size: 13px ;padding-left:4rem;">
-                    BSI - 723053270</span>
-    <br> <span style="font-size: 13px ;padding-left:4rem;">
-                    AN - IMELDA</span>
-            </td>
-        </tr>
-        </table>
+	
    
         <div id="ket">
-            <div class="text-start fw-semibold">Keterangan</div>
-            <div class="text-start ">-{{$ket ?? ''}}</div>
-
+            <div class="text-start"><b>Catatan :</b></div>
+            <div class="text-start">1. Barang Barang yang sudah dibeli tidak dapat dikembalikan</div>
+            <div class="text-start">2. Harap diperiksa dengan seksama</div>
+            <div class="text-start">3. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
+            <div class="text-start">MANDIRI : 106.0055.4466.71</div>
+            <div class="text-start">BNI : 1264.666.777</div>
         </div>
-    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
 
 
 

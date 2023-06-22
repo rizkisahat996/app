@@ -1,6 +1,13 @@
 @extends('layout.main')
 @section('content')
     <div class="mx-auto">
+      <!-- Tampilkan pesan kesalahan jika ada -->
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
       <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1rem" class="py-3 px-4 mb-4 mt-3 col-sm-7 col-xl-4 col-lg-5 d-flex">
           <div>
             <a href="/barang">
@@ -27,8 +34,14 @@
                 <input required type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama" placeholder="Masukan nama barang">
             </div>
             <div class="mb-3">
-                <label for="satuan" class="form-label">Satuan Barang</label>
-                <input required type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="satuan" placeholder="Masukan satuan baranga">
+              <label for="id_kategori" class="form-label">Satuan Barang</label>
+                <select class="form-select" aria-label="Default select example" name="satuan">
+                    <option selected>==Pilih Satuan==</option>
+                    <option value="Kg">Kg</option>
+                    <option value="M^²">M^²</option>
+                    <option value="Unit">Unit</option>
+                    <option value="Psc">Psc</option>
+                  </select>
             </div>
             <div class="mb-3">
               <label for="id_kategori" class="form-label">Kategori Barang</label>
@@ -40,43 +53,41 @@
                     @endforeach
                   </select>
             </div>
-            <div class="mb-3">
+            <div hidden class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Minimum Stok</label>
                 <div class="input-group mb-3" id="exampleInputEmail1">
-                    <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="minimstok" placeholder="Masukkan minimum stok pemberitahuan">
+                    <input value="10" required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="minimstok" placeholder="Masukkan minimum stok pemberitahuan">
                 </div>
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
-                  <span class="input-group-text">Rp.</span>
-                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli">
-                  <span class="input-group-text">.000</span>
+                <span class="input-group-text">Rp.</span>
+                <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli">
               </div>
-          </div>
-          <div class="mb-3">
+            </div>
+            <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Untung</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
-                  <span class="input-group-text">Rp.</span>
-                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung">
-                  <span class="input-group-text">.000</span>
+                <span class="input-group-text">Rp.</span>
+                <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung">
               </div>
-          </div>
-          <div class="mb-3">
+            </div>
+            <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Jual <span>(termasuk ppn)</span></label>
               <div class="input-group mb-3" id="exampleInputEmail1">
-                  <span class="input-group-text">Rp.</span>
-                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual">
+                <span class="input-group-text">Rp.</span>
+                <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual">
               </div>
-          </div>
+            </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Stok</label>
                 <input required type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" placeholder="Masukan stok yang akan di setor">
               </div>
-              <div class="mb-3">
+              {{-- <div class="mb-3">
                 <label for="formFileSm" class="form-label">Masukkan Gambar</label>
                 <input class="form-control form-control-sm" id="formFileSm" type="file" name="gambar">
-              </div>
+              </div> --}}
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">
                   <i class="ti ti-send"></i>

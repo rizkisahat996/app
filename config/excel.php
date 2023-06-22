@@ -214,7 +214,7 @@ return [
     'cache' => [
         /*
         |--------------------------------------------------------------------------
-        | Default cell caching driver
+    | Default cell caching driver
         |--------------------------------------------------------------------------
         |
         | By default PhpSpreadsheet keeps all cell values in memory, however when

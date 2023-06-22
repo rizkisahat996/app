@@ -10,17 +10,14 @@
       @csrf
       <div class="row row-cols-2 bg-white px-4 py-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
         <div class="col">
-          <div class="item form-group">
-              <label class="control-label" for="nama_pembeli">Nama Pembeli</label>
-              <div class="mb-2">
-                  <input placeholder="Masukan nama pembeli" style="background-color: white" id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" type="text" required >
-              </div>
-          </div>
-          <div class="item form-grou2">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
-              <div class="mb-2">
-                  <input placeholder="Masukan alamat pembeli" style="background-color: white" id="nama_pembeli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="alamat" required type="text">
-              </div>
+          <div class="mb-3">
+            <label for="id_kategori" class="form-label">Nama Pembeli</label>
+              <select class="form-select" aria-label="Default select example" name="pelanggan_id">
+                  <option selected>==Pilih Pembeli==</option>
+                  @foreach ($pelanggan as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama }}, {{ $item->perusahaan }}</option>
+                  @endforeach
+                </select>
           </div>
           <div class="item form-group">
             <label class="control-label" for="tgl_beli">Tanggal Transaksi</label>
@@ -86,15 +83,33 @@
           </thead>
 
           <tfoot>
-              <tr>
-                  <td style="text-align:right; vertical-align: middle" colspan="5">
-                      <b>Grandtotal</b>
-                  </td>
-                  <td>
-                      <input id="grandtotal2" type="text" class="form-control grandtotal" readonly>
-                      <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
-                  </td>
-              </tr>
+            <tr>
+              <td style="text-align:right; vertical-align: middle" colspan="5">
+                <b>Grandtotal</b>
+              </td>
+              <td>
+                <input id="grandtotal2" type="text" class="form-control grandtotal" value="0" readonly>
+                <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right; vertical-align: middle" colspan="5">
+                <b>Pembayaran</b>
+              </td>
+              <td>
+                <input id="pembayaran2" type="text" class="form-control pembayaran" oninput="hitungSisa()">
+                <input id="pembayaran" name="pembayaran" type="text" class="form-control pembayaran" hidden>
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align:right; vertical-align: middle" colspan="5">
+                <b>Sisa</b>
+              </td>
+              <td>
+                <input id="kembalian2" type="text" class="form-control kembalian" readonly>
+                <input id="kembalian" name="kembalian" type="text" class="form-control kembalian" hidden>
+              </td>
+            </tr>
           </tfoot>
 
           <tbody id="tbody">
@@ -160,9 +175,33 @@
             hitung();
             coba();
             hitungseluruh();
-            kembalian();
         }, 1000);
-    
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            hitungSisa(); // Menghitung sisa saat halaman dimuat
+        });
+
+        function hitungSisa() {
+            var grandtotal = parseFloat(document.getElementById('grandtotal2').value);
+            var pembayaran = parseFloat(document.getElementById('pembayaran2').value);
+
+            if (isNaN(grandtotal)) {
+            grandtotal = 0; // Setel grandtotal ke 0 jika tidak valid
+            }
+
+            if (isNaN(pembayaran)) {
+            pembayaran = 0; // Setel pembayaran ke 0 jika tidak valid
+            }
+
+            var sisa = pembayaran - grandtotal;
+
+            if (sisa < 0) {
+            sisa = 0; // Sisa tidak boleh negatif
+            }
+
+            document.getElementById('kembalian2').value = sisa.toFixed(2);
+            document.getElementById('kembalian').value = sisa.toFixed(2);
+        }
         function bon() {
             var jenis = document.getElementById("jenispembayaran").value;
             if (jenis === String("belum-dibayar").valueOf()) {
@@ -173,12 +212,6 @@
                 bon.classList.add("d-none");
             }
         }
-    
-        var balek = document.getElementById("kembali");
-        var balektampil = document.getElementById("kembalian");
-        balek.addEventListener("keyup", function(e) {
-            balektampil.value = formatRupiah(balek.value, "Rp. ");
-        });
     
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, "").toString(),
@@ -241,22 +274,7 @@
                 hitung();
             }
         }
-    
-        function kembalian() {
-            let a = document.getElementById("bayar").value;
-            let uang = parseInt(a);
-            let total = parseInt(document.getElementById("grandtotal").value);
-            let kembali = uang - total;
-    
-            if (kembali < 0) {
-                var element = document.getElementById("uang");
-                element.classList.remove("d-none");
-                element.classList.add("d-flex");
-            } else {
-                document.getElementById("kembali").value = kembali;
-                balektampil.value = formatRupiah(balek.value, "Rp. ");
-            }
-        }
+
     
         function hitung() {
             let a = document.querySelectorAll("#trow");

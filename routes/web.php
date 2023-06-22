@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\TransaksiController;
 
@@ -18,6 +19,8 @@ use App\Http\Controllers\TransaksiController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::resource('/pelanggan', PelangganController::class)->middleware('auth');
 
 Route::get('/dashboard', [HomeController::class, 'index'])->middleware('su');
 Route::get('/harinih', [HomeController::class, 'harinih'])->middleware('su');
