@@ -21,7 +21,6 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-       
         $data = barang::orderBy('nama')->get();
         $pelanggan = pelanggan::get();
         return view('pages.kasir.index', compact('data', 'pelanggan'));
@@ -43,49 +42,60 @@ class TransaksiController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        // try {
-            //code...
-            $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
-            $hasil = $jumlah->count() + 1;
-            $id = "ST".Carbon::parse($request->tgl_beli)->format('dm').sprintf("%04d", $hasil);
-            for ($i=0; $i <count($request->nama) ; $i++) { 
-                $barang = barang::where('id', $request->nama[$i]);
-                $barang->decrement('stok', $request->jumlah[$i]);
-            }
-            $uuid = str::uuid();
-            transaksi::insert([
-                'id' => $id,
-                'pelanggan_id' => $request->pelanggan_id,
-                'kodefaktut'=> $uuid,
-                'jenispembayaran'=> $request->jenispembayaran,
-                'total'=>$request->grandtotal,
-                'pembayaran'=>$request->pembayaran,
-                'user_id'=> Auth::user()->id,
-                'kembalian'=> $request->kembalian,
-                'jatuh_tempo' => $request->jatuh_tempo,
+{
+    try {
+        // code...
+        $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
+        $hasil = $jumlah->count() + 1;
+        $id = "ST".Carbon::parse($request->tgl_beli)->format('dm').sprintf("%04d", $hasil);
+        for ($i=0; $i <count($request->nama) ; $i++) { 
+            $barang = barang::where('id', $request->nama[$i]);
+            $barang->decrement('stok', $request->jumlah[$i]);
+        }
+        $uuid = str::uuid();
+        $grandtotal = $request->grandtotal;
+        $pembayaran = $request->pembayaran;
+        $kembalian = $pembayaran - $grandtotal;
+
+        if ($pembayaran < $grandtotal) {
+            alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
+            return back();
+        }
+        
+        $kembalian = $pembayaran - $grandtotal;
+
+        transaksi::insert([
+            'id' => $id,
+            'pelanggan_id' => $request->pelanggan_id,
+            'kodefaktut'=> $uuid,
+            'jenispembayaran'=> $request->jenispembayaran,
+            'total'=> $grandtotal,
+            'pembayaran'=> $pembayaran,
+            'user_id'=> Auth::user()->id,
+            'kembalian'=> $kembalian,
+            'jatuh_tempo' => $request->jatuh_tempo,
+            'created_at' => $request->tgl_beli,
+        ]);
+        for ($i=0; $i <count($request->nama) ; $i++) {
+            $detail = detailtransaksi::insert([
+                'id_transaksi' => $id,
+                'id_barang' => $request->nama[$i],
+                'jumlah' => $request->jumlah[$i],
+                'subtotal' => $request->subtotal[$i],
+                'harga_jual' => $request->harga_jual[$i],
+                'modal'=>$request->modal[$i],
                 'created_at' => $request->tgl_beli,
             ]);
-            for ($i=0; $i <count($request->nama) ; $i++) {
-                $detail = detailtransaksi::insert([
-                    'id_transaksi' => $id,
-                    'id_barang' => $request->nama[$i],
-                    'jumlah' => $request->jumlah[$i],
-                    'subtotal' => $request->subtotal[$i],
-                    'harga_jual' => $request->harga_jual[$i],
-                    'modal'=>$request->modal[$i],
-                    'created_at' => $request->tgl_beli,
-                ]);
-            }
-           
-            return redirect()->route('preview', ['id' => $id]);
-        // } catch (\Throwable  $e) {
-        //     // dd($e);
-        //     alert()->error('Gagal','Data yang anda masukkan tidak valid, Silahkan cek kembali');
-        //     return Redirect::back();
-        // }
+        }
        
+        return redirect()->route('preview', ['id' => $id]);
+    } catch (\Throwable  $e) {
+        // dd($e);
+        alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
+        return back();
     }
+}
+
 
     /**
      * Display the specified resource.
@@ -113,12 +123,22 @@ class TransaksiController extends Controller
     public function update(Request $request, string $id)
     {
         try {
+            $grandtotal = $request->grandtotal;
+            $pembayaran = $request->pembayaran;
+            $kembalian = $pembayaran - $grandtotal;
+            if ($pembayaran < $grandtotal) {
+                alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
+                return back();
+            }
+            
+            $kembalian = $pembayaran - $grandtotal;
             //code...
             transaksi::where('id',$id )->update([
-                'nama' =>$request->nama_pembeli,
                 'jenispembayaran'=> $request->jenispembayaran,
-                'total'=>$request->grandtotal,
+                'total'=>$grandtotal,
+                'pembayaran'=> $pembayaran,
                 'user_id'=> Auth::user()->id,
+                'kembalian'=> $kembalian,
                 'jatuh_tempo' => $request->jatuh_tempo,
                 'created_at' => $request->tgl_beli,
             ]);
@@ -137,7 +157,7 @@ class TransaksiController extends Controller
             return redirect()->route('preview', ['id' => $id]);
         } catch (\Throwable $th) {
             alert()->error('Gagal','Data yang anda masukkan tidak valid, Silahkan cek kembali');
-            return Redirect::back();
+            return back();
         }
     }
 

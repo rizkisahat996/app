@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\pelanggan;
 use App\Http\Requests\StorepelangganRequest;
 use App\Http\Requests\UpdatepelangganRequest;
+use App\Models\transaksi;
 
 class PelangganController extends Controller
 {
@@ -43,10 +44,14 @@ class PelangganController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(pelanggan $pelanggan)
+    public function show($id)
     {
-        //
+        $pelanggan = pelanggan::findOrFail($id);
+        $data = transaksi::where('pelanggan_id', $id)->get();
+        return view('pages.pelanggan.show', compact('data', 'pelanggan'));
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.

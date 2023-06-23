@@ -11,7 +11,7 @@
       <div class="row row-cols-2 bg-white px-4 py-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
         <div class="col">
           <div class="mb-3">
-            <label for="id_kategori" class="form-label">Nama Pembeli</label>
+            <label for="id_kategori" class="form-label">Nama, Perusahaan</label>
               <select class="form-select" aria-label="Default select example" name="pelanggan_id">
                   <option selected>==Pilih Pembeli==</option>
                   @foreach ($pelanggan as $item)
@@ -97,17 +97,7 @@
                 <b>Pembayaran</b>
               </td>
               <td>
-                <input id="pembayaran2" type="text" class="form-control pembayaran" oninput="hitungSisa()">
-                <input id="pembayaran" name="pembayaran" type="text" class="form-control pembayaran" hidden>
-              </td>
-            </tr>
-            <tr>
-              <td style="text-align:right; vertical-align: middle" colspan="5">
-                <b>Sisa</b>
-              </td>
-              <td>
-                <input id="kembalian2" type="text" class="form-control kembalian" readonly>
-                <input id="kembalian" name="kembalian" type="text" class="form-control kembalian" hidden>
+                <input id="pembayaran" name="pembayaran" type="number" class="form-control pembayaran">
               </td>
             </tr>
           </tfoot>
@@ -176,32 +166,7 @@
             coba();
             hitungseluruh();
         }, 1000);
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            hitungSisa(); // Menghitung sisa saat halaman dimuat
-        });
 
-        function hitungSisa() {
-            var grandtotal = parseFloat(document.getElementById('grandtotal2').value);
-            var pembayaran = parseFloat(document.getElementById('pembayaran2').value);
-
-            if (isNaN(grandtotal)) {
-            grandtotal = 0; // Setel grandtotal ke 0 jika tidak valid
-            }
-
-            if (isNaN(pembayaran)) {
-            pembayaran = 0; // Setel pembayaran ke 0 jika tidak valid
-            }
-
-            var sisa = pembayaran - grandtotal;
-
-            if (sisa < 0) {
-            sisa = 0; // Sisa tidak boleh negatif
-            }
-
-            document.getElementById('kembalian2').value = sisa.toFixed(2);
-            document.getElementById('kembalian').value = sisa.toFixed(2);
-        }
         function bon() {
             var jenis = document.getElementById("jenispembayaran").value;
             if (jenis === String("belum-dibayar").valueOf()) {

@@ -21,14 +21,6 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a  style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
-                <span>
-                  <i class="ti ti-shovel"></i>
-                </span>
-                <span class="hide-menu">Nama Barang</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
               <a  style="color: white;" class="sidebar-link" href="/barang" aria-expanded="false">
                 <span>
                   <i class="ti ti-building-warehouse"></i>
@@ -53,14 +45,6 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a style="color: white;" class="sidebar-link" href="/#" aria-expanded="false">
-                <span>
-                  <i class="ti ti-building-bank"></i>
-                </span>
-                <span class="hide-menu">Manajemen Laporan</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
               <a style="color: white;" class="sidebar-link" href="/histori" aria-expanded="false">
                 <span>
                   <i class="ti ti-history"></i>
@@ -73,24 +57,7 @@
                 <span>
                   <i class="ti ti-book-2"></i>
                 </span>
-                <span class="hide-menu">Nomor Surat</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
-                <span>
-                  <i class="ti ti-archive"></i>
-                </span>
-                <span class="hide-menu">Surat Keluar</span>
-              </a>
-            </li>
-            
-            <li class="sidebar-item">
-              <a style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
-                <span>
-                  <i class="ti ti-book"></i>
-                </span>
-                <span class="hide-menu">Surat Pemesanan Order</span>
+                <span class="hide-menu">Surat Perjalanan</span>
               </a>
             </li>
             <li class="sidebar-item">

@@ -68,8 +68,7 @@
                   <tr>
                       <th scope="col">No.</th>
                       <th scope="col">Faktur</th>
-                      <th scope="col">Nama Pembeli</th>
-                      <th scope="col">Perusahaan</th>
+                      <th scope="col">Nama, Perusahaan</th>
                       <th scope="col">Tanggal Pembeli</th>
                       <th scope="col">Total</th>
                       <th scope="col">Metode Pembayaran</th>
@@ -90,12 +89,12 @@
                           <tr>
                               <th scope="row">{{ $loop->iteration }}</th>
                               <td>{{ $item->id }}</td>
-                              <td>{{ $item->nama }}</td>
-                              <td>{{ $item->perusahaan }}</td>
+                              <td>{{ $item->nama }}, {{ $item->perusahaan }}</td>
                               <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                               <td>@currency($item->total)</td>
                               <td class="text-start ms-5 ps-5">{{ $item->jenispembayaran }}</td>
-                              <td class="d-flex justify-content-center gap-3"> <a target="_blank"
+                              <td class="d-flex justify-content-center gap-3"> 
+                                <a target="_blank"
                                       href="/preview/{{ $item->id }}">
                                       <div class="btn btn-primary btn-sm text-white mb-1">
                                           <i class="ti ti-printer"></i>

@@ -22,5 +22,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::component('alert-stok', AlertStok::class);
         Blade::directive('currency', function ( $expression ) { return "Rp. <?php echo number_format($expression,0,',','.'); ?>"; });
+        \Blade::directive('terbilang', function ($number) {
+            return "<?php echo terbilang($number); ?>";
+        });
     }
 }

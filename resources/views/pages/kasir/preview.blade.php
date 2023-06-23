@@ -91,6 +91,16 @@
                           <td colspan="5" class="text-end">Total&nbsp;:</td>
                           <td class="text-center">@currency($transaksi->total)</td>
                       </tr>
+                      <tr>
+
+                          <td colspan="5" class="text-end">Bayar&nbsp;:</td>
+                          <td class="text-center">@currency($transaksi->pembayaran)</td>
+                      </tr>
+                      <tr>
+
+                          <td colspan="5" class="text-end">Kembalian&nbsp;:</td>
+                          <td class="text-center">@currency($transaksi->kembalian)</td>
+                      </tr>
                   </tbody>
               </table>
               <div class="col-md-3 mt-5">

@@ -51,6 +51,13 @@
                                     <td>{{ $item->no_telp }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
+                                            <a target="_blank"
+                                          href="{{ route('pelanggan.show', $item->id) }}">
+                                          <div class="btn btn-primary btn-sm text-white mb-1">
+                                              <i class="ti ti-brand-cashapp"></i>
+                                              <span>Lihat</span>
+                                          </div>
+                                      </a>
                                             @component('components.modal')
                                                 @slot('target')
                                                     {{ $item->id }}

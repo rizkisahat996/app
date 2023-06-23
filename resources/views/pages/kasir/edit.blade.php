@@ -11,15 +11,11 @@
       <div class="row row-cols-2 bg-white px-4 py-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
         <div class="col">
           <div class="item form-group">
-              <label class="control-label" for="nama_pembeli">Nama Pembeli</label>
+              <label class="control-label" for="nama_pembeli">Nama, Perusahaan</label>
               <div class="mb-2">
-                  <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="nama_pembeli" required="required"  value="{{ old('nama', $transaksi->nama) }}" type="text">
-              </div>
-          </div>
-          <div class="item form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_pembeli">Alamat</label>
-              <div class="mb-2">
-                  <input id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" name="alamat" required="required" value="{{ old('alamat', $transaksi->alamat) }}" type="text">
+                  <div id="nama_pembeli" class="form-control bg-white" data-validate-length-range="6" data-validate-words="1" value="" type="text" >
+                  {{ $transaksi->pelanggan->nama }}, {{ $transaksi->pelanggan->perusahaan }}
+                </div>
               </div>
           </div>
           <div class="item form-group">
@@ -87,15 +83,23 @@
 
             <tfoot>
                 <tr>
-                    <td style="text-align:right; vertical-align: middle" colspan="5">
-                        <b>Grandtotal</b>
-                    </td>
-                    <td>
-                        <input id="grandtotal2" type="text" class="form-control grandtotal" readonly>
-                        <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
-                    </td>
+                  <td style="text-align:right; vertical-align: middle" colspan="5">
+                    <b>Grandtotal</b>
+                  </td>
+                  <td>
+                    <input id="grandtotal2" type="text" class="form-control grandtotal" value="0" readonly>
+                    <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
+                  </td>
                 </tr>
-            </tfoot>
+                <tr>
+                  <td style="text-align:right; vertical-align: middle" colspan="5">
+                    <b>Pembayaran</b>
+                  </td>
+                  <td>
+                    <input id="pembayaran" name="pembayaran" type="number" class="form-control pembayaran" value="{{ old('pembayaran', $transaksi->pembayaran) }}">
+                  </td>
+                </tr>
+              </tfoot>
 
             <tbody id="tbody">
                 @foreach ($data as $item)
@@ -251,22 +255,6 @@
             if (currentJumlah > 1) {
                 jumlah.value = currentJumlah - 1;
                 hitung();
-            }
-        }
-    
-        function kembalian() {
-            let a = document.getElementById("bayar").value;
-            let uang = parseInt(a);
-            let total = parseInt(document.getElementById("grandtotal").value);
-            let kembali = uang - total;
-    
-            if (kembali < 0) {
-                var element = document.getElementById("uang");
-                element.classList.remove("d-none");
-                element.classList.add("d-flex");
-            } else {
-                document.getElementById("kembali").value = kembali;
-                balektampil.value = formatRupiah(balek.value, "Rp. ");
             }
         }
     

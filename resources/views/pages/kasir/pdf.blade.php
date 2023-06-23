@@ -82,10 +82,6 @@ padding-top:4rem;
 	width = 500% !important;
 padding :        0 0 0 0 !important;
         }
-
-        #ket {
-            margin-left: 2rem !important;
-        }
         #bar tr td{
             border-bottom: 1px solid #000000;
         background-image: linear-gradient(to right, #000000 50%, transparent 50%);
@@ -111,6 +107,48 @@ text-decoration: underline;
     margin-bottom: 2px;
     margin-top: 2px;
   }
+  .container {
+    display: flex;
+    align-items: start;
+    width: 100%;
+}
+
+.catatan {
+    width: 70%;
+    margin-right: 20px;
+    float: left;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.barcode {
+    width: 30%;
+    margin-top: 15px;
+    padding-top: 15px;
+    float: left;
+}
+
+#barcode {
+    width: 50%;
+    height: 100px;
+    margin-left: 50px;
+    border: 1px solid black;
+}
+
+.barcode-digit {
+    flex-grow: 1;
+    border-right: 1px solid black;
+}
+
+.black {
+    background-color: black;
+}
+#okkk {
+    text-align: center;
+    margin-top: 2px;
+    padding-top: 2px;
+}
+
         @media print {}
     </style>
 </head>
@@ -210,7 +248,7 @@ text-decoration: underline;
                     <td></td>
                     <td></td>
                     <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">Bayar&nbsp;:</td>
-                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">bayar</td>
+                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->pembayaran)</td>
                 </tr>
                 <tr class="">
                     <td></td>
@@ -218,21 +256,30 @@ text-decoration: underline;
                     <td></td>
                     <td></td>
                     <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Sisa&nbsp;:</td>
-                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">sisa</td>
+                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->kembalian)</td>
                 </tr>
             </tfoot>
             
         </table>
 	
    
-        <div id="ket">
-            <div class="text-start"><b>Catatan :</b></div>
-            <div class="text-start">1. Barang Barang yang sudah dibeli tidak dapat dikembalikan</div>
-            <div class="text-start">2. Harap diperiksa dengan seksama</div>
-            <div class="text-start">3. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
-            <div class="text-start">MANDIRI : 106.0055.4466.71</div>
-            <div class="text-start">BNI : 1264.666.777</div>
+        <div class="container">
+            <div class="catatan">
+                <div class="text-start"><b>Catatan :</b></div>
+                <div class="text-start">1. Barang yang sudah dibeli tidak dapat dikembalikan</div>
+                <div class="text-start">2. Harap diperiksa dengan seksama</div>
+                <div class="text-start">3. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
+                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div>
+                <div class="text-start">MANDIRI : 106.0055.4466.71</div>
+                <div class="text-start">BNI : 1264.666.777</div>
+            </div>
+            <div class="barcode">
+                <div id="barcode"></div>
+                <div id="okkk"><b>{{ Auth::user()->name; }}</b></div>
+                <div id="okkk">{{ Auth::user()->jabatan; }}</div>
+            </div>
         </div>
+        
                                 </div>
                             </div>
                         </div>
@@ -249,6 +296,26 @@ text-decoration: underline;
   
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        function generateBarcode() {
+        var barcodeDiv = document.getElementById("barcode");
+        var barcodeData = "123456789"; // Nilai barcode yang diinginkan
+        
+        for (var i = 0; i < barcodeData.length; i++) {
+            var barcodeDigit = barcodeData.charAt(i);
+            var barcodeElement = document.createElement("div");
+            barcodeElement.classList.add("barcode-digit");
+            
+            if (barcodeDigit === "1") {
+                barcodeElement.classList.add("black");
+            }
+            
+            barcodeDiv.appendChild(barcodeElement);
+        }
+    }
+    
+    generateBarcode();
+    </script>
 </body>
 
 </html>
