@@ -53,7 +53,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a style="color: white;" class="sidebar-link" href="#" aria-expanded="false">
+              <a style="color: white;" class="sidebar-link" href="suratjalann" aria-expanded="false">
                 <span>
                   <i class="ti ti-book-2"></i>
                 </span>

@@ -172,7 +172,7 @@ text-decoration: underline;
                     <br> {{ $transaksi->pelanggan->perusahaan }}
                 </td>
                 <td style="text-align: right;">
-                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->kodefaktur }}</div>
+                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->id }}</div>
                 </td>
             </tr>
             <tr>

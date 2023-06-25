@@ -15,4 +15,8 @@ class pelanggan extends Model
     {
         return $this->hasMany(transaksi::class);
     }
+    public function surat_jalan()
+    {
+        return $this->hasMany(SuratJalan::class);
+    }
 }

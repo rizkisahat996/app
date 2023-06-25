@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('pelanggan_id');
+            $table->string('kodefaktur');
             $table->uuid('kodefaktut');     
             $table->enum('jenispembayaran', ['tunai', 'non-tunai','belum-dibayar']);
             $table->date('jatuh_tempo')->nullable();

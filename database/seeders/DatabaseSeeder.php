@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
       'minimstok' => '10',
       'hargajual' => '10',
       'untung' => '10',
-      'stok' => '10',
+      'stok' => '1000',
     ]);
   }
 }

@@ -41,60 +41,62 @@ class TransaksiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-{
-    try {
-        // code...
-        $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
-        $hasil = $jumlah->count() + 1;
-        $id = "ST".Carbon::parse($request->tgl_beli)->format('dm').sprintf("%04d", $hasil);
-        for ($i=0; $i <count($request->nama) ; $i++) { 
-            $barang = barang::where('id', $request->nama[$i]);
-            $barang->decrement('stok', $request->jumlah[$i]);
-        }
-        $uuid = str::uuid();
-        $grandtotal = $request->grandtotal;
-        $pembayaran = $request->pembayaran;
-        $kembalian = $pembayaran - $grandtotal;
+        public function store(Request $request)
+    {
+        try {
+            // code...
+            $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
+            $hasil = $jumlah->count() + 1;
+            $id = sprintf("%03d", $hasil);
+            $kodefaktur = "NF - TH/" . date('Y') . "/" . sprintf("%03d", $hasil);
+            for ($i=0; $i <count($request->nama) ; $i++) { 
+                $barang = barang::where('id', $request->nama[$i]);
+                $barang->decrement('stok', $request->jumlah[$i]);
+            }
+            $uuid = str::uuid();
+            $grandtotal = $request->grandtotal;
+            $pembayaran = $request->pembayaran;
+            $kembalian = $pembayaran - $grandtotal;
 
-        if ($pembayaran < $grandtotal) {
-            alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
-            return back();
-        }
-        
-        $kembalian = $pembayaran - $grandtotal;
+            if ($pembayaran < $grandtotal) {
+                alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
+                return back();
+            }
+            
+            $kembalian = $pembayaran - $grandtotal;
 
-        transaksi::insert([
-            'id' => $id,
-            'pelanggan_id' => $request->pelanggan_id,
-            'kodefaktut'=> $uuid,
-            'jenispembayaran'=> $request->jenispembayaran,
-            'total'=> $grandtotal,
-            'pembayaran'=> $pembayaran,
-            'user_id'=> Auth::user()->id,
-            'kembalian'=> $kembalian,
-            'jatuh_tempo' => $request->jatuh_tempo,
-            'created_at' => $request->tgl_beli,
-        ]);
-        for ($i=0; $i <count($request->nama) ; $i++) {
-            $detail = detailtransaksi::insert([
-                'id_transaksi' => $id,
-                'id_barang' => $request->nama[$i],
-                'jumlah' => $request->jumlah[$i],
-                'subtotal' => $request->subtotal[$i],
-                'harga_jual' => $request->harga_jual[$i],
-                'modal'=>$request->modal[$i],
+            transaksi::insert([
+                'id' => $id,
+                'pelanggan_id' => $request->pelanggan_id,
+                'kodefaktur'=> $kodefaktur,
+                'kodefaktut'=> $uuid,
+                'jenispembayaran'=> $request->jenispembayaran,
+                'total'=> $grandtotal,
+                'pembayaran'=> $pembayaran,
+                'user_id'=> Auth::user()->id,
+                'kembalian'=> $kembalian,
+                'jatuh_tempo' => $request->jatuh_tempo,
                 'created_at' => $request->tgl_beli,
             ]);
+            for ($i=0; $i <count($request->nama) ; $i++) {
+                $detail = detailtransaksi::insert([
+                    'id_transaksi' => $id,
+                    'id_barang' => $request->nama[$i],
+                    'jumlah' => $request->jumlah[$i],
+                    'subtotal' => $request->subtotal[$i],
+                    'harga_jual' => $request->harga_jual[$i],
+                    'modal'=>$request->modal[$i],
+                    'created_at' => $request->tgl_beli,
+                ]);
+            }
+        
+            return redirect()->route('preview', ['id' => $id]);
+        } catch (\Throwable  $e) {
+            // dd($e);
+            alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
+            return back();
         }
-       
-        return redirect()->route('preview', ['id' => $id]);
-    } catch (\Throwable  $e) {
-        // dd($e);
-        alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
-        return back();
     }
-}
 
 
     /**
@@ -180,7 +182,7 @@ class TransaksiController extends Controller
         $transaksi = transaksi::where('id', '=', $id)->first();
         $detail = detailtransaksi::where('id_transaksi', '=', $id)->join('barangs', 'detailtransaksis.id_barang', '=', 'barangs.id')->get();
         // $transaksi->
-        // dd($transaksi->id);
+        // dd($transaksi);
     
             // dd($detail);
             $count = count($detail);
@@ -210,7 +212,7 @@ class TransaksiController extends Controller
             $tes = $break / 5;
             $ket = $request->query('note');
             $pdf = PDF::loadview('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket'));
-            return $pdf->download($transaksi['id'].'.pdf');
+            return $pdf->download($transaksi['kodefaktur'].'.pdf');
             // return view('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket'));
         }
         public function penjualan(Request $request)

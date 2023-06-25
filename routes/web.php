@@ -7,7 +7,9 @@ use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\TransaksiController;
+use App\Models\SuratJalan;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,11 @@ Route::post('/login', [PenggunaController::class, 'attemp']);
 Route::get('/logout', [PenggunaController::class, 'logout'])->middleware('auth');
 Route::resource('/barang', BarangController::class)->middleware('auth');
 Route::resource('/pengguna', PenggunaController::class)->middleware('su');
+Route::resource('/suratjalan', SuratJalanController::class)->middleware('su');
+Route::get('detail-barang-{barang_id}', [SuratJalanController::class, 'detail'])->middleware('su');
+Route::get('suratjalann', [SuratJalanController::class, 'suratjalann'])->middleware('su');
+Route::get('/preview-surat/{id}', [SuratJalanController::class, 'preview'])->middleware('su')->name('preview-surat');
+Route::get('/pdfsurat/{id}', [SuratJalanController::class, 'pdf'])->middleware('su')->name('pdf-surat');
 Route::get('/barang/{kategori}', [BarangController::class, 'filter'])->middleware('auth');
 Route::get('/eksport', [BarangController::class, 'pdf'])->middleware('auth');
 Route::post('/barang/tambah/{id}', [BarangController::class, 'tambah'])->middleware('auth');
@@ -44,7 +51,7 @@ Route::get('/kasir/delete/{id}', [TransaksiController::class, 'destroy'])->middl
 Route::post('/kasir/update/{id}', [TransaksiController::class, 'update'])->middleware('auth');
 Route::post('/kasir', [TransaksiController::class, 'store'])->middleware('auth');
 Route::post('/piutang/{id}', [TransaksiController::class, 'storepiutang'])->middleware('auth');
-Route::get('detail-barang-{id_barang}', [TransaksiController::class, 'detail'])->middleware('auth');
+Route::get('detail-barang-{i  d_barang}', [TransaksiController::class, 'detail'])->middleware('auth');
 Route::get('pdf/{id}', [TransaksiController::class, 'pdf'])->name('pdf')->middleware('auth');
 Route::get('/penjualan', [TransaksiController::class, 'penjualan'])->middleware('auth');
 Route::get('/histori/penjualan', [HistoriController::class, 'penjualan'])->middleware('auth');
