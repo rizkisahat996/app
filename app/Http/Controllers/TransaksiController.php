@@ -215,6 +215,43 @@ class TransaksiController extends Controller
             return $pdf->download($transaksi['kodefaktur'].'.pdf');
             // return view('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket'));
         }
+    public function proforma($id, Request $request){
+       
+        $transaksi = transaksi::where('id', '=', $id)->first();
+        $detail = detailtransaksi::where('id_transaksi', '=', $id)->join('barangs', 'detailtransaksis.id_barang', '=', 'barangs.id')->get();
+        // $transaksi->
+        // dd($transaksi);
+    
+            // dd($detail);
+            $count = count($detail);
+            $transaksi->detail = $detail;
+          
+            switch ($count % 5) {
+                case 1:
+                    $break = $count + 4;
+                    break;
+                
+                case 2:
+                    $break = $count + 3;
+                    break;
+                
+                case 3:
+                    $break = $count + 2;
+                    break;
+                
+                case 4:
+                    $break = $count + 1;
+                    break;
+                
+                default:
+                $break = $count;
+                    break;
+            }
+            $tes = $break / 5;
+            $ket = $request->query('note');
+            $pdf = PDF::loadview('pages.kasir.proforma', compact('transaksi','detail', 'count', 'tes','ket'));
+            return $pdf->download($transaksi['kodefaktur'].'.pdf');
+        }
         public function penjualan(Request $request)
         {
             $data['tgl_awal'] = $request->query('tgl_awal');

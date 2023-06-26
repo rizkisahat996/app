@@ -17,14 +17,13 @@
         }
     </style>
     <div class="col-lg-10 mx-auto">
-      <form action="/pdf/{{ $transaksi->id }}">
           <h5 class="text-center">Preview</h5>
           <div class="mx-1 mt-3 py-5 px-5 bg-white">
               <div class="d-flex justify-content-between px-1 py-2" id="top">
                   <div class="fw-bold fs-5">BOBIE</div>
                   <div class="fw-bold fs-5">Faktur Penjualan</div>
               </div>
-              <table class="table " id="tab">
+              <table class="table" id="tab">
                   <tr class="">
                       <td width="20%">Nomor Faktur</td>
                       <td width="5%">:</td>
@@ -108,12 +107,19 @@
               </div>
             </div>
             <div class="d-flex justify-content-start ml-4">
+                <form action="/pdf/{{ $transaksi->id }}">
                 <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
                   <span>Print Faktur</span>
                   <i class="fa-solid fa-print"></i>
                 </button>
+            </form>
+            <form action="/proforma/{{ $transaksi->id }}">
+                <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+                    <span>Print Proforma</span>
+                    <i class="fa-solid fa-print"></i>
+                  </button>
+                </form>
             </div>
-      </form>
     </div>
     @push('css')
     @endpush
