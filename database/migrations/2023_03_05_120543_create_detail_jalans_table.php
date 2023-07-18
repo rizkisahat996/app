@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('barang_id');
             $table->float('jumlah',5, 1)->nullable();
             $table->integer('kuantitas')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -53,6 +53,15 @@
                       <td width="5%"></td>
                       <td style="text-align: start"></td>
                   </tr>
+                  <tr class="">
+                      <td width="20%">Nomor Polisi</td>
+                      <td width="5%">:</td>
+                      <td>{{ $transaksi->nomor_polisi }}</td>
+                      <td width="10%"></td>
+                      <td width="20%"></td>
+                      <td width="5%"></td>
+                      <td style="text-align: start"></td>
+                  </tr>
               </table>
           </div>
           <div class="mx-1 mt-3 py-5 px-5 bg-white">
@@ -75,14 +84,12 @@
                               <td>{{ $item->kuantitas }}</td>
                               <td>{{ $item->satuan }}</td>
                               <td>10</td>
-                              <td>kosong</td>
+                              <td>{{ $item->keterangan }}</td>
                           </tr>
+                          {{ $item->keterangan }}
                       @endforeach
                   </tbody>
               </table>
-              <div class="col-md-3 mt-5">
-                <input class="form-control border border-3" type="text" id="note" name="note" placeholder="Masukan keterangan disini">
-              </div>
             </div>
             <div class="d-flex justify-content-start ml-4">
                 <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">

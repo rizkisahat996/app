@@ -102,9 +102,9 @@
                       </tr>
                   </tbody>
               </table>
-              <div class="col-md-3 mt-5">
+              {{-- <div class="col-md-3 mt-5">
                 <input class="form-control border border-3" type="text" id="note" name="note" placeholder="Masukan keterangan disini">
-              </div>
+              </div> --}}
             </div>
             <div class="d-flex justify-content-start ml-4">
                 <form action="/pdf/{{ $transaksi->id }}">

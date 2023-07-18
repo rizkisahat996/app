@@ -43,10 +43,17 @@ class TransaksiController extends Controller
      */
         public function store(Request $request)
     {
-        // try {
+        try {
             // code...
             $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
             $hasil = $jumlah->count() + 1;
+            // if (transaksi::exists()) {
+            //     $hasil = transaksi::count() + 1;
+            // } else {
+            //     $hasil = 1;
+            // }
+            // dd($hasil);
+            // $hasil = transaksi::count() + 1;
             $id = sprintf("%03d", $hasil);
             $kodefaktur = "NF - TH/" . date('Y') . "/" . sprintf("%03d", $hasil);
             for ($i=0; $i <count($request->nama) ; $i++) { 
@@ -91,10 +98,10 @@ class TransaksiController extends Controller
             }
         
             return redirect()->route('preview', ['id' => $id]);
-        // } catch (\Throwable  $e) {
-        //     alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
-        //     return back();
-        // }
+        } catch (\Throwable  $e) {
+            alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
+            return back();
+        }
     }
 
 

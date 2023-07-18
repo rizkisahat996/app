@@ -63,8 +63,9 @@
                 <th style="text-align: center" width="30%">Nama Barang</th>
                 <th style="text-align: center" width="10%">Satuan</th>
                 <th style="text-align: center" width="10%">Stok</th>
-                <th style="text-align: center" width="15%">Volume</th>
-                <th style="text-align: center" width="15%">Kuantitas</th>
+                <th style="text-align: center" width="10%">Volume</th>
+                <th style="text-align: center" width="10%">Kuantitas</th>
+                <th style="text-align: center" width="30%">Keterangan</th>
             </tr>
         </thead>
         <tbody id="tbody">
@@ -88,6 +89,9 @@
                 </td>
                 <td>
                     <input type="number" id="jumlah1" name="kuantitas[]" class="form-control jumlah" required>
+                </td>
+                <td>
+                  <input type="text" name="keterangan[]" class="form-control jumlah" required>
                 </td>
                 <td>
                     <button id="1" class="btn btn-danger hapus" type="button" onclick="hapus(this)">

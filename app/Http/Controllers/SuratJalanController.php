@@ -52,7 +52,8 @@ class SuratJalanController extends Controller
     try {
         // code...
         $tgl = $request->tgl_beli;
-        $jumlah = DB::table('surat_jalans')->where('created_at', $tgl);
+        // $jumlah = DB::table('surat_jalans')->where('created_at', $tgl);
+        $jumlah = SuratJalan::get();
         $hasil = $jumlah->count() + 1;
         $kodejalan = "SJ - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
         for ($i=0; $i <count($request->nama) ; $i++) { 
@@ -77,13 +78,14 @@ class SuratJalanController extends Controller
                 'barang_id' => $request->nama[$i],
                 'jumlah' => $request->jumlah[$i],
                 'kuantitas' => $request->kuantitas[$i],
+                'keterangan' => $request->keterangan[$i],
                 'created_at' => $tgl,
             ]);
         }
        
         return redirect()->route('preview-surat', ['id' => $id]);
     } catch (\Throwable  $e) {
-        // dd($e);
+        dd($e);
         alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
         return back();
     }
