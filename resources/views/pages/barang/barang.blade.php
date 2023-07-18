@@ -23,7 +23,13 @@
               <p>{{ $jumlah }}</p>
             </div>
           </div>
-        </div> 
+          <div class="col-sm-4 col-lg-2 col-6">
+            <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size: 1rem; text-align: center;" class="py-3 px-4 mb-4 mt-3">
+              <span>Berat Barang</span>
+              <p>12</p>
+            </div>
+          </div>
+        </div>
       <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px" class="bg-white py-4 px-4">
           <div class="d-flex justify-content-between">
               <div class="d-flex gap-2">
