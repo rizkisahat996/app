@@ -32,7 +32,7 @@ class BarangController extends Controller
     }
     $id = $request->query('kategori');
 
-    $jumlah = barang::sum('stok');
+    $jumlah = barang::sum(\DB::raw('CAST(stok as UNSIGNED)'));
     // dd($data);
 
     return view('pages.barang.barang', compact('data', 'kategori', 'id', 'jumlah'));
