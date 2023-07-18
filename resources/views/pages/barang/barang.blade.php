@@ -14,7 +14,7 @@
         <i class="ti ti-building-warehouse"></i>
         <span>Gudang</span>
       </div>
-      <div class="col-sm-12">
+      <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size: 1rem; text-align: center;" class="py-3 px-4 mb-4 mt-3 col-sm-4 col-lg-2 col-6">
         <span>Total Barang</span>
         <p>{{ $jumlah }}</p>
       </div>
