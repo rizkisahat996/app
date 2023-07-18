@@ -31,9 +31,11 @@ class BarangController extends Controller
       $data = barang::paginate(15);
     }
     $id = $request->query('kategori');
+
+    $jumlah = barang::sum('stok');
     // dd($data);
 
-    return view('pages.barang.barang', compact('data', 'kategori', 'id'));
+    return view('pages.barang.barang', compact('data', 'kategori', 'id', 'jumlah'));
   }
 
   /**
