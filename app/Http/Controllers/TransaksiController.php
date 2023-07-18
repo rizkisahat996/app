@@ -43,7 +43,7 @@ class TransaksiController extends Controller
      */
         public function store(Request $request)
     {
-        try {
+        // try {
             // code...
             $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
             $hasil = $jumlah->count() + 1;
@@ -91,11 +91,10 @@ class TransaksiController extends Controller
             }
         
             return redirect()->route('preview', ['id' => $id]);
-        } catch (\Throwable  $e) {
-            // dd($e);
-            alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
-            return back();
-        }
+        // } catch (\Throwable  $e) {
+        //     alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
+        //     return back();
+        // }
     }
 
 
