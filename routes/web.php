@@ -54,6 +54,7 @@ Route::post('/piutang/{id}', [TransaksiController::class, 'storepiutang'])->midd
 Route::get('detail-barang-{i  d_barang}', [TransaksiController::class, 'detail'])->middleware('auth');
 Route::get('pdf/{id}', [TransaksiController::class, 'pdf'])->name('pdf')->middleware('auth');
 Route::get('proforma/{id}', [TransaksiController::class, 'proforma'])->name('proforma')->middleware('auth');
+Route::get('kwitansi/{id}', [TransaksiController::class, 'kwitansi'])->name('kwitansi')->middleware('auth');
 Route::get('/penjualan', [TransaksiController::class, 'penjualan'])->middleware('auth');
 Route::get('/histori/penjualan', [HistoriController::class, 'penjualan'])->middleware('auth');
 Route::get('/histori/barang', [HistoriController::class, 'barang'])->middleware('su');

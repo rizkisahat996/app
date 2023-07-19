@@ -147,10 +147,11 @@ text-align: center;
     padding-top: 10px;
 }
 .box {
-    width: 200px;
+    width: 400px;
     height: 100px;
     border: 1px solid black;
-    padding: 10px;
+    font-size: small;
+    font-weight: bold;
 }
         @media print {}
     </style>
@@ -167,27 +168,30 @@ text-align: center;
     </div>
     <hr>
         <div class="d-flex" id="tek">
-            <h3 style="text-decoration: underline;">FAKTUR</h3>
+            <h3 style="text-decoration: underline;">KWITANSI</h3>
             <h3>OFFICIAL RECEIPT</h3>
         </div>
-        
+
         <div class="pad">
-            <span style="padding-right: 100px;">Sudah Diterima Dari</span> : <span style="padding-left: 25px;">...........................................................................</span>
-            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
-            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <span style="padding-right: 100px;">Sudah Diterima Dari</span> : <span style="padding-left: 25px;">{{ $transaksi->pelanggan->nama ?? '...........................................................................' }}</span>
+            <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            {{-- <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">{{ $transaksi->pelanggan->skip(1)->nama ?? '...........................................................................' }}</span></p> --}}
+            {{-- <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">{{ $transaksi->pelanggan->skip(2)->nama ?? '...........................................................................' }}</span></p> --}}
         </div>
         <div class="pad">
-            <span style="padding-right: 134px;">Uang Sejumlah</span> : <span style="padding-left: 40px;">Rp. <span class="box">1.000.000</span></span>
+            {{-- <span style="padding-right: 134px;">Uang Sejumlah</span> : <span style="padding-left: 40px;">Rp. <span class="box">{{ @currency($transaksi->pembayaran) }}</span></span> --}}
+            <span style="padding-right: 134px;">Uang Sejumlah</span> : <span style="padding-left: 40px;">Rp. <span class="box">{{ $transaksi->pembayaran }}</span></span>
         </div>
         <div class="pad">
-            <span style="padding-right: 172px;">Terbilang</span> : <span style="padding-left: 25px;">...........................................................................</span>
+            <span style="padding-right: 174px;">Terbilang</span><span style="padding-right: 60px;">:</span> <span><b>{{ terbilang($transaksi->pembayaran)}} rupiah</b></span>
         </div>
         <div class="pad">
-            <span style="padding-right: 64px;">UNTUK PEMBAYARAN</span> : <span style="padding-left: 25px;">...........................................................................</span>
-            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
-            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
-            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
-            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <span style="padding-right: 61px;">UNTUK PEMBAYARAN</span> : <span style="padding-left: 25px;">...........................................................................</span>
+            <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 228px;">&nbsp;</span> : <span style="padding-left: 25px">...........................................................................</span></p>
         </div>
         
         
@@ -196,10 +200,10 @@ text-align: center;
                 <div id="okkk" style="padding-bottom: 70px;"></div>
                 <div id="okkk"></div>
             </div>
-            <div class="barcode">
-                <div id="okkk" style="padding-left: 20px;">Medan, tanggal</div>
+            <div class="barcode" style="padding-right: 40px">
+                <div id="okkk" style="padding-left: 20px;">Medan, {{ now()->format('d F Y') }}</div>
                 <div id="okkk" style="padding-bottom: 70px; padding-left: 20px;">Yang menerima,</div>
-                <div id="okkk" style="padding-right: 30px;">(........................................)</div>
+                <div id="okkk">(........................................)</div>
             </div>
         </div>
                                 </div>  

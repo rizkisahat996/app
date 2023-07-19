@@ -48,48 +48,48 @@ class SuratJalanController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    try {
-        // code...
-        $tgl = $request->tgl_beli;
-        // $jumlah = DB::table('surat_jalans')->where('created_at', $tgl);
-        $jumlah = SuratJalan::get();
-        $hasil = $jumlah->count() + 1;
-        $kodejalan = "SJ - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
-        for ($i=0; $i <count($request->nama) ; $i++) { 
-            $barang = barang::where('id', $request->nama[$i]);
-            $barang->decrement('stok', $request->jumlah[$i]);
-        }
-        
-        $uuid = str::uuid();
+    {
+        try {
+            // code...
+            $tgl = $request->tgl_beli;
+            // $jumlah = DB::table('surat_jalans')->where('created_at', $tgl);
+            $jumlah = SuratJalan::get();
+            $hasil = $jumlah->count() + 1;
+            $kodejalan = "SJ - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
+            for ($i=0; $i <count($request->nama) ; $i++) { 
+                $barang = barang::where('id', $request->nama[$i]);
+                $barang->decrement('stok', $request->jumlah[$i]);
+            }
+            
+            $uuid = str::uuid();
 
-        $id = sprintf($hasil);
-        SuratJalan::insert([
-            'id' => $id,
-            'pelanggan_id' => $request->pelanggan_id,
-            'kodejalan'=> $kodejalan,
-            'kodejalak'=> $uuid,
-            'nomor_polisi' => $request->nomor_polisi,
-            'created_at' => $tgl,
-        ]);
-        for ($i=0; $i <count($request->nama) ; $i++) {
-            $detail = DetailJalan::insert([
-                'surat_id' => $id,
-                'barang_id' => $request->nama[$i],
-                'jumlah' => $request->jumlah[$i],
-                'kuantitas' => $request->kuantitas[$i],
-                'keterangan' => $request->keterangan[$i],
+            $id = sprintf($hasil);
+            SuratJalan::insert([
+                'id' => $id,
+                'pelanggan_id' => $request->pelanggan_id,
+                'kodejalan'=> $kodejalan,
+                'kodejalak'=> $uuid,
+                'nomor_polisi' => $request->nomor_polisi,
                 'created_at' => $tgl,
             ]);
+            for ($i=0; $i <count($request->nama) ; $i++) {
+                $detail = DetailJalan::insert([
+                    'surat_id' => $id,
+                    'barang_id' => $request->nama[$i],
+                    'jumlah' => $request->jumlah[$i],
+                    'kuantitas' => $request->kuantitas[$i],
+                    'keterangan' => $request->keterangan[$i],
+                    'created_at' => $tgl,
+                ]);
+            }
+        
+            return redirect()->route('preview-surat', ['id' => $id]);
+        } catch (\Throwable  $e) {
+            dd($e);
+            alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
+            return back();
         }
-       
-        return redirect()->route('preview-surat', ['id' => $id]);
-    } catch (\Throwable  $e) {
-        dd($e);
-        alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
-        return back();
     }
-}
 
     /**
      * Display the specified resource.

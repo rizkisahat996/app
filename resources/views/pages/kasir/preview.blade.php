@@ -17,7 +17,18 @@
         }
     </style>
     <div class="col-lg-10 mx-auto">
-          <h5 class="text-center">Preview</h5>
+        <div class="d-flex justify-content-start ml-4">
+            <a href="/penjualan">
+          <button class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+            <span>Kembali ke Faktur</span>
+            <i class="fa-solid fa-print"></i>
+          </button>
+        </a>
+      </div>
+        <div class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+            <span>Preview Faktur</span>
+            <i class="fa-solid fa-print"></i>
+          </div>
           <div class="mx-1 mt-3 py-5 px-5 bg-white">
               <div class="d-flex justify-content-between px-1 py-2" id="top">
                   <div class="fw-bold fs-5">BOBIE</div>
@@ -119,6 +130,12 @@
                     <i class="fa-solid fa-print"></i>
                   </button>
                 </form>
+                <form action="/kwitansi/{{ $transaksi->id }}">
+                    <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+                        <span>Print Kwitansi</span>
+                        <i class="fa-solid fa-print"></i>
+                      </button>
+                    </form>
             </div>
     </div>
     @push('css')

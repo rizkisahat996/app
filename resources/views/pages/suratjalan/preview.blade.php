@@ -17,9 +17,20 @@
         }
     </style>
     <div class="col-lg-10 mx-auto">
+        <div class="d-flex justify-content-start ml-4">
+            <a href="/suratjalann">
+          <button class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+            <span>Kembali ke Surat Jalan</span>
+            <i class="fa-solid fa-print"></i>
+          </button>
+        </a>
+      </div>
         {{-- {{ dd($transaksi->id) }} --}}
       <form action="/pdfsurat/{{ $transaksi->id }}">
-          <h5 class="text-center">Preview Surat</h5>
+        <div class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+            <span>Preview Surat</span>
+            <i class="fa-solid fa-print"></i>
+          </div>
           <div class="mx-1 mt-3 py-5 px-5 bg-white">
               <div class="d-flex justify-content-between px-1 py-2" id="top">
                   <div class="fw-bold fs-5">BOBIE</div>

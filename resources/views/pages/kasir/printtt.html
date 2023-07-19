@@ -1,158 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.cdnfonts.com/css/cooper-black" rel="stylesheet">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="{{ asset('bootstrap/dist/css/bootstrap.min.css') }}">
     <title>PDF</title>
    
    
     <style>
         @import url('https://fonts.cdnfonts.com/css/cooper-black');
 
-body {
-    margin-top: 20px;
-}
+        body * {
+            font-family: 'Times New Roman', Times, serif;
+            
+        }
 
-h1{
-    font-family: 'Cooper Black', sans-serif;
-    color: #B6EE05;
-    font-size: 67px;
-}
+        h1{
+            font-family: 'Cooper Black', sans-serif;
+        }
 
-.text-secondary-d1 {
-    color: #728299!important;
-}
+        .page-break {
+            page-break-before: always;
+        }
 
-.page-header {
-    margin: 0 0 1rem;
-    padding-bottom: 1rem;
-    padding-top: .5rem;
-    border-bottom: 1px dotted #e2e2e2;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-align: center;
-    align-items: center;
-}
+        #info td {
+            margin: 0 0 0 0;
+            padding: 0 0 0 0;
+        }
 
-.page-title {
-    padding: 0;
-    margin: 0;
-    font-size: 1.75rem;
-    font-weight: 300;
-}
+        #info {
+            width: 100% !important;
+        }
 
-.brc-default-l1 {
-    border-color: #dce9f0!important;
+        #barang td {
+            text-align: center !important;
+            font-size: 15px;
+        }
+        #fott{
+            width: 100%;
+            margin-left: 0.5rem !important;
+        }
+        #barang th {
+           
+            text-align: center !important;
+            font-size: 18px !important;
+        }
+#a{
+padding-top:4rem;
 }
-
-.ml-n1,
-.mx-n1 {
-    margin-left: -.25rem!important;
+#ak{
+    margin-top: -1rem !important;
 }
+    #total{
+            text-align: center !important;
+            border-collapse: collapse
+        }
+        .page-break {
+            page-break-after: always;
+        }
 
-.mr-n1,
-.mx-n1 {
-    margin-right: -.25rem!important;
+        #bawah td {
+            padding-bottom: 0rem !important;
+            font-size: 18px
+        }
+      
+        #barang thead  tr th{
+            border-spacing: -1px;
+            background-color: #B6EE05;
+            color: white;
+            font-size: 20px;
+            width = 100% !important;
+        }
+
+        #barang tbody {
+            
+        }
+
+        #barang {
+            border-collapse: collapse; 
+            border-spacing: -1px;
+	width = 500% !important;
+padding :        0 0 0 0 !important;
+        }
+        #bar tr td{
+            border-bottom: 1px solid #000000;
+        background-image: linear-gradient(to right, #000000 50%, transparent 50%);
+        background-repeat: repeat-x;
+        background-position: bottom;
+        background-size: 8px 1px;
+        }
+#tek {
+font-weight:500 !important ;
+text-align: center;
 }
-
-.mb-4,
-.my-4 {
-    margin-bottom: 1.5rem!important;
-}
-
-hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 0;
-    border-top: 1px solid rgba(0, 0, 0, .1);
-}
-
-
-.font-bolder,
-.text-600 {
-    font-weight: 600!important;
-}
-
-.text-110 {
-    font-size: 110%!important;
-}
-
-.text-blue {
-    color: #478fcc!important;
-}
-
-.pb-25,
-.py-25 {
-    padding-bottom: .75rem!important;
-}
-
-.pt-25,
-.py-25 {
-    padding-top: .75rem!important;
-}
-
-.bgc-default-tp1 {
-    background-color: rgba(121, 169, 197, .92)!important;
-}
-
-.bgc-default-l4,
-.bgc-h-default-l4:hover {
-    background-color: #f3f8fa!important;
-}
-
-.page-header .page-tools {
-    -ms-flex-item-align: end;
-    align-self: flex-end;
-}
-
-.btn-light {
-    color: #757984;
-    background-color: #f5f6f9;
-    border-color: #dddfe4;
-}
-
-.w-2 {
-    width: 1rem;
-}
-
-.text-120 {
-    font-size: 120%!important;
-}
-
-.text-primary-m1 {
-    color: #4087d4!important;
-}
-
-.text-danger-m1 {
-    color: #dd4949!important;
-}
-
-.text-blue-m2 {
-    color: #68a3d5!important;
-}
-
-.text-150 {
-    font-size: 150%!important;
-}
-
-.text-60 {
-    font-size: 60%!important;
-}
-
-.text-grey-m1 {
-    color: #7b7d81!important;
-}
-
-.align-bottom {
-    vertical-align: bottom!important;
-}
-.dashed-2 {
+.dash-2 {
     border: none;
     height: 5px;
     background: #B6EE05;
@@ -161,213 +102,107 @@ hr {
     transform-origin: top left;
     filter: drop-shadow(0 0 0 transparent);
   }
-p{
-    margin-left: 95px;
+  .pp{
+    margin-bottom: 2px;
+    margin-top: 2px;
+  }
+  .catatan {
+    width: 70%;
+    margin-right: 20px;
+    float: left;
+    margin-top: 15px;
+    padding-top: 15px;
 }
-.ok{
-    margin-left: 41px;
+
+.barcode {
+    width: 14%;
+    margin-top: 15px;
+    padding-top: 15px;
+    float: left;
 }
-.okk{
-    margin-left: 34px;
+
+#barcode {
+    width: 50%;
+    height: 100px;
+    margin-left: 50px;
+    border: 1px solid black;
 }
-.okkk{
-    margin-left: 55px;
+
+.barcode-digit {
+    flex-grow: 1;
+    border-right: 1px solid black;
 }
-.okkkk{
-    margin-left: 87px;
-}
-h2{
+#okkk {
     text-align: center;
-    text-decoration: underline;
-    font-style: italic;
+    margin-top: 2px;
+    padding-top: 2px;
+    font-size: small;
 }
-.tab{
-    background-color: #B6EE05;
+.container {
+    display: flex;
+    align-items: start;
+    width: 100%;
 }
-.aaa{
-    margin-right: 50px;
+.pad{
+    padding-top: 10px;
 }
-.okeee{
-    margin-left: 30px;
+.box {
+    width: 200px;
+    height: 100px;
+    border: 1px solid black;
+    padding: 10px;
 }
-.wew{
-    margin-top: 20px;
-}
+        @media print {}
     </style>
 </head>
 
 <body class="px-2 " onload="window.print()">
-    <div class="page-content container">
-        <div class="container px-0">
-            <div class="row mt-4">
-                <div class="col-12 col-lg-12">
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div>
-                                <h1>BOBIE</h1>
-                            </div>
-                            <div class="text-grey-m2">
-                                <div >
-                                    Hp. 0812 6466 677
-                                </div>
-                                <div >
-                                    Jl. Tanjung Raya Pasar 6 Helvetia Marelan
-                                </div>
-                                <div >
-                                    Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="dashed-2">
-                    <h2>FAKTUR</h2>
-                    <div class="col-12 col-lg-12">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div>
-                                    <span class="text-sm align-middle"><b>Kepada Yth,</b> </span>
-                                    <span class="align-middle">{{ $transaksi->nama }}</span>
-                                    <span class="align-right"><p>Alex Doe</p></span>
-                                </div>
-                                <div>
-                                    <span class="text-sm align-middle">Alamat</span>
-                                    <span class="ok align-middle">{{ $transaksi->alamat }}</span>
-                                </div>
-                                <div>
-                                    <span class="text-sm align-middle">No. Telp</span>
-                                    <span class="okk align-middle">0831231234</span>
-                                </div>
-                            </div>
-    
-                            <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
-                                <hr class="d-sm-none" />
-                                <div class="text-grey-m2">
-                                    <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                                        Nomor : {{ $transaksi->id }}
-                                        <p style="margin-left: 7px;">Medan, {{ $transaksi->created_at->format('d-m-Y') }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- @if (($transaksi->jatuh_tempo == null))
-                <td></td>
-                <td></td>
-                <td></td>
-                @else
-                <td>Tanggal Tempo</td>
-                <td>:</td>
-                <td>{{ Carbon\Carbon::parse($transaksi->jatuh_tempo)->format('d-m-Y') }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                @endif -->
-                        </div>
-
-                        <div class="mt-4">
-                            <div class="row text-600 text-white py-25 text-center">
-                                <div class="tab d-none d-sm-block col-1 justify-content-center">
-                                    No.
-                                </div>
-                                <div class="tab col-9 col-sm-4 justify-content-center">
-                                    Nama Barang
-                                </div>
-                                <div class="tab d-none d-sm-block col-4 col-sm-2 justify-content-center">
-                                    Volume
-                                </div>
-                                <div class="tab d-none d-sm-block col-sm-2 justify-content-center">
-                                    Satuan
-                                </div>
-                                <div class="tab d-none d-sm-block col-sm-2 justify-content-center">
-                                    Harga
-                                </div>
-                                <div class="tab col-sm-1 justify-content-center">
-                                    Jumlah
-                                </div>
-                            </div>
-                            @php
-                                $nomor = 1;
-                            @endphp
-                        
-                            <div class="text-95 text-secondary-d3">
-                                @foreach ($detail->slice(0, 5) as $item)
-                                <div class="row mb-2 mb-sm-0 py-25 text-center">
-                                    <div class="d-none d-sm-block col-1">{{ $nomor }}<hr></div>
-                                    <div class="col-9 col-sm-4">{{ $item->nama }}<hr></div>
-                                    <div class="d-none d-sm-block col-4 col-sm-2">{{ $item->jumlah }}<hr></div>
-                                    <div class="d-none d-sm-block col-2 text-95">{{ $item->satuan }}<hr></div>
-                                    <div class="col-2 text-secondary-d2">@currency($item->harga_jual)<hr></div>
-                                    <div class="col-sm-1 text-secondary-d2">@currency($item->subtotal)<hr></div>
-                                </div>
-                                @php
-                                    $nomor++;
-                                @endphp
-                            @endforeach
-                            </div>
-                        
-                            <div class="row border-b-2 brc-default-l2"></div>
-                        
-                            <div class="row mt-3">
-                                <div class="col-12 col-sm-7 text-grey-d2 text-95 mt-2 mt-lg-0">
-                                </div>
-                                <div class="col-12 col-sm-5 text-grey text-90 order-first order-sm-last font-weight-bold">
-                                    <div class="row my-2">
-                                        <div class="col-7 text-left">Jumlah Total</div>
-                                        <div class="col-5 text-right">
-                                            <span class="text-120 text-secondary-d1">@currency($transaksi->total)</span>
-                                        </div>
-                                    </div>
-                                    <div class="row my-2">
-                                        <div class="col-7 text-left">Bayar</div>
-                                        <div class="col-5 text-right">
-                                            <span class="text-110 text-secondary-d1">$225</span>
-                                        </div>
-                                    </div>
-                                    <div class="row my-2">
-                                        <div class="col-7 text-left">Sisa</div>
-                                        <div class="col-5 text-right">
-                                            <span class="text-110 text-secondary-d1">$225</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{$ket ?? ''}}
-                </div>
+    <div class="keranjang">
+    <div>
+        <h1>BOBIE</h1>
+        <div class="pp">
+            <p class="pp">Hp. 0812 6455 677</p>
+            <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
+            <p class="pp">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
+    </div>
+    <hr>
+        <div class="d-flex" id="tek">
+            <h3 style="text-decoration: underline;">FAKTUR</h3>
+            <h3>OFFICIAL RECEIPT</h3>
+        </div>
+        
+        <div class="pad">
+            <span style="padding-right: 100px;">Sudah Diterima Dari</span> : <span style="padding-left: 25px;">...........................................................................</span>
+            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+        </div>
+        <div class="pad">
+            <span style="padding-right: 134px;">Uang Sejumlah</span> : <span style="padding-left: 40px;">Rp. <span class="box">1.000.000</span></span>
+        </div>
+        <div class="pad">
+            <span style="padding-right: 172px;">Terbilang</span> : <span style="padding-left: 25px;">...........................................................................</span>
+        </div>
+        <div class="pad">
+            <span style="padding-right: 64px;">UNTUK PEMBAYARAN</span> : <span style="padding-left: 25px;">...........................................................................</span>
+            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+            <p><span style="padding-right: 237px;"></span> : <span style="padding-left: 25px">...........................................................................</span></p>
+        </div>
+        
+        
+        <div class="container">
+            <div class="catatan">
+                <div id="okkk" style="padding-bottom: 70px;"></div>
+                <div id="okkk"></div>
             </div>
-            <div class="col-12 col-lg-12">
-                <div class="col-12 col-lg-12">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <div>
-                                <p class="okkk align-middle font-weight-bold">
-                                    <span class="okeee">Catatan:</span>
-                                </p>
-                                <p class="ok align-middle">
-                                    <span class="mx-3">1</span> Barang Barang yang sudah dibeli tidak dapat dikembalikan
-                                </p>
-                                <p class="ok align-middle">
-                                    <span class="mx-3">2</span> Harap diperiksa dengan seksama
-                                </p>
-                                <p class="ok align-middle">
-                                    <span class="mx-3">3</span> Pembayaran Transfer melalui rekening an. BOBBY NUSANTARA PRIBADI
-                                </p>
-                                <p class="okkkk align-middle">
-                                    <span>Mandiri : 106.0055.4466.71</span>
-                                </p>
-                                <p class="okkkk align-middle">
-                                    <span>BNI : 1264.666.777</span>
-                                </p>
-                            </div>
-                        </div>
-                        
-
-                        <div class="text-95 col-sm-5 align-self-start d-sm-flex justify-content-end">
-                            <hr class="d-sm-none" />
-                            <div class="text-grey-m2">
-                                <div class="mt-1 mb-2 text-secondary-m1 text-600 text-125">
-                                    Nomor : NF-TH/2023/066
-                                    <p style="margin-left: 7px;">Medan,</p>
-                                </div>
+            <div class="barcode">
+                <div id="okkk" style="padding-left: 20px;">Medan, tanggal</div>
+                <div id="okkk" style="padding-bottom: 70px; padding-left: 20px;">Yang menerima,</div>
+                <div id="okkk" style="padding-right: 30px;">(........................................)</div>
+            </div>
+        </div>
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -375,7 +210,7 @@ h2{
             </div>
         </div>
     </div>
-
+</div>
 
 
 
