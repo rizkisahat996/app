@@ -71,19 +71,18 @@
         <table id="prod" class="table table-bordered bg-white mt-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
             <thead>
                 <tr>
-                    <th style="text-align: center" width="30%">Nama Barang</th>
-                    <th style="text-align: center" width="15%">Satuan</th>
+                    <th style="text-align: center" width="25%">Nama Barang</th>
                     <th style="text-align: center" width="10%">Stok</th>
-                    <th style="text-align: center">Harga</th>
-                    <th style="text-align: center">jumlah</th>
-                    <th style="text-align: center">Subtotal</th>
-                    <th style="text-align: center">Aksi</th>
+                    <th style="text-align: center" width="15%">Harga</th>
+                    <th style="text-align: center" width="10%">Berat</th>
+                    <th style="text-align: center" width="10%">Satuan</th>
+                    <th style="text-align: center" width="15%">Jumlah</th>
+                    <th style="text-align: center" width="25%">Subtotal</th>
                 </tr>
             </thead>
-
             <tfoot>
                 <tr>
-                  <td style="text-align:right; vertical-align: middle" colspan="5">
+                  <td style="text-align:right; vertical-align: middle" colspan="6">
                     <b>Grandtotal</b>
                   </td>
                   <td>
@@ -92,11 +91,11 @@
                   </td>
                 </tr>
                 <tr>
-                  <td style="text-align:right; vertical-align: middle" colspan="5">
+                  <td style="text-align:right; vertical-align: middle" colspan="6">
                     <b>Pembayaran</b>
                   </td>
                   <td>
-                    <input id="pembayaran" name="pembayaran" type="number" class="form-control pembayaran" value="{{ old('pembayaran', $transaksi->pembayaran) }}">
+                    <input type="number" name="pembayaran" class="form-control" value="{{ $transaksi->pembayaran }}"  id="pembayaran">
                   </td>
                 </tr>
               </tfoot>
@@ -125,15 +124,19 @@
                         @endforeach --}}
                             </select>
                         </td>
-                        <td>
-                            <input id="{{ 'satuan' . $loop->iteration }}" name="stok[]" class="form-control stok"
-                                readonly="">
-                            <input id="{{ 'modal' . $loop->iteration }}" name="modal[]" class="form-control stok" hidden>
-                        </td>
                         <td><input id="{{ 'stok' . $loop->iteration }}" name="unit[]" class="form-control"
                                 readonly=""></td>
                         <td><input id="{{ 'harga' . $loop->iteration }}" name="harga_jual[]"
                                 class="form-control harga_jual" readonly="" onchange="hitung()">
+                        </td>
+                        <td>
+                            <input id="{{ 'berat' . $loop->iteration }}" name="berat[]" class="form-control berat"
+                                readonly="">
+                        </td>
+                        <td>
+                            <input id="{{ 'satuan' . $loop->iteration }}" name="stok[]" class="form-control stok"
+                                readonly="">
+                            <input id="{{ 'modal' . $loop->iteration }}" name="modal[]" class="form-control stok" hidden>
                         </td>
                         <td><input type="number" id="{{ 'jumlah' . $loop->iteration }}" name="jumlah[]"
                                 class="form-control jumlah" required="required" onchange="hitung()"
@@ -280,7 +283,7 @@
                     element.classList.remove("d-none");
                     element.classList.add("d-flex");
                 } else {
-                    let hasil = document.getElementById(id).value * satuan;
+                    let hasil = document.getElementById(id).value * satuan * 25;
                     document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
                 }

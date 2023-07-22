@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\barang;
+use App\Observers\BarangObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use App\View\Components\AlertStok;
@@ -25,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
         \Blade::directive('terbilang', function ($number) {
             return "<?php echo terbilang($number); ?>";
         });
+        barang::observe(BarangObserver::class);
     }
 }

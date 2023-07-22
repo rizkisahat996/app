@@ -15,13 +15,15 @@ return new class extends Migration
             $table->string('id')->primary();
             $table->string('nama');
             $table->string('satuan');
+            $table->string('jenis');
+            $table->float('stok');
+            $table->float('berat')->nullable();
             $table->integer('hargabeli');
             $table->string('id_kategori');
             $table->foreign('id_kategori')->references('id')->on('kategoribarangs');
             $table->integer('minimstok');
             $table->integer('untung');
             $table->integer('hargajual');
-            $table->float('stok', 5, 1);
             $table->string('gambar')->nullable();
             $table->timestamps();
         });

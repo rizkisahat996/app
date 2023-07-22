@@ -14,6 +14,8 @@ use Redirect;
 use Exception;
 use PDF;
 use DB;
+use Illuminate\Support\Facades\Validator;
+
 class TransaksiController extends Controller
 {
     /**
@@ -42,66 +44,87 @@ class TransaksiController extends Controller
      * Store a newly created resource in storage.
      */
         public function store(Request $request)
-    {
-        try {
-            // code...
-            $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
-            $hasil = $jumlah->count() + 1;
-            // if (transaksi::exists()) {
-            //     $hasil = transaksi::count() + 1;
-            // } else {
-            //     $hasil = 1;
-            // }
-            // dd($hasil);
-            // $hasil = transaksi::count() + 1;
-            $id = sprintf("%03d", $hasil);
-            $kodefaktur = "NF - TH/" . date('Y') . "/" . sprintf("%03d", $hasil);
-            for ($i=0; $i <count($request->nama) ; $i++) { 
-                $barang = barang::where('id', $request->nama[$i]);
-                $barang->decrement('stok', $request->jumlah[$i]);
-            }
-            $uuid = str::uuid();
-            $grandtotal = $request->grandtotal;
-            $pembayaran = $request->pembayaran;
-            $kembalian = $pembayaran - $grandtotal;
-
-            if ($pembayaran < $grandtotal) {
-                alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
-                return back();
-            }
-            
-            $kembalian = $pembayaran - $grandtotal;
-
-            transaksi::insert([
-                'id' => $id,
-                'pelanggan_id' => $request->pelanggan_id,
-                'kodefaktur'=> $kodefaktur,
-                'kodefaktut'=> $uuid,
-                'jenispembayaran'=> $request->jenispembayaran,
-                'total'=> $grandtotal,
-                'pembayaran'=> $pembayaran,
-                'user_id'=> Auth::user()->id,
-                'kembalian'=> $kembalian,
-                'jatuh_tempo' => $request->jatuh_tempo,
-                'created_at' => $request->tgl_beli,
+        {
+            $validator = Validator::make($request->all(), [
+                'grandtotal' => 'required|numeric|min:0',
+                'pembayaran' => 'required|numeric|min:' . $request->grandtotal,
+                'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
+                'tgl_beli' => 'required|date', 
+                'nama.*' => 'required', 
+                'jumlah.*' => 'required|numeric|min:1', 
             ]);
-            for ($i=0; $i <count($request->nama) ; $i++) {
-                $detail = detailtransaksi::insert([
-                    'id_transaksi' => $id,
-                    'id_barang' => $request->nama[$i],
-                    'jumlah' => $request->jumlah[$i],
-                    'subtotal' => $request->subtotal[$i],
-                    'harga_jual' => $request->harga_jual[$i],
-                    'modal'=>$request->modal[$i],
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+    
+    
+            try {
+                // code...
+                $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
+                $hasil = $jumlah->count() + 1;
+                $id = sprintf("%03d", $hasil);
+                $kodefaktur = "NF - TH/" . date('Y') . "/" . sprintf("%03d", $hasil);
+                $kodeproforma = "PRO - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
+                $kodejalan = "SJ - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
+                for ($i=0; $i <count($request->nama) ; $i++) { 
+                    $barang = barang::where('id', $request->nama[$i]);
+                    $barang->decrement('stok', $request->jumlah[$i]);
+                }
+                $uuid = str::uuid();
+                $grandtotal = $request->grandtotal;
+                $pembayaran = $request->pembayaran;
+                $kembalian = $pembayaran - $grandtotal;
+
+                if ($pembayaran < $grandtotal) {
+                    alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
+                    return back();
+                }
+                
+                $kembalian = $pembayaran - $grandtotal;
+
+                transaksi::insert([
+                    'id' => $id,
+                    'pelanggan_id' => $request->pelanggan_id,
+                    'kodefaktur'=> $kodefaktur,
+                    'kodefaktut'=> $uuid,
+                    'kodeproforma'=> $kodeproforma,
+                    'kodejalan'=> $kodejalan,
+                    'jenispembayaran'=> $request->jenispembayaran,
+                    'total'=> $grandtotal,
+                    'pembayaran'=> $pembayaran,
+                    'user_id'=> Auth::user()->id,
+                    'kembalian'=> $kembalian,
+                    'jatuh_tempo' => $request->jatuh_tempo,
                     'created_at' => $request->tgl_beli,
                 ]);
+
+                for ($i=0; $i <count($request->nama) ; $i++) {
+                    $detail = detailtransaksi::insert([
+                        'id_transaksi' => $id,
+                        'id_barang' => $request->nama[$i],
+                        'jumlah' => $request->jumlah[$i],
+                        'subtotal' => $request->subtotal[$i],
+                        'harga_jual' => $request->harga_jual[$i],
+                        'modal'=>$request->modal[$i],
+                        'created_at' => $request->tgl_beli,
+                    ]);
+                }
+            
+                return redirect()->route('preview', ['id' => $id]);
+            } catch (\Throwable  $e) {
+                alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
+                return back();
             }
-        
-            return redirect()->route('preview', ['id' => $id]);
-        } catch (\Throwable  $e) {
-            alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
-            return back();
         }
+    
+    public function polisi(Request $request, string $id)
+    {
+        transaksi::where('id', $id)->update([
+            'nomor_polisi' => $request->nomor_polisi
+        ]);
+
+        return redirect()->route('preview', ['id' => $id]);
     }
 
 
@@ -130,10 +153,22 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
+            $validator = Validator::make($request->all(), [
+                'grandtotal' => 'required|numeric|min:0',
+                'pembayaran' => 'required|numeric|min:' . $request->grandtotal,
+                'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
+                'tgl_beli' => 'required|date', 
+                'nama.*' => 'required', 
+                'jumlah.*' => 'required|numeric|min:1', 
+            ]);
+    
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            
         try {
             $grandtotal = $request->grandtotal;
             $pembayaran = $request->pembayaran;
-            $kembalian = $pembayaran - $grandtotal;
             if ($pembayaran < $grandtotal) {
                 alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
                 return back();
@@ -255,8 +290,22 @@ class TransaksiController extends Controller
             }
             $tes = $break / 5;
             $ket = $request->query('note');
-            $pdf = PDF::loadview('pages.kasir.proforma', compact('transaksi','detail', 'count', 'tes','ket'));
-            return $pdf->download($transaksi['kodefaktur'].'.pdf');
+            
+            // qr tanda tangan
+            $path = base_path('/public/assets/images/bobi.png');
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            // logo
+            $path2 = base_path('/public/assets/images/logo.png');
+            $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+            $data2 = file_get_contents($path2);
+            $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
+
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.kasir.proforma', compact('transaksi','detail', 'count', 'tes','ket', 'ttd', 'logo'));
+            return $pdf->download($transaksi['kodeproforma'].'.pdf');
+            // return $pdf->stream();
         }
     public function kwitansi($id, Request $request){
        
@@ -293,7 +342,44 @@ class TransaksiController extends Controller
             $tes = $break / 5;
             $ket = $request->query('note');
             $pdf = PDF::loadview('pages.kasir.kwitansi', compact('transaksi','detail', 'count', 'tes','ket'));
-            return $pdf->download($transaksi['kodefaktur'].'.pdf');
+            return $pdf->download($transaksi['kwitansi'].'.pdf');
+        }
+    public function suratjalan($id, Request $request){
+       
+        $transaksi = transaksi::where('id', '=', $id)->first();
+        $detail = detailtransaksi::where('id_transaksi', '=', $id)->join('barangs', 'detailtransaksis.id_barang', '=', 'barangs.id')->get();
+        // $transaksi->
+        // dd($transaksi);
+    
+            // dd($detail);
+            $count = count($detail);
+            $transaksi->detail = $detail;
+          
+            switch ($count % 5) {
+                case 1:
+                    $break = $count + 4;
+                    break;
+                
+                case 2:
+                    $break = $count + 3;
+                    break;
+                
+                case 3:
+                    $break = $count + 2;
+                    break;
+                
+                case 4:
+                    $break = $count + 1;
+                    break;
+                
+                default:
+                $break = $count;
+                    break;
+            }
+            $tes = $break / 5;
+            $ket = $request->query('note');
+            $pdf = PDF::loadview('pages.kasir.suratjalan', compact('transaksi','detail', 'count', 'tes','ket'));
+            return $pdf->download($transaksi['kodejalan'].'.pdf');
         }
         public function penjualan(Request $request)
         {

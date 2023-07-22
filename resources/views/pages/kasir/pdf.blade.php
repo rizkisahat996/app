@@ -16,7 +16,9 @@
         }
 
         h1{
-            font-family: 'Cooper Black', sans-serif;
+            font-family: 'Brush Script MT', cursive;
+            color: #B6EE05;
+            font-size: 200%;
         }
 
         .page-break {

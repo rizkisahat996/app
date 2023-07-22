@@ -16,9 +16,7 @@
         }
 
         h1{
-            font-family: 'Brush Script MT', cursive;
-            color: #B6EE05;
-            font-size: 200%;
+            font-family: 'Cooper Black', sans-serif;
         }
 
         .page-break {
@@ -123,6 +121,20 @@ text-decoration: underline;
     padding-top: 15px;
 }
 
+.barcode {
+    width: 30%;
+    margin-top: 15px;
+    padding-top: 15px;
+    float: left;
+}
+
+#barcode {
+    width: 50%;
+    height: 100px;
+    margin-left: 50px;
+    border: 1px solid black;
+}
+
 .barcode-digit {
     flex-grow: 1;
     border-right: 1px solid black;
@@ -143,7 +155,7 @@ text-decoration: underline;
 
 <body class="px-2 " onload="window.print()">
     <div>
-        <img src="<?php echo $logo ?>" alt="logo" height="50px" width="130px">
+        <h1>BOBIE</h1>
         <div class="pp">
             <p class="pp">Hp. 0812 6455 677</p>
             <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
@@ -151,7 +163,7 @@ text-decoration: underline;
     </div>
     <hr>
         <div class="d-flex" id="tek">
-            <h2><i>PROFORMA</i></h2>
+            <h2><i>FAKTUR</i></h2>
         </div>
         <table class="table table-borderless" id="info">
             <tr>
@@ -160,7 +172,7 @@ text-decoration: underline;
                     <br> {{ $transaksi->pelanggan->perusahaan }}
                 </td>
                 <td style="text-align: right;">
-                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->kodeproforma }}</div>
+                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->id }}</div>
                 </td>
             </tr>
             <tr>
@@ -197,10 +209,6 @@ text-decoration: underline;
                 
             </tr>
         </table>
-        {{-- <img src="
-        {{'data:image/png;base64,'.base64_encode(file_get_contents(public_path('assets/images/bobi.png')))}}"
-        > --}}
-        {{-- <img src="{{ public_path("assets/images/bobi.png") }}" alt="" style="width: 150px; height: 150px;"> --}}
         <table class="table table-borderless" id="barang" style="width: 100%; height:100px">
             <thead>
                 <tr>
@@ -258,20 +266,17 @@ text-decoration: underline;
         <div class="container">
             <div class="catatan">
                 <div class="text-start"><b>Catatan :</b></div>
-                <div class="text-start">1. Barang yang sudah dipabrikasi, tidak dapat dibatalkan pembeliannya</div>
-                <div class="text-start">2. Hanya berlaku selama 14 {{ "(" }}empat belas{{ ")" }} hari</div>
-                <div class="text-start">3. Harga belum termasuk Pajak-Pajak</div>
-                <div class="text-start">4. Pembayaran Barang, 50 % DP, selebihnya 50 % saat barang akan dikirim</div>
-                <div class="text-start">5. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
+                <div class="text-start">1. Barang yang sudah dibeli tidak dapat dikembalikan</div>
+                <div class="text-start">2. Harap diperiksa dengan seksama</div>
+                <div class="text-start">3. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
                 <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div>
                 <div class="text-start">MANDIRI : 106.0055.4466.71</div>
                 <div class="text-start">BNI : 1264.666.777</div>
             </div>
             <div class="barcode">
-                <img src="<?php echo $ttd ?>" alt="ttd" height="200px" width="200px">
-                </div>
-                <div style="text-align: center"><b>{{ Auth::user()->name; }}</b></div>
-                <div style="text-align: center">{{ Auth::user()->jabatan; }}</div>
+                <div id="barcode"></div>
+                <div id="okkk"><b>{{ Auth::user()->name; }}</b></div>
+                <div id="okkk">{{ Auth::user()->jabatan; }}</div>
             </div>
         </div>
         

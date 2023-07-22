@@ -57,12 +57,13 @@ class BarangController extends Controller
         'id' => 'required',
         'nama' => 'required|max:255',
         'satuan' => 'required',
+        'jenis' => 'required',
+        'stok' => 'required',
         'id_kategori' => 'required',
         'minimstok' => 'required',
         'hargabeli' => 'required',
         'untung' => 'required',
         'hargajual' => 'required',
-        'stok' => 'required',
         'gambar' => 'file',
     ]);
 

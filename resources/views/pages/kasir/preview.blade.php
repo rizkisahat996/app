@@ -20,7 +20,7 @@
         <div class="d-flex justify-content-start ml-4">
             <a href="/penjualan">
           <button class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
-            <span>Kembali ke Faktur</span>
+            <span>Kembali ke Penjualan</span>
             <i class="fa-solid fa-print"></i>
           </button>
         </a>
@@ -118,7 +118,7 @@
               </div> --}}
             </div>
             <div class="d-flex justify-content-start ml-4">
-                <form action="/pdf/{{ $transaksi->id }}">
+            <form action="/pdf/{{ $transaksi->id }}">
                 <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
                   <span>Print Faktur</span>
                   <i class="fa-solid fa-print"></i>
@@ -136,7 +136,26 @@
                         <i class="fa-solid fa-print"></i>
                       </button>
                     </form>
+                </div>
+                @if ($transaksi->nomor_polisi)
+                <form action="/suratjalan/{{ $transaksi->id }}">
+                    <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+                        <span>Print Surat Jalan</span>
+                        <i class="fa-solid fa-print"></i>
+                      </button>
+                    </form>
+                @else
+                <div class="d-flex justify-content-start ml-4 mt-4">
+                <form action="/kasir/polisi/{{ $transaksi->id }}" method="POST">
+                    @csrf
+                    <input class="form-control mb-2 w-400" type="text" name="nomor_polisi" placeholder="Masukkan Nomor Polisi">
+                <button type="submit" class="btn btn-primary">
+                    <i class="ti ti-plus"></i>
+                    <span>Tambah Nomor Polisi</span>
+                </button>
+            </form>
             </div>
+                @endif
     </div>
     @push('css')
     @endpush

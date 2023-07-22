@@ -75,11 +75,14 @@
       // Menghitung harga jual termasuk PPN
       const ppn = 0.11; // 11% atau 11 / 100
       const harga = hargabeli + untung + (hargabeli + untung) * ppn;
-      const hargaJual = Math.ceil(harga / 10) * 10;
+      const hargaJual = Math.ceil(harga / 100) * 100;
   
       // Menetapkan nilai harga jual pada input
       hargajualInput.value = hargaJual;
     }
+
+    
+
   </script>
 
   <script src="{{ asset('asset/libs/jquery/dist/jquery.min.js') }}"></script>

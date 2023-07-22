@@ -16,6 +16,9 @@ return new class extends Migration
             $table->foreignId('pelanggan_id');
             $table->string('kodefaktur');
             $table->uuid('kodefaktut');     
+            $table->string('kodejalan');
+            $table->string('kodeproforma');
+            $table->string('nomor_polisi')->nullable();
             $table->enum('jenispembayaran', ['tunai', 'non-tunai','belum-dibayar']);
             $table->date('jatuh_tempo')->nullable();
             $table->integer('pembayaran')->nullable();

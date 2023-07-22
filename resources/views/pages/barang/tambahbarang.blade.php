@@ -34,6 +34,25 @@
                 <input required type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama" placeholder="Masukan nama barang">
             </div>
             <div class="mb-3">
+              <label for="id_kategori" class="form-label">Jenis Stok</label>
+                <select class="form-select" aria-label="Default select example" name="jenis">
+                    <option selected>==Pilih Jenis==</option>
+                    <option value="Sak">Sak</option>
+                    <option value="Pcs">Pcs</option>
+                    <option value="Pail">Pail</option>
+                  </select>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Stok</label>
+                <input required type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" placeholder="Masukan stok yang akan di setor">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Berat Total</label>
+                <div class="input-group mb-3" id="exampleInputEmail1">
+                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="berat" id="berat">
+                </div>
+              </div>
+            <div class="mb-3">
               <label for="id_kategori" class="form-label">Satuan Barang</label>
                 <select class="form-select" aria-label="Default select example" name="satuan">
                     <option selected>==Pilih Satuan==</option>
@@ -74,20 +93,12 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Harga Jual <span>(termasuk ppn)</span></label>
+              <label for="exampleInputEmail1" class="form-label">Harga Jual Per Satuan <span>(termasuk ppn)</span></label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                 <span class="input-group-text">Rp.</span>
                 <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual">
               </div>
             </div>
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Stok</label>
-                <input required type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" placeholder="Masukan stok yang akan di setor">
-              </div>
-              {{-- <div class="mb-3">
-                <label for="formFileSm" class="form-label">Masukkan Gambar</label>
-                <input class="form-control form-control-sm" id="formFileSm" type="file" name="gambar">
-              </div> --}}
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">
                   <i class="ti ti-send"></i>
@@ -96,6 +107,17 @@
               </div>
         </form>
     </div>
+    <script type="text/javascript">
+      const stokInput = document.getElementById('exampleFormControlInput1');
+      const beratInput = document.getElementById('berat');
+    
+      stokInput.addEventListener('input', function() {
+        const stokValue = parseFloat(stokInput.value);
+        const beratTotal = stokValue * 25;
+    
+        beratInput.value = beratTotal;
+      });
+      </script>
 @endsection
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"

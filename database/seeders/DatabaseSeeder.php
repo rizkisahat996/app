@@ -43,12 +43,13 @@ class DatabaseSeeder extends Seeder
       'id' => '1',
       'nama' => 'nama',
       'satuan' => 'satuan',
+      'jenis' => 'jenis',
+      'stok' => '100',
       'hargabeli' => '1000',
       'id_kategori' => '1',
       'minimstok' => '10',
       'hargajual' => '10',
       'untung' => '10',
-      'stok' => '1000',
     ]);
   }
 }

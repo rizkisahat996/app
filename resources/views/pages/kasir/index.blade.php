@@ -72,19 +72,20 @@
 
       <table style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="prod" class="table table-bordered bg-white mt-3 py-4 px-4">
           <thead>
-              <tr >
-                  <th style="text-align: center" width="30%">Nama Barang</th>
-                  <th style="text-align: center" width="10%">Satuan</th>
-                  <th style="text-align: center" width="10%">Stok</th>
-                  <th style="text-align: center" width="15%">Harga</th>
-                  <th style="text-align: center" width="15%">Jumlah</th>
-                    <th style="text-align: center" width="20%">Subtotal</th>
-              </tr>
+            <tr>
+                <th style="text-align: center" width="25%">Nama Barang</th>
+                <th style="text-align: center" width="10%">Stok</th>
+                <th style="text-align: center" width="15%">Harga</th>
+                <th style="text-align: center" width="10%">Berat</th>
+                <th style="text-align: center" width="10%">Satuan</th>
+                <th style="text-align: center" width="15%">Jumlah</th>
+                <th style="text-align: center" width="25%">Subtotal</th>
+            </tr>
           </thead>
 
           <tfoot>
             <tr>
-              <td style="text-align:right; vertical-align: middle" colspan="5">
+              <td style="text-align:right; vertical-align: middle" colspan="6">
                 <b>Grandtotal</b>
               </td>
               <td>
@@ -93,7 +94,7 @@
               </td>
             </tr>
             <tr>
-              <td style="text-align:right; vertical-align: middle" colspan="5">
+              <td style="text-align:right; vertical-align: middle" colspan="6">
                 <b>Pembayaran</b>
               </td>
               <td>
@@ -116,13 +117,16 @@
                           @endforeach
                       </select>
                   </td>
-                  <td>
-                      <input id="satuan1" name="stok[]" class="form-control stok" readonly="">
-                      <input id="modal1" name="modal[]" class="form-control stok" hidden>
-                  </td>
                   <td><input id="stok1" name="unit[]" class="form-control" readonly=""></td>
                   <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
                           onchange="hitung()">
+                  </td>
+                  <td>
+                      <input type="number" id="berat1" name="berat[]" class="form-control berat" readonly>
+                  </td>
+                  <td>
+                      <input id="satuan1" name="stok[]" class="form-control stok" readonly="">
+                      <input id="modal1" name="modal[]" class="form-control stok" hidden>
                   </td>
                   <td>
                     <input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
@@ -208,6 +212,7 @@
             baru.querySelector("#stok1").id = 'stok' + panjang;
             baru.querySelector("#subtotal1").id = 'subtotal' + panjang;
             baru.querySelector("#subtotaltampil1").id = 'subtotaltampil' + panjang;
+            baru.querySelector("#berat1").id = 'berat' + panjang;
             baru.querySelector("#jumlah1").id = 'jumlah' + panjang;
             baru.querySelector("#modal1").id = 'modal' + panjang;
             baru.querySelector("#satuan1").id = 'satuan' + panjang;
@@ -263,9 +268,12 @@
                     element.classList.remove("d-none");
                     element.classList.add("d-flex");
                 } else {
-                    let hasil = document.getElementById(id).value * satuan;
+                    let berat = document.getElementById("jumlah" + i).value * 25;
+                    document.getElementById("berat" + i).value = berat;
+                    let hasil = document.getElementById(id).value * satuan * 25;
                     document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
+
                 }
             }
         }
