@@ -1,6 +1,0 @@
-archive
-assets
-templates
-components/*/snippets/**
-bower.json
-.npmignore

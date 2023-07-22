@@ -7,6 +7,8 @@ use App\Observers\BarangObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use App\View\Components\AlertStok;
+use Illuminate\Support\Facades\Schema;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo terbilang($number); ?>";
         });
         barang::observe(BarangObserver::class);
+        Schema::defaultStringLength(191);
     }
 }
