@@ -27,29 +27,5 @@ class DatabaseSeeder extends Seeder
       'jabatan' => 'kasir',
     ]);
 
-    DB::table('pelanggans')->insert([
-      'nama' => 'nama',
-      'perusahaan' => 'perusahaan',
-      'alamat' => 'alamat',
-      'no_telp' => 'no_telp',
-    ]);
-
-    DB::table('kategoribarangs')->insert([
-      'id' => '1',
-      'kategori' => 'barang'
-    ]);
-    
-    DB::table('barangs')->insert([
-      'id' => '1',
-      'nama' => 'nama',
-      'satuan' => 'satuan',
-      'jenis' => 'jenis',
-      'stok' => '100',
-      'hargabeli' => '1000',
-      'id_kategori' => '1',
-      'minimstok' => '10',
-      'hargajual' => '10',
-      'untung' => '10',
-    ]);
   }
 }
