@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Models\barang;
+use App\Models\transaksi;
 use App\Observers\BarangObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use App\View\Components\AlertStok;
 use Illuminate\Support\Facades\Schema;
+use App\Models\TransactionLog;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,5 +33,29 @@ class AppServiceProvider extends ServiceProvider
         });
         barang::observe(BarangObserver::class);
         Schema::defaultStringLength(191);
+
+        transaksi::created(function ($transaction) {
+            $items = DB::table('detailtransaksis')
+                ->where('id_transaksi', $transaction->id)
+                ->get();
+    
+            foreach ($items as $pivot) {
+                $item = barang::find($pivot->item_id);
+                $beforeQuantity = $item->berat;
+    
+                $item->berat -= $pivot->jumlah;
+                $item->save();
+    
+                $logData = [
+                    'kode' => $transaction->kode_faktur,
+                    'kode_barang' => $item->id,
+                    'sebelum' => $beforeQuantity,
+                    'sesudah' => $item->berat,
+                    'keluar' => $pivot->jumlah,
+                ];
+    
+                TransactionLog::create($logData);
+            }
+        });
     }
 }

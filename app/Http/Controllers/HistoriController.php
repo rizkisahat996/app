@@ -21,4 +21,14 @@ class HistoriController extends Controller
     public function index(){
         return view('pages.histori.index');
     }
+
+    public function jurnal()
+    {
+        $penjualan = DB::table('log_transaksis')->join('users', 'users.id', '=', 'log_transaksis.user_id')
+        ->select('log_transaksis.*', 'users.name')->latest()->get();
+
+        $barang = DB::table('log_barang')->latest()->get();
+  
+        return view('pages.histori.jurnal', compact('barang', 'penjualan'));
+    }
 }

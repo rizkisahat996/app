@@ -155,7 +155,9 @@ text-decoration: underline;
 
 <body class="px-2 " onload="window.print()">
     <div>
-        <h1>BOBIE</h1>
+        <div style="height: 130px">
+        <img style="height:200px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
+         </div>
         <div class="pp">
             <p class="pp">Hp. 0812 6455 677</p>
             <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
@@ -172,7 +174,7 @@ text-decoration: underline;
                     <br> {{ $transaksi->pelanggan->perusahaan }}
                 </td>
                 <td style="text-align: right;">
-                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->id }}</div>
+                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->kodejalan }}</div>
                 </td>
             </tr>
             <tr>
@@ -185,6 +187,9 @@ text-decoration: underline;
             <tr>
                     <td rowspan="2">Alamat</td>
                     <td rowspan="2">{{ $transaksi->pelanggan->alamat }}</td>
+                    <td style="text-align: right;">
+                        <div style="display: inline-block; text-align: left;">Nomor Polisi : {{ $transaksi->nomor_polisi }}</div>
+                    </td>
             </tr>
             <tr>
                 <td></td>
@@ -213,11 +218,11 @@ text-decoration: underline;
             <thead>
                 <tr>
                     <th width="10%">No.</th>
-                    <th width="30%">Nama Barang</th>
-                    <th width="10%">Volume</th>
+                    <th width="30%">Uraian</th>
+                    <th width="10%">Qty</th>
                     <th width="10%">Satuan</th>
-                    <th width="20%">Harga</th>
-                    <th width="20%">Jumlah</th>
+                    <th width="20%">Volume</th>
+                    <th width="20%">Keterangan</th>
                 </tr>
             </thead>
             <tbody id="bar">
@@ -227,68 +232,47 @@ text-decoration: underline;
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->jumlah }}</td>
                         <td>{{ $item->satuan }}</td>
-                        <td>@currency($item->harga_jual)</td>
-                        <td>@currency($item->subtotal)</td>
+                        <td>{{ $item->berat }}</td>
+                        <td>keterangan</td>
                     </tr>
                 @endforeach
                     
             </tbody>
-            <tfoot>
-                <tr class="">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">Jumlah Total&nbsp;:</td>
-                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->total)</td>
-                </tr>
-                <tr class="">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">Bayar&nbsp;:</td>
-                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->pembayaran)</td>
-                </tr>
-                <tr class="">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Sisa&nbsp;:</td>
-                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->kembalian)</td>
-                </tr>
-            </tfoot>
             
         </table>
 	
-   
-        <div class="container">
-            <div class="catatan">
-                <div class="text-start"><b>Catatan :</b></div>
-                <div class="text-start">1. Barang yang sudah dibeli tidak dapat dikembalikan</div>
-                <div class="text-start">2. Harap diperiksa dengan seksama</div>
-                <div class="text-start">3. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
-                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div>
-                <div class="text-start">MANDIRI : 106.0055.4466.71</div>
-                <div class="text-start">BNI : 1264.666.777</div>
-            </div>
-            <div class="barcode">
-                <div id="barcode"></div>
-                <div id="okkk"><b>{{ Auth::user()->name; }}</b></div>
-                <div id="okkk">{{ Auth::user()->jabatan; }}</div>
-            </div>
-        </div>
-        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-            </div>
-        </div>
-    </div>
-
+        <table  class="table table-borderless" id="info">
+            <tr>    
+                <td style="text-align: center"><b>SUPIR</b></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: center; position: relative;margin-top: -20px;">
+                    <img style="display: inline-block" src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
+                </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td style="text-align: center;margin-top:20px">{{ "(........................................)" }}</td>
+                <td></td>
+                <td></td>
+                <td style="text-align: center;">
+                    <div><b>{{ Auth::user()->name }}</b></div>
+                </td>
+            </tr>
+            <tr style="position: relative;margin-top: -20px;">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="text-align: center; ">
+                    <div>{{ Auth::user()->jabatan }}</div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
 
 
 

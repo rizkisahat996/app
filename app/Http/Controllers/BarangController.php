@@ -67,6 +67,11 @@ class BarangController extends Controller
         'gambar' => 'file',
     ]);
 
+    $berat = $request->stok * 25;
+
+    $data['berat'] = $berat;
+
+
     // Mendapatkan kode barang dari input pengguna
     $kodeBarang = $request->input('id');
 

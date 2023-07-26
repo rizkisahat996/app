@@ -1,23 +1,43 @@
 @extends('layout.main')
 @section('content')
-    <div class="text-center fw-semibold fs-5">Histori Barang</div>
+    <div class="text-center fw-semibold fs-5">Jurnal Transaksi</div>
     <div class="d-flex justify-content-center ">
         <div class="col-lg-12 bg-white  p-5">
+            {{-- {{ dd($penjualan) }} --}}
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Kode Barang</th>
-                        <th scope="col">Harga Beli </th>
-                        {{-- <th scope="col">Harga Eceran</th> --}}
-                        {{-- <th scope="col">Harga Retail</th> --}}
-                        <th scope="col">Harga Stok</th>
+                        <th scope="col">No Faktur</th>
                         <th scope="col">Tanggal</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col" colspan="2">Stok Awal </th>
+                        <th scope="col" colspan="2">Stok Masuk</th>
+                        <th scope="col" colspan="2">Stok Keluar</th>
+                        <th scope="col" colspan="2">Stok Akhir</th>
+                        <th scope="col" colspan="2">Harga</th>
+                        <th scope="col">Jumlah</th>
+                        <th scope="col">Ket</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($barang->isEmpty())
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {{-- @if ($barang->isEmpty())
                         <tr>
                             <td colspan="5">
                                 <div class="d-flex text-muted justify-content-center text-center">
@@ -31,8 +51,8 @@
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $item->id_barang }}</td>
                                 <td>{{ $item->hargabeli }}</td>
-                                {{-- <td>{{ $item->hargaeceran }}</td> --}}
-                                {{-- <td>{{ $item->hargaretail }}</td> --}}
+                                <td></td>
+                                <td></td>
                                 <td>{{ $item->stok }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 @if (Str::lower($item->action) == 'insert')
@@ -45,7 +65,7 @@
 
                             </tr>
                         @endforeach
-                    @endif
+                    @endif --}}
 
 
 

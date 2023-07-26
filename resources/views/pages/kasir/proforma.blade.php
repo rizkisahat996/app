@@ -8,8 +8,6 @@
    
    
     <style>
-        @import url('https://fonts.cdnfonts.com/css/cooper-black');
-
         body * {
             font-family: 'Times New Roman', Times, serif;
             
@@ -123,11 +121,6 @@ text-decoration: underline;
     padding-top: 15px;
 }
 
-.barcode-digit {
-    flex-grow: 1;
-    border-right: 1px solid black;
-}
-
 .black {
     background-color: black;
 }
@@ -143,7 +136,9 @@ text-decoration: underline;
 
 <body class="px-2 " onload="window.print()">
     <div>
-        <img src="<?php echo $logo ?>" alt="logo" height="50px" width="130px">
+        <div style="height: 130px">
+        <img style="height:200px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
+         </div>
         <div class="pp">
             <p class="pp">Hp. 0812 6455 677</p>
             <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
@@ -267,11 +262,11 @@ text-decoration: underline;
                 <div class="text-start">MANDIRI : 106.0055.4466.71</div>
                 <div class="text-start">BNI : 1264.666.777</div>
             </div>
-            <div class="barcode">
-                <img src="<?php echo $ttd ?>" alt="ttd" height="200px" width="200px">
+            <div style="text-align:center">
+                <img src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
                 </div>
-                <div style="text-align: center"><b>{{ Auth::user()->name; }}</b></div>
-                <div style="text-align: center">{{ Auth::user()->jabatan; }}</div>
+                <div style="text-align:center"><b>{{ Auth::user()->name; }}</b></div>
+                <div style="text-align:center">{{ Auth::user()->jabatan; }}</div>
             </div>
         </div>
         
@@ -291,26 +286,6 @@ text-decoration: underline;
   
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bootstrap.js"></script>
-    <script type="text/javascript">
-        function generateBarcode() {
-        var barcodeDiv = document.getElementById("barcode");
-        var barcodeData = "123456789"; // Nilai barcode yang diinginkan
-        
-        for (var i = 0; i < barcodeData.length; i++) {
-            var barcodeDigit = barcodeData.charAt(i);
-            var barcodeElement = document.createElement("div");
-            barcodeElement.classList.add("barcode-digit");
-            
-            if (barcodeDigit === "1") {
-                barcodeElement.classList.add("black");
-            }
-            
-            barcodeDiv.appendChild(barcodeElement);
-        }
-    }
-    
-    generateBarcode();
-    </script>
 </body>
 
 </html>

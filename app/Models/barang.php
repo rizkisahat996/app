@@ -36,4 +36,9 @@ class barang extends Model
         // and you want to calculate the "berat" as "stok * 5"
         $this->berat = $this->stok * 5;
     }
+
+    public function transaksi_log()
+    {
+        return $this->hasMany(TransactionLog::class, 'barang_id');
+    }
 }

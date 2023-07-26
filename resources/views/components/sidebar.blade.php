@@ -52,14 +52,14 @@
                 <span class="hide-menu">History Data</span>
               </a>
             </li>
-            <li class="sidebar-item">
+            {{-- <li class="sidebar-item">
               <a style="color: white;" class="sidebar-link" href="suratjalann" aria-expanded="false">
                 <span>
                   <i class="ti ti-book-2"></i>
                 </span>
                 <span class="hide-menu">Surat Perjalanan</span>
               </a>
-            </li>
+            </li> --}}
             <li class="sidebar-item">
               <a style="color: white;" class="sidebar-link" href="/pengguna" aria-expanded="false">
                 <span>

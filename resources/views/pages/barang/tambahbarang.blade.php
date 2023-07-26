@@ -43,13 +43,13 @@
                   </select>
             </div>
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Stok</label>
-                <input required type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" placeholder="Masukan stok yang akan di setor">
+                <label for="exampleFormControlInput1" class="form-label">Berat Total</label>
+                <input required type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="berat" placeholder="Masukan volume yang akan di setor">
               </div>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Berat Total</label>
+                <label for="exampleInputEmail1" class="form-label">Jumlah Stok</label>
                 <div class="input-group mb-3" id="exampleInputEmail1">
-                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="berat" id="berat">
+                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="stok" id="berat">
                 </div>
               </div>
             <div class="mb-3">
@@ -113,7 +113,7 @@
     
       stokInput.addEventListener('input', function() {
         const stokValue = parseFloat(stokInput.value);
-        const beratTotal = stokValue * 25;
+        const beratTotal = stokValue / 25;
     
         beratInput.value = beratTotal;
       });

@@ -12,5 +12,9 @@
         <div class="btn btn-md btn-success">Histori barang</div>
     </a>
 
+    <a href="/histori/jurnal">
+        <div class="btn btn-md btn-dark">Jurnal Transaksi</div>
+    </a>
+
 </div>
 @endsection

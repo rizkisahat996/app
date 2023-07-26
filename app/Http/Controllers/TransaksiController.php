@@ -59,7 +59,7 @@ class TransaksiController extends Controller
             }
     
     
-            try {
+            // try {
                 // code...
                 $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
                 $hasil = $jumlah->count() + 1;
@@ -112,10 +112,10 @@ class TransaksiController extends Controller
                 }
             
                 return redirect()->route('preview', ['id' => $id]);
-            } catch (\Throwable  $e) {
-                alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
-                return back();
-            }
+            // } catch (\Throwable  $e) {
+            //     alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
+            //     return back();
+            // }
         }
     
     public function polisi(Request $request, string $id)
@@ -252,7 +252,21 @@ class TransaksiController extends Controller
             }
             $tes = $break / 5;
             $ket = $request->query('note');
-            $pdf = PDF::loadview('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket'));
+            
+            // qr tanda tangan
+            $path = base_path('/public/assets/images/bobi.png');
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            // logo
+            $path2 = base_path('/public/assets/images/logo.png');
+            $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+            $data2 = file_get_contents($path2);
+            $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
+
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket', 'ttd', 'logo'));
+
             return $pdf->download($transaksi['kodefaktur'].'.pdf');
             // return view('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket'));
         }
@@ -341,8 +355,23 @@ class TransaksiController extends Controller
             }
             $tes = $break / 5;
             $ket = $request->query('note');
-            $pdf = PDF::loadview('pages.kasir.kwitansi', compact('transaksi','detail', 'count', 'tes','ket'));
-            return $pdf->download($transaksi['kwitansi'].'.pdf');
+            
+            // qr tanda tangan
+            $path = base_path('/public/assets/images/bobi.png');
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            // logo
+            $path2 = base_path('/public/assets/images/logo.png');
+            $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+            $data2 = file_get_contents($path2);
+            $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
+
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.kasir.kwitansi', compact('transaksi','detail', 'count', 'tes','ket', 'ttd', 'logo'));        
+
+            return $pdf->download('kwitansi.pdf');
+            // return $pdf->stream();
         }
     public function suratjalan($id, Request $request){
        
@@ -378,7 +407,21 @@ class TransaksiController extends Controller
             }
             $tes = $break / 5;
             $ket = $request->query('note');
-            $pdf = PDF::loadview('pages.kasir.suratjalan', compact('transaksi','detail', 'count', 'tes','ket'));
+            
+            // qr tanda tangan
+            $path = base_path('/public/assets/images/bobi.png');
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            // logo
+            $path2 = base_path('/public/assets/images/logo.png');
+            $type2 = pathinfo($path2, PATHINFO_EXTENSION);
+            $data2 = file_get_contents($path2);
+            $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
+
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.kasir.suratjalan', compact('transaksi','detail', 'count', 'tes','ket', 'ttd', 'logo'));
+
             return $pdf->download($transaksi['kodejalan'].'.pdf');
         }
         public function penjualan(Request $request)
