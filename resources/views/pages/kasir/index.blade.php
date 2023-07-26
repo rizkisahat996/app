@@ -73,31 +73,34 @@
       <table style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="prod" class="table table-bordered bg-white mt-3 py-4 px-4">
           <thead>
             <tr>
-                <th style="text-align: center" width="25%">Nama Barang</th>
+                <th style="text-align: center" width="20%">Nama Barang</th>
                 <th style="text-align: center" width="10%">Stok</th>
                 <th style="text-align: center" width="15%">Harga</th>
                 <th style="text-align: center" width="10%">Berat</th>
                 <th style="text-align: center" width="10%">Satuan</th>
                 <th style="text-align: center" width="15%">Jumlah</th>
-                <th style="text-align: center" width="25%">Subtotal</th>
+                <th style="text-align: center" width="10%">Keterangan</th>
+                <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
             </tr>
           </thead>
 
           <tfoot>
             <tr>
+                <td></td>
               <td style="text-align:right; vertical-align: middle" colspan="6">
                 <b>Grandtotal</b>
               </td>
-              <td>
+              <td colspan="2">
                 <input id="grandtotal2" type="text" class="form-control grandtotal" value="0" readonly>
                 <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
               </td>
             </tr>
             <tr>
+                <td></td>
               <td style="text-align:right; vertical-align: middle" colspan="6">
                 <b>Pembayaran</b>
               </td>
-              <td>
+              <td colspan="2">
                 <input id="pembayaran" name="pembayaran" type="number" class="form-control pembayaran">
               </td>
             </tr>
@@ -132,12 +135,14 @@
                     <input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
                         required onchange="hitung()">
                 </td>
-                  <td><input id="subtotaltampil1"  class="form-control subtotal" readonly></td>
-                  <td><input id="subtotal1" name="subtotal[]" class="form-control subtotal" hidden
+                <td>
+                    <input id="keterangan1" type="text" name="keterangan[]" class="form-control jumlah" required>
+                  </td>
+                  <td colspan="2"><input id="subtotaltampil1"  class="form-control subtotal" readonly></td>
+                  <td hidden><input id="subtotal1" name="subtotal[]" class="form-control subtotal"
                           onchange="hitungseluruh()"></td>
                   <td>
                     <button id="1" class="btn btn-danger hapus" type="button" onclick="hapus(this)">
-                      <i class="ti ti-trash"></i>
                       <span>Hapus</span>
                     </button>
                   </td>
@@ -196,7 +201,8 @@
             }
     
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+            return prefix == undefined ? rupiah : rupiah ? + rupiah : "";
+            // return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
     
         function tambah() {
@@ -216,6 +222,7 @@
             baru.querySelector("#jumlah1").id = 'jumlah' + panjang;
             baru.querySelector("#modal1").id = 'modal' + panjang;
             baru.querySelector("#satuan1").id = 'satuan' + panjang;
+            baru.querySelector("#keterangan1").id = 'keterangan' + panjang;
             baru.querySelector(".hapus").id = panjang;
             baru.className = panjang;
     

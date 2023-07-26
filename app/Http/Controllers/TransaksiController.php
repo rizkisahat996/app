@@ -107,6 +107,7 @@ class TransaksiController extends Controller
                         'subtotal' => $request->subtotal[$i],
                         'harga_jual' => $request->harga_jual[$i],
                         'modal'=>$request->modal[$i],
+                        'keterangan' => $request->keterangan[$i],
                         'created_at' => $request->tgl_beli,
                     ]);
                 }

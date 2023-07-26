@@ -109,7 +109,6 @@
                                         <span>Edit</span>
                                       </div>
                                   </a>
-
                                             @component('components.modal')
                                                 @slot('target')
                                                     {{ $item->id }}

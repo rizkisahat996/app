@@ -23,17 +23,17 @@ return new class extends Migration
         });
 
         DB::unprepared('
-        CREATE TRIGGER log_insert_detail AFTER INSERT ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `action`, `id_barang`, `harga_jual`,
+        CREATE TRIGGER log_insert_detail AFTER INSERT ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `id_barang`, `action`, `harga_jual`,
         `modal`, `jumlah`,`subtotal`,  `created_at`,`updated_at`) 
         VALUES (NEW.id_transaksi, NEW.id_barang, "Insert",NEW.harga_jual, NEW.modal, NEW.jumlah, NEW.subtotal, now(), null); END
         ');
         DB::unprepared('
-        CREATE TRIGGER log_update_detail AFTER UPDATE ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `action`, `id_barang`, `harga_jual`,
+        CREATE TRIGGER log_update_detail AFTER UPDATE ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `id_barang`, `action`, `harga_jual`,
         `modal`, `jumlah`,`subtotal`,  `created_at`,`updated_at`) 
         VALUES (NEW.id_transaksi, NEW.id_barang, "Update", NEW.harga_jual, NEW.modal, NEW.jumlah, NEW.subtotal, now(), null); END
         ');
         DB::unprepared('
-        CREATE TRIGGER log_delete_detail AFTER DELETE ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `action`, `id_barang`, `harga_jual`,
+        CREATE TRIGGER log_delete_detail AFTER DELETE ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `id_barang`, `action`, `harga_jual`,
         `modal`, `jumlah`,`subtotal`,  `created_at`,`updated_at`) 
         VALUES (old.id_transaksi, old.id_barang, "Delete", old.harga_jual, old.modal, old.jumlah, old.subtotal, now(), null); END
         ');

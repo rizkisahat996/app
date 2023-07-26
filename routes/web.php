@@ -52,7 +52,7 @@ Route::post('/kasir/update/{id}', [TransaksiController::class, 'update'])->middl
 Route::post('/kasir/polisi/{id}', [TransaksiController::class, 'polisi'])->middleware('auth');
 Route::post('/kasir', [TransaksiController::class, 'store'])->middleware('auth');
 Route::post('/piutang/{id}', [TransaksiController::class, 'storepiutang'])->middleware('auth');
-Route::get('detail-barang-{i  d_barang}', [TransaksiController::class, 'detail'])->middleware('auth');
+Route::get('detail-barang-{id_barang}', [TransaksiController::class, 'detail'])->middleware('auth');
 Route::get('pdf/{id}', [TransaksiController::class, 'pdf'])->name('pdf')->middleware('auth');
 Route::get('proforma/{id}', [TransaksiController::class, 'proforma'])->name('proforma')->middleware('auth');
 Route::get('kwitansi/{id}', [TransaksiController::class, 'kwitansi'])->name('kwitansi')->middleware('auth');
@@ -61,6 +61,7 @@ Route::get('/penjualan', [TransaksiController::class, 'penjualan'])->middleware(
 Route::get('/histori/penjualan', [HistoriController::class, 'penjualan'])->middleware('auth');
 Route::get('/histori/barang', [HistoriController::class, 'barang'])->middleware('su');
 Route::get('/histori/jurnal', [HistoriController::class, 'jurnal'])->middleware('su');
+Route::get('/histori/jurnal/{id}', [HistoriController::class, 'show'])->middleware('su');
 Route::get('/histori', [HistoriController::class, 'index'])->middleware('su');
 Route::post('/laporan', [LaporanController::class, 'index'])->middleware('auth');
 Route::post('/laporan/laba', [LaporanController::class, 'laba'])->middleware('auth');

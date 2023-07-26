@@ -16,11 +16,11 @@ return new class extends Migration
             $table->foreign('id_transaksi')->references('id')->on('transaksis');
             $table->string('id_barang');
             $table->foreign('id_barang')->references('id')->on('barangs');
-
             $table->integer('harga_jual');
             $table->integer('modal');
             $table->float('jumlah',5, 1);
             $table->integer('subtotal');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

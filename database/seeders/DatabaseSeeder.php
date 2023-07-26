@@ -52,6 +52,19 @@ class DatabaseSeeder extends Seeder
       'untung' => '200',
       'hargajual' => '15000',
     ]);
+    DB::table('barangs')->insert([
+      'id' => '22',
+      'nama' => 'wqw',
+      'satuan' => 'satuan',
+      'jenis' => 'jenis',
+      'stok' => '100.00',
+      'berat' => '2500.00',
+      'hargabeli' => '10000',
+      'id_kategori' => 'kategori',
+      'minimstok' => '10',
+      'untung' => '200',
+      'hargajual' => '20000',
+    ]);
 
   }
 }
