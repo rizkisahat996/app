@@ -26,7 +26,6 @@ return new class extends Migration
             $table->integer('kembalian')->nullable();
             $table->string('total');
 
-
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('jumlah',5, 1);
             $table->integer('subtotal');
             $table->string('keterangan')->nullable();
+            $table->float('barang_awal');
             $table->timestamps();
         });
     }

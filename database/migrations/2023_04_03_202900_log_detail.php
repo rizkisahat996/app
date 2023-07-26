@@ -19,23 +19,24 @@ return new class extends Migration
             $table->integer('modal');
             $table->float('jumlah', 5, 1);
             $table->integer('subtotal');
+            $table->float('barang_awal');
             $table->timestamps();
         });
 
         DB::unprepared('
         CREATE TRIGGER log_insert_detail AFTER INSERT ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `id_barang`, `action`, `harga_jual`,
-        `modal`, `jumlah`,`subtotal`,  `created_at`,`updated_at`) 
-        VALUES (NEW.id_transaksi, NEW.id_barang, "Insert",NEW.harga_jual, NEW.modal, NEW.jumlah, NEW.subtotal, now(), null); END
+        `modal`, `jumlah`,`subtotal`, `barang_awal`, `created_at`,`updated_at`) 
+        VALUES (NEW.id_transaksi, NEW.id_barang, "Insert",NEW.harga_jual, NEW.modal, NEW.jumlah, NEW.subtotal, NEW.barang_awal, now(), null); END
         ');
         DB::unprepared('
         CREATE TRIGGER log_update_detail AFTER UPDATE ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `id_barang`, `action`, `harga_jual`,
-        `modal`, `jumlah`,`subtotal`,  `created_at`,`updated_at`) 
-        VALUES (NEW.id_transaksi, NEW.id_barang, "Update", NEW.harga_jual, NEW.modal, NEW.jumlah, NEW.subtotal, now(), null); END
+        `modal`, `jumlah`,`subtotal`,  `barang_awal`, `created_at`,`updated_at`) 
+        VALUES (NEW.id_transaksi, NEW.id_barang, "Update", NEW.harga_jual, NEW.modal, NEW.jumlah, NEW.subtotal, NEW.barang_awal, now(), null); END
         ');
         DB::unprepared('
         CREATE TRIGGER log_delete_detail AFTER DELETE ON `detailtransaksis` FOR EACH ROW BEGIN INSERT INTO log_detail (`id_transaksi`, `id_barang`, `action`, `harga_jual`,
-        `modal`, `jumlah`,`subtotal`,  `created_at`,`updated_at`) 
-        VALUES (old.id_transaksi, old.id_barang, "Delete", old.harga_jual, old.modal, old.jumlah, old.subtotal, now(), null); END
+        `modal`, `jumlah`,`subtotal`,  `barang_awal`, `created_at`,`updated_at`) 
+        VALUES (old.id_transaksi, old.id_barang, "Delete", old.harga_jual, old.modal, old.jumlah, old.subtotal, old.barang_awal, now(), null); END
         ');
     }
 

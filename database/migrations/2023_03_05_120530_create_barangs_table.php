@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('minimstok');
             $table->integer('untung');
             $table->integer('hargajual');
+            $table->string('barang_awal')->nullable();
             $table->string('gambar')->nullable();
             $table->timestamps();
         });

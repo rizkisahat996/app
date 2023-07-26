@@ -1,5 +1,5 @@
 <!-- Sidebar scroll-->
-<div style="background-color: #273248; height: 100%; overflow-y: scroll;">
+<div style="background-color: #273248; height: 100%; overflow-y: scroll; id="sidebarWrapper"">
     <div class="brand-logo d-flex align-items-center justify-content-between">
       <a href="/dashboard" class="text-nowrap logo-img">
         <img src="../asset/images/logos/bobie-logo.png" width="100%" alt="" />

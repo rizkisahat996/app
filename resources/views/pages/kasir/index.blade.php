@@ -1,11 +1,22 @@
 @extends('layout.main')
 @section('content')
-  <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
-    <div style="text-align: center">
-      <i class="ti ti-building-bank"></i>
-      <span>Kasir</span>
-    </div>
-  </div>
+<div class="d-row">
+
+    <div class="d-flex justify-content-start ml-4">
+        <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
+          <div style="text-align: center">
+            <i class="ti ti-building-bank"></i>
+            <span>Kasir</span>
+          </div>
+        </div>
+        <a href="/penjualan">
+      <button class="btn border-2 border border-gray-500 btn-primary text-white ms-3 mt-3">
+        <span>Kembali ke Penjualan</span>
+        <i class="fa-solid fa-print"></i>
+      </button>
+      </a>
+      </div>
+</div>
   <form action="/kasir" method="post" class="form-horizontal form-label-left" novalidate>
       @csrf
       <div class="row row-cols-2 bg-white px-4 py-5" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
@@ -74,12 +85,12 @@
           <thead>
             <tr>
                 <th style="text-align: center" width="20%">Nama Barang</th>
-                <th style="text-align: center" width="10%">Stok</th>
-                <th style="text-align: center" width="15%">Harga</th>
+                <th style="text-align: center" width="8%">Stok</th>
+                <th style="text-align: center" width="12%">Harga</th>
                 <th style="text-align: center" width="10%">Berat</th>
                 <th style="text-align: center" width="10%">Satuan</th>
-                <th style="text-align: center" width="15%">Jumlah</th>
-                <th style="text-align: center" width="10%">Keterangan</th>
+                <th style="text-align: center" width="10%">Jumlah</th>
+                <th style="text-align: center" width="15%">Keterangan</th>
                 <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
             </tr>
           </thead>
@@ -201,7 +212,7 @@
             }
     
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-            return prefix == undefined ? rupiah : rupiah ? + rupiah : "";
+            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
             // return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
     
