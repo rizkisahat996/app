@@ -69,9 +69,9 @@
                       <th scope="col">No.</th>
                       <th scope="col">Faktur</th>
                       <th scope="col">Nama, Perusahaan</th>
-                      <th scope="col">Tanggal Pembeli</th>
+                      <th scope="col">Tanggal Pembelian</th>
                       <th scope="col">Total</th>
-                      <th scope="col">Metode Pembayaran</th>
+                      <th scope="col" width="10%">Metode Pembayaran</th>
                       <th scope="col" class="text-center">Action</th>
                   </tr>
               </thead>
@@ -88,7 +88,7 @@
                       @foreach ($hasil as $item)
                           <tr>
                               <th scope="row">{{ $loop->iteration }}</th>
-                              <td>{{ $item->id }}</td>
+                              <td>{{ $item->kodefaktur }}</td>
                               <td>{{ $item->nama }}, {{ $item->perusahaan }}</td>
                               <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                               <td>@currency($item->total)</td>

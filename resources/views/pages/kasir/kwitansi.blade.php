@@ -113,9 +113,7 @@
 <body class="px-2 " onload="window.print()">
     <div class="keranjang">
       <div>
-        <div style="height: 130px">
-        <img style="height:200px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
-         </div>
+        <img style="height:100px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
         <div class="pp">
             <p class="pp">Hp. 0812 6455 677</p>
             <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>

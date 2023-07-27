@@ -130,15 +130,22 @@ text-decoration: underline;
     padding-top: 2px;
 }
 
+td{
+    font-weight: bold;
+}
+
+#kec{
+    font-weight: lighter;
+    font-size: smaller
+}
+
         @media print {}
     </style>
 </head>
 
 <body class="px-2 " onload="window.print()">
     <div>
-        <div style="height: 130px">
-        <img style="height:200px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
-         </div>
+        <img style="height:100px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
         <div class="pp">
             <p class="pp">Hp. 0812 6455 677</p>
             <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
@@ -200,29 +207,33 @@ text-decoration: underline;
             <thead>
                 <tr>
                     <th width="10%">No.</th>
-                    <th width="30%">Nama Barang</th>
-                    <th width="10%">Volume</th>
-                    <th width="10%">Satuan</th>
-                    <th width="20%">Harga</th>
-                    <th width="20%">Jumlah</th>
+                    <th width="40%">Nama Barang</th>
+                    <th width="20%">Volume</th>
+                    <th width="30%">Harga</th>
+                    <th width="40%">Jumlah</th>
                 </tr>
             </thead>
             <tbody id="bar">
                 @foreach ($detail as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->jumlah }}</td>
-                        <td>{{ $item->satuan }}</td>
-                        <td>@currency($item->harga_jual)</td>
-                        <td>@currency($item->subtotal)</td>
-                    </tr>
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->nama }}</td>
+                    <td>{{ $item->jumlah * 25 }}</td>
+                    <td>@currency($item->harga_jual)</td>
+                    <td>@currency($item->subtotal)</td>
+                </tr>
+                <tr style="border-bottom:1px solid #000; margin-top:2px;margin-bottom:2px ">
+                    <td></td>
+                    <td id="kec">{{ $item->keterangan }}</td>
+                    <td id="kec">{{ $item->satuan }}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
                 @endforeach
                     
             </tbody>
             <tfoot>
                 <tr class="">
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -233,12 +244,10 @@ text-decoration: underline;
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
                     <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">Bayar&nbsp;:</td>
                     <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->pembayaran)</td>
                 </tr>
                 <tr class="">
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

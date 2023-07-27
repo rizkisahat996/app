@@ -28,7 +28,6 @@
                         <th rowspan="2" scope="col">Nama Costumer</th>
                     </tr>
                     <tr>
-                        <!-- This row is for the sub-headers, which will be empty since we already merged them in the first row -->
                         <th scope="col">QTY</th>
                         <th scope="col">KG</th>
                         <th scope="col">QTY</th>

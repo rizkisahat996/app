@@ -85,20 +85,20 @@
           <thead>
             <tr>
                 <th style="text-align: center" width="20%">Nama Barang</th>
-                <th style="text-align: center" width="8%">Stok</th>
-                <th style="text-align: center" width="12%">Harga</th>
-                <th style="text-align: center" width="10%">Berat</th>
-                <th style="text-align: center" width="10%">Satuan</th>
-                <th style="text-align: center" width="10%">Jumlah</th>
+                <th style="text-align: center" width="10%">Stok</th>
+                <th style="text-align: center" width="15%">Harga</th>
+                {{-- <th style="text-align: center" width="10%">Berat</th> --}}
+                <th style="text-align: center" width="8%">Satuan</th>
+                <th style="text-align: center" width="12%">Berat</th>
                 <th style="text-align: center" width="15%">Keterangan</th>
-                <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
+                <th style="text-align: center" width="25%" colspan="2">Subtotal</th>
             </tr>
           </thead>
 
           <tfoot>
             <tr>
                 <td></td>
-              <td style="text-align:right; vertical-align: middle" colspan="6">
+              <td style="text-align:right; vertical-align: middle" colspan="5">
                 <b>Grandtotal</b>
               </td>
               <td colspan="2">
@@ -108,7 +108,7 @@
             </tr>
             <tr>
                 <td></td>
-              <td style="text-align:right; vertical-align: middle" colspan="6">
+              <td style="text-align:right; vertical-align: middle" colspan="5">
                 <b>Pembayaran</b>
               </td>
               <td colspan="2">
@@ -135,7 +135,7 @@
                   <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
                           onchange="hitung()">
                   </td>
-                  <td>
+                  <td hidden>
                       <input type="number" id="berat1" name="berat[]" class="form-control berat" readonly>
                   </td>
                   <td>
@@ -275,11 +275,12 @@
                 let total = "subtotal" + i;
                 let tampil = "subtotaltampil" + i;
                 let stk = "stok" + i;
+                let brt = stk * 25;
                 let jumlah = parseInt(document.getElementById(id).value);
                 let satuan = document.getElementById(jual).value;
                 let stok = parseInt(document.getElementById(stk).value);
     
-                if (jumlah > stok) {
+                if (jumlah > brt) {
                     document.getElementById(id).value = " ";
                     document.getElementById(id).placeholder = " ";
                     var element = document.getElementById("alert");
@@ -288,7 +289,8 @@
                 } else {
                     let berat = document.getElementById("jumlah" + i).value * 25;
                     document.getElementById("berat" + i).value = berat;
-                    let hasil = document.getElementById(id).value * satuan * 25;
+                    // let hasil = document.getElementById(id).value * satuan * 25;
+                    let hasil = document.getElementById(id).value * satuan;
                     document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
 
@@ -322,8 +324,8 @@
                         dataType: 'json',
                         url: "{{ url('/detail-barang-') }}" + id,
                         success: function(data) {
-                            document.querySelector(stok).placeholder = data.data.stok;
-                            document.querySelector(stok).value = data.data.stok;
+                            document.querySelector(stok).placeholder = data.data.stok *25;
+                            document.querySelector(stok).value = data.data.stok *25;
                             document.querySelector(unit).value = data.data.satuan;
     
                             let tes = document.querySelector(harga);

@@ -79,9 +79,10 @@
                       <tr>
                           <th>No.</th>
                           <th>Nama Barang</th>
-                          <th>Jumlah</th>
+                          <th>Volume</th>
                           <th>Satuan</th>
                           <th>Harga</th>
+                          <th>Keterangan</th>
                           <th>Subtotal</th>
                       </tr>
                   </thead>
@@ -90,25 +91,26 @@
                           <tr class="text-center" >
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $item->nama }}</td>
-                              <td>{{ $item->jumlah }}</td>
+                              <td>{{ $item->jumlah * 25 }}</td>
                               <td>{{ $item->satuan }}</td>
                               <td>@currency($item->harga_jual) </td>
+                              <td>{{ ($item->keterangan) }} </td>
                               <td>@currency($item->subtotal) </td>
                           </tr>
                       @endforeach
                       <tr>
 
-                          <td colspan="5" class="text-end">Total&nbsp;:</td>
+                          <td colspan="6" class="text-end">Total&nbsp;:</td>
                           <td class="text-center">@currency($transaksi->total)</td>
                       </tr>
                       <tr>
 
-                          <td colspan="5" class="text-end">Bayar&nbsp;:</td>
+                          <td colspan="6" class="text-end">Bayar&nbsp;:</td>
                           <td class="text-center">@currency($transaksi->pembayaran)</td>
                       </tr>
                       <tr>
 
-                          <td colspan="5" class="text-end">Kembalian&nbsp;:</td>
+                          <td colspan="6" class="text-end">Kembalian&nbsp;:</td>
                           <td class="text-center">@currency($transaksi->kembalian)</td>
                       </tr>
                   </tbody>

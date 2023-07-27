@@ -71,13 +71,14 @@
         <table id="prod" class="table table-bordered bg-white mt-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
             <thead>
                 <tr>
-                    <th style="text-align: center" width="25%">Nama Barang</th>
+                    <th style="text-align: center" width="20%">Nama Barang</th>
                     <th style="text-align: center" width="10%">Stok</th>
                     <th style="text-align: center" width="15%">Harga</th>
-                    <th style="text-align: center" width="10%">Berat</th>
-                    <th style="text-align: center" width="10%">Satuan</th>
-                    <th style="text-align: center" width="15%">Jumlah</th>
-                    <th style="text-align: center" width="25%">Subtotal</th>
+                    {{-- <th style="text-align: center" width="10%">Berat</th> --}}
+                    <th style="text-align: center" width="8%">Satuan</th>
+                    <th style="text-align: center" width="12%">Berat</th>
+                    <th style="text-align: center" width="15%">Keterangan</th>
+                    <th style="text-align: center" width="25%" colspan="2">Subtotal</th>
                 </tr>
             </thead>
             <tfoot>
@@ -129,7 +130,7 @@
                         <td><input id="{{ 'harga' . $loop->iteration }}" name="harga_jual[]"
                                 class="form-control harga_jual" readonly="" onchange="hitung()">
                         </td>
-                        <td>
+                        <td hidden>
                             <input id="{{ 'berat' . $loop->iteration }}" name="berat[]" class="form-control berat"
                                 readonly="">
                         </td>
@@ -142,6 +143,10 @@
                                 class="form-control jumlah" required="required" onchange="hitung()"
                                 value="{{ old('jumlah', $item->jumlah) }}">
                         </td>
+                        <td>
+                            <input id="{{ 'keterangan' . $loop->iteration }}" type="text" name="keterangan[]" class="form-control jumlah"
+                            value="{{ old('keterangan', $item->keterangan) }}" required>
+                          </td>
                         <td><input id="{{ 'subtotaltampil' . $loop->iteration }}" class="form-control subtotal" readonly>
                         </td>
                         <td><input id="{{ 'subtotal' . $loop->iteration }}" name="subtotal[]"
@@ -232,6 +237,7 @@
             baru.querySelector("#jumlah1").id = 'jumlah' + panjang;
             baru.querySelector("#modal1").id = 'modal' + panjang;
             baru.querySelector("#satuan1").id = 'satuan' + panjang;
+            baru.querySelector("#keterangan1").id = 'keterangan' + panjang;
             baru.querySelector(".hapus").id = panjang;
             baru.className = panjang;
     
@@ -316,8 +322,8 @@
                         dataType: 'json',
                         url: "{{ url('/detail-barang-') }}" + id,
                         success: function(data) {
-                            document.querySelector(stok).placeholder = data.data.stok;
-                            document.querySelector(stok).value = data.data.stok;
+                            document.querySelector(stok).placeholder = data.data.stok * 25;
+                            document.querySelector(stok).value = data.data.stok * 25;
                             document.querySelector(unit).value = data.data.satuan;
     
                             let tes = document.querySelector(harga);

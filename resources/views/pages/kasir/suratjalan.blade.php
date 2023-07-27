@@ -82,13 +82,6 @@ padding-top:4rem;
 	width = 500% !important;
 padding :        0 0 0 0 !important;
         }
-        #bar tr td{
-            border-bottom: 1px solid #000000;
-        background-image: linear-gradient(to right, #000000 50%, transparent 50%);
-        background-repeat: repeat-x;
-        background-position: bottom;
-        background-size: 8px 1px;
-        }
 #tek {
 font-weight:500 !important ;
 text-align: center;
@@ -155,9 +148,7 @@ text-decoration: underline;
 
 <body class="px-2 " onload="window.print()">
     <div>
-        <div style="height: 130px">
-        <img style="height:200px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
-         </div>
+        <img style="height:100px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
         <div class="pp">
             <p class="pp">Hp. 0812 6455 677</p>
             <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>

@@ -27,21 +27,21 @@
               <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
-                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli" value="{{ old('hargabeli',Str::limit($barang->hargabeli, 3, "")) }}">
+                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli" value="{{ old('hargabeli',$barang->hargabeli) }}">
               </div>
           </div>
           <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Untung</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
-                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung" value="{{ old('untung',Str::limit($barang->untung, 3, "")) }}">
+                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung" value="{{ old('untung',$barang->untung) }}">
               </div>
           </div>
           <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Jual <span>(termasuk ppn)</span></label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
-                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual" value="{{ old('hargajual',number_format($barang->hargajual, 0, ',', '.')) }}">
+                  <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual" value="{{ old('hargajual',$barang->hargajual) }}">
               </div>
           </div>
           <div class="mb-3">
@@ -49,9 +49,9 @@
               <input type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" value="{{ old('stok',$barang->stok) }}">
             </div>
             <div class="mb-3">
-              <label for="formFileSm" class="form-label">Masukkan Gambar</label>
-              <input class="form-control form-control-sm" id="formFileSm" type="file" name="gambar">
-            </div>
+              <label for="exampleInputEmail1" class="form-label">Keterangan</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="keterangan" value="{{ old('keterangan',$barang->keterangan) }}">
+          </div>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">
                 <span>Submit</span>

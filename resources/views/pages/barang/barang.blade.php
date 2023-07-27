@@ -68,6 +68,7 @@
                       <th scope="col">Nama Barang</th>
                       <th scope="col">Satuan</th>
                       <th scope="col">Stok</th>
+                      <th scope="col">Berat</th>
                       <th scope="col">Action</th>
                   </tr>
               </thead>
@@ -88,6 +89,7 @@
                               <td>{{ $item->nama }}</td>
                               <td>{{ $item->satuan }}</td>
                               <td>{{ $item->stok }}</td>
+                              <td>{{ $item->berat }}</td>
                               <td>
                                   <div class="d-flex gap-2 justify-content-center">
                                       @component('components.modal')
@@ -97,16 +99,16 @@
                                           @slot('icon')
                                               <div style="border-radius: 5px" type="submit" class="btn btn-success mb-1 text-white">
                                                 <i class="ti ti-calendar-plus"></i>
-                                                <span>Stok</span>
+                                                <span>Volume</span>
                                               </div>
                                           @endslot
                                           @slot('isi')
                                               <form action="/barang/tambah/{{ $item->id }}" method="POST" class="px-4 py-4 col-12">
                                                   @method('post')
                                                   @csrf
-                                                  <h3>Masukkan Jumlah Stok yang ingin ditambah</h6>
+                                                  <h3>Masukkan Jumlah Volume yang ingin ditambah</h6>
                                                   <div class="my-4">
-                                                      <input placeholder="Masukan Tambahan Stok" type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" required>
+                                                      <input placeholder="Masukan Tambahan Volume" type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="berat" required>
                                                   </div>
                                                   <div class="d-flex justify-content-end">
                                                       <button type="submit" class="btn btn-primary">

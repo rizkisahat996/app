@@ -168,7 +168,7 @@ class TransaksiController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
             
-        try {
+        // try {
             $grandtotal = $request->grandtotal;
             $pembayaran = $request->pembayaran;
             if ($pembayaran < $grandtotal) {
@@ -196,14 +196,16 @@ class TransaksiController extends Controller
                     'subtotal' => $request->subtotal[$i],
                     'harga_jual' => $request->harga_jual[$i],
                     'modal'=>$request->modal[$i],
+                    'keterangan' => $request->keterangan[$i],
+                    'barang_awal' => $request->unit[$i],
                     'created_at' => $request->tgl_beli,
                 ]);
             }
             return redirect()->route('preview', ['id' => $id]);
-        } catch (\Throwable $th) {
-            alert()->error('Gagal','Data yang anda masukkan tidak valid, Silahkan cek kembali');
-            return back();
-        }
+        // } catch (\Throwable $th) {
+        //     alert()->error('Gagal','Data yang anda masukkan tidak valid, Silahkan cek kembali');
+        //     return back();
+        // }
     }
 
     /**

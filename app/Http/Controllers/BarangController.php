@@ -133,10 +133,11 @@ class BarangController extends Controller
   {
     barang::where('id', $id)->update([
       'nama' => $request->nama,
-      'hargabeli' => $request->hargabeli . "000",
-      'untung' => $request->untung . "000",
-      'hargajual' => $request->hargajual * 1000,
-      'stok' => $request->stok
+      'hargabeli' => $request->hargabeli,
+      'untung' => $request->untung,
+      'hargajual' => $request->hargajual,
+      'stok' => $request->stok,
+      'keterangan' => $request->keterangan
     ]);
     alert()->success('Berhasil', 'Berhasil Memperbarui Data');
     return redirect('/barang');
@@ -158,13 +159,14 @@ class BarangController extends Controller
     $barang = barang::where('id', $id)->first();
     $stoklama = (int)$barang->stok;
 
-    $tambah = $request->stok;
+    $tambah = $request->berat / 25;
 
     $updatestok = $tambah + $stoklama;
+    $updateberat = $updatestok * 25;
     $hargalama = $barang->hargabeli * $stoklama * 25;
     $total = $updatestok * $barang->hargabeli * 25;
 
-    barang::where('id', $id)->update(['stok' => $updatestok, 'stokawal' => $stoklama, 'tambah' => $tambah, 'total_lama' => $hargalama, 'total' => $total]);
+    barang::where('id', $id)->update(['berat' => $updateberat, 'stok' => $updatestok, 'stokawal' => $stoklama, 'tambah' => $tambah, 'total_lama' => $hargalama, 'total' => $total]);
     alert()->success('Berhasil', 'Berhasil Menambahkan Stok');
     return Redirect::back();
   }
