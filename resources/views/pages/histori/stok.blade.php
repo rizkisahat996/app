@@ -11,7 +11,7 @@
     }
 </style>
 
-    <div class="text-center fw-semibold fs-5">Jurnal Transaksi</div>
+    <div class="text-center fw-semibold fs-5">Jurnal Barang</div>
     <div class="d-flex justify-content-center ">
         <div class="col-lg-12 bg-white  p-3">
             <table class="table">
@@ -39,22 +39,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($detail as $item)
-                    <tr>
-                        <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->stokawal }}</td>
-                        <td>{{ $item->stokawal * 25 }}</td>
-                        <td>{{ $item->tambah }}</td>
-                        <td>{{ $item->tambah * 25 }}</td>
-                        <td>{{ $item->stok }}</td>
-                        <td>{{ $item->stok * 25 }}</td>
-                        <td>{{ $item->hargabeli }}</td>
-                        <td>{{ $item->hargajual }}</td>
-                        <td>{{ $item->total }}</td>
-                        <td>{{ $item->keterangan }}</td>
-                    </tr>
-                    @endforeach
+                    @if ($detail->isEmpty())
+                        <tr>
+                            <td colspan="3">
+                                <div class="d-flex text-muted justify-content-center text-center">
+                                    Transaksi Belum Ada
+                                </div>
+                            </td>
+                        </tr>
+                    @else
+                        @foreach ($detail as $item)
+                        <tr>
+                            <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->stokawal }}</td>
+                            <td>{{ $item->stokawal * 25 }}</td>
+                            <td>{{ $item->tambah }}</td>
+                            <td>{{ $item->tambah * 25 }}</td>
+                            <td>{{ $item->stok }}</td>
+                            <td>{{ $item->stok * 25 }}</td>
+                            <td>{{ $item->hargabeli }}</td>
+                            <td>{{ $item->hargajual }}</td>
+                            <td>{{ $item->total }}</td>
+                            <td>{{ $item->keterangan }}</td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
