@@ -24,8 +24,11 @@ return new class extends Migration
             $table->integer('minimstok');
             $table->integer('untung');
             $table->integer('hargajual');
-            $table->string('barang_awal')->nullable();
-            $table->string('gambar')->nullable();
+            $table->integer('stokawal');
+            $table->integer('tambah');
+            $table->bigInteger('total');
+            $table->bigInteger('total_lama')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

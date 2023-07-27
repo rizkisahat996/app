@@ -68,16 +68,24 @@ class BarangController extends Controller
     ]);
 
     $berat = $request->stok * 25;
+    $tambah = $request->stok;
+    $beli = $request->hargabeli;
+    $berat = $request->berat;
+    $total =  $beli * $berat;
+    $keterangan = $request->keterangan;
+    $awal = 0;
 
     $data['berat'] = $berat;
+    $data['tambah'] = $tambah;
+    $data['total'] = $total;
+    $data['stokawal'] = $awal;
+    $data['keterangan'] = $keterangan;
 
 
-    // Mendapatkan kode barang dari input pengguna
     $kodeBarang = $request->input('id');
 
     // Mengecek apakah kode barang sudah ada dalam database
     if (barang::where('id', $kodeBarang)->exists()) {
-        // Jika kode barang sudah ada, beri pesan kesalahan
         return back()->with('error', 'Kode barang sudah ada dalam database.');
     }
 
@@ -150,11 +158,17 @@ class BarangController extends Controller
     $barang = barang::where('id', $id)->first();
     $stoklama = (int)$barang->stok;
 
-    $updatestok = (int)$request->stok + $stoklama;
-    barang::where('id', $id)->update(['stok' => $updatestok]);
+    $tambah = $request->stok;
+
+    $updatestok = $tambah + $stoklama;
+    $hargalama = $barang->hargabeli * $stoklama * 25;
+    $total = $updatestok * $barang->hargabeli * 25;
+
+    barang::where('id', $id)->update(['stok' => $updatestok, 'stokawal' => $stoklama, 'tambah' => $tambah, 'total_lama' => $hargalama, 'total' => $total]);
     alert()->success('Berhasil', 'Berhasil Menambahkan Stok');
     return Redirect::back();
   }
+
   public function kategori()
   {
     return view('pages.barang.kategori');

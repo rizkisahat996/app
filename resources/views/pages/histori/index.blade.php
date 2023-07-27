@@ -6,14 +6,16 @@
         <div class="btn btn-md btn-primary">Histori Penjualan</div>
     </a>
 
-
-
     <a href="/histori/barang">
         <div class="btn btn-md btn-success">Histori barang</div>
     </a>
 
     <a href="/histori/jurnal">
         <div class="btn btn-md btn-dark">Jurnal Transaksi</div>
+    </a>
+
+    <a href="/histori/stok">
+        <div class="btn btn-md btn-secondary">Jurnal Barang</div>
     </a>
 
 </div>

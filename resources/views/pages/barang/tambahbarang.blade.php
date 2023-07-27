@@ -99,6 +99,10 @@
                 <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual">
               </div>
             </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Keterangan</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="keterangan" placeholder="Masukan keterangan barang">
+          </div>
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">
                   <i class="ti ti-send"></i>

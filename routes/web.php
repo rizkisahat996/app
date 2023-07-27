@@ -60,6 +60,7 @@ Route::get('suratjalan/{id}', [TransaksiController::class, 'suratjalan'])->name(
 Route::get('/penjualan', [TransaksiController::class, 'penjualan'])->middleware('auth');
 Route::get('/histori/penjualan', [HistoriController::class, 'penjualan'])->middleware('auth');
 Route::get('/histori/barang', [HistoriController::class, 'barang'])->middleware('su');
+Route::get('/histori/stok', [HistoriController::class, 'stok'])->middleware('su');
 Route::get('/histori/jurnal', [HistoriController::class, 'jurnal'])->middleware('su');
 Route::get('/histori/jurnal/{id}', [HistoriController::class, 'show'])->middleware('su');
 Route::get('/histori', [HistoriController::class, 'index'])->middleware('su');

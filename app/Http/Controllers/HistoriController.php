@@ -24,10 +24,6 @@ class HistoriController extends Controller
 
     public function jurnal()
     {
-        // $penjualan = DB::table('log_transaksis')
-        //     ->join('log_detail', 'log_transaksis.id', '=', 'log_detail.id_transaksi')
-        //     ->groupBy('log_detail.id_transaksi')
-        //     ->get();
         $penjualan = DB::table('log_transaksis')
             ->select('log_transaksis.*')
             ->get();
@@ -51,9 +47,15 @@ class HistoriController extends Controller
             ->select('log_detail.*', 'barangs.*', 'log_transaksis.*', 'pelanggans.nama AS pelanggan_nama')
             ->get();
 
-        // dd($detail);
-
-        
         return view('pages.histori.show', compact('penjualan', 'detail'));
+    }
+
+    public function stok()
+    {
+        $detail = DB::table('log_barang')
+                ->get();
+        
+        // dd($detail);
+        return view('pages.histori.stok', compact('detail'));
     }
 }

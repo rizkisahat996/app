@@ -50,7 +50,11 @@ class DatabaseSeeder extends Seeder
       'id_kategori' => 'kategori',
       'minimstok' => '10',
       'untung' => '200',
+      'stokawal' => '0',
+      'tambah' => '200',
+      'total' => '200',
       'hargajual' => '15000',
+      'keterangan' => 'keterangan',
     ]);
     DB::table('barangs')->insert([
       'id' => '22',
@@ -63,7 +67,11 @@ class DatabaseSeeder extends Seeder
       'id_kategori' => 'kategori',
       'minimstok' => '10',
       'untung' => '200',
+      'stokawal' => '0',
+      'tambah' => '200',
+      'total' => '200',
       'hargajual' => '20000',
+      'keterangan' => 'keterangan',
     ]);
 
   }
