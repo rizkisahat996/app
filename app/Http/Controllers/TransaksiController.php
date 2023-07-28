@@ -53,15 +53,11 @@ class TransaksiController extends Controller
                 'nama.*' => 'required', 
                 'jumlah.*' => 'required|numeric|min:1', 
             ]);
-    
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
     
-    
-            // try {
-                // code...
-                // $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
                 $jumlah = DB::table('transaksis')->get();
                 $hasil = $jumlah->count() + 1;
                 // dd($hasil);
@@ -102,6 +98,7 @@ class TransaksiController extends Controller
                 ]);
 
                 for ($i=0; $i <count($request->nama) ; $i++) {
+                    $keterangan = isset($request->keterangan[$i]) ? $request->keterangan[$i] : "-";
                     $detail = detailtransaksi::insert([
                         'id_transaksi' => $id,
                         'id_barang' => $request->nama[$i],
@@ -109,17 +106,13 @@ class TransaksiController extends Controller
                         'subtotal' => $request->subtotal[$i],
                         'harga_jual' => $request->harga_jual[$i],
                         'modal'=>$request->modal[$i],
-                        'keterangan' => $request->keterangan[$i],
+                        'keterangann' => $keterangan,
                         'barang_awal' => $request->unit[$i],
                         'created_at' => $request->tgl_beli,
                     ]);
                 }
             
                 return redirect()->route('preview', ['id' => $id]);
-            // } catch (\Throwable  $e) {
-            //     alert()->error('Gagal', 'Data yang Anda masukkan tidak valid, silakan periksa kembali.');
-            //     return back();
-            // }
         }
     
     public function polisi(Request $request, string $id)
@@ -191,6 +184,7 @@ class TransaksiController extends Controller
             ]);
             detailtransaksi::where('id_transaksi', $id)->delete();
             for ($i=0; $i <count($request->nama) ; $i++) {
+                $keterangan = isset($request->keterangan[$i]) ? $request->keterangan[$i] : "-";
                 $detail = detailtransaksi::where('id_transaksi', $id)->insert([
                     'id_transaksi' => $id,
                     'id_barang' => $request->nama[$i],
@@ -198,7 +192,7 @@ class TransaksiController extends Controller
                     'subtotal' => $request->subtotal[$i],
                     'harga_jual' => $request->harga_jual[$i],
                     'modal'=>$request->modal[$i],
-                    'keterangan' => $request->keterangan[$i],
+                    'keterangann' => $keterangan,
                     'barang_awal' => $request->unit[$i],
                     'created_at' => $request->tgl_beli,
                 ]);

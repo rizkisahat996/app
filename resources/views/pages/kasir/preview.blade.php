@@ -29,7 +29,7 @@
             <span>Preview Faktur</span>
             <i class="fa-solid fa-print"></i>
           </div>
-          <div class="mx-1 mt-3 py-5 px-5 bg-white">
+          <div class="mx-1 mt-3 py-5 px-5 bg-white table-responsive">
               <div class="d-flex justify-content-between px-1 py-2" id="top">
                   <div class="fw-bold fs-5">BOBIE</div>
                   <div class="fw-bold fs-5">Faktur Penjualan</div>
@@ -73,7 +73,7 @@
                   </tr>
               </table>
           </div>
-          <div class="mx-1 mt-3 py-5 px-5 bg-white">
+          <div class="mx-1 mt-3 py-5 px-5 bg-white table-responsive">
               <table class="table " id="tab">
                   <thead class="text-center">
                       <tr>
@@ -91,10 +91,10 @@
                           <tr class="text-center" >
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $item->nama }}</td>
-                              <td>{{ $item->jumlah * 25 }}</td>
+                              <td>{{ $item->jumlah }}</td>
                               <td>{{ $item->satuan }}</td>
                               <td>@currency($item->harga_jual) </td>
-                              <td>{{ ($item->keterangan) }} </td>
+                              <td>{{ ($item->keterangann) }} </td>
                               <td>@currency($item->subtotal) </td>
                           </tr>
                       @endforeach

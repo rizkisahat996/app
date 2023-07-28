@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('modal');
             $table->float('jumlah',5, 1);
             $table->integer('subtotal');
-            $table->string('keterangan')->nullable();
+            $table->string('keterangann')->default("-");
             $table->float('barang_awal');
             $table->timestamps();
         });

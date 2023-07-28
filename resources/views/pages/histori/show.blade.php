@@ -34,10 +34,8 @@
                         <th scope="col">KG</th>
                         <th scope="col">QTY</th>
                         <th scope="col">KG</th>
-                        <th scope="col">QTY</th>
-                        <th scope="col">KG</th>
-                        <th scope="col">Jual</th>
                         <th scope="col">Beli</th>
+                        <th scope="col">Jual</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,14 +46,12 @@
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->barang_awal }}</td>
                         <td>{{ $item->barang_awal * 25 }}</td>
-                        <td></td>
-                        <td></td>
                         <td>{{ $item->jumlah }}</td>
                         <td>{{ $item->jumlah * 25 }}</td>
                         <td>{{ $item->barang_awal - $item->jumlah }}</td>
                         <td>{{ ($item->barang_awal - $item->jumlah) * 25 }}</td>
-                        <td>{{ $item->hargajual }}</td>
                         <td>{{ $item->hargabeli }}</td>
+                        <td>{{ $item->hargajual }}</td>
                         <td>{{ $item->subtotal }}</td>
                         <td>An. {{ $item->pelanggan_nama }}</td>
                     </tr>

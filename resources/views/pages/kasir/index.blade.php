@@ -1,21 +1,23 @@
 @extends('layout.main')
 @section('content')
-<div class="d-row">
-
-    <div class="d-flex justify-content-start ml-4">
-        <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
-          <div style="text-align: center">
-            <i class="ti ti-building-bank"></i>
-            <span>Kasir</span>
-          </div>
+<div class="container">
+  <div class="row justify-content-start">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size: 1.3rem"
+        class="mb-3 py-3 px-4">
+        <div style="text-align: center">
+          <i class="ti ti-building-bank"></i>
+          <span>Kasir</span>
         </div>
-        <a href="/penjualan">
-      <button class="btn border-2 border border-gray-500 btn-primary text-white ms-3 mt-3">
-        <span>Kembali ke Penjualan</span>
-        <i class="fa-solid fa-print"></i>
-      </button>
-      </a>
       </div>
+      <div class="text-start mb-3">
+        <a href="/penjualan" class="btn border-2 border border-gray-500 btn-primary text-white">
+          <span>Kembali ke Penjualan</span>
+          <i class="fa-solid fa-print"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
   <form action="/kasir" method="post" class="form-horizontal form-label-left" novalidate>
       @csrf
@@ -80,21 +82,59 @@
         </div>
       </div>
 
-
+<div class="table-responsive">
       <table style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" id="prod" class="table table-bordered bg-white mt-3 py-4 px-4">
           <thead>
             <tr>
                 <th style="text-align: center" width="20%">Nama Barang</th>
-                <th style="text-align: center" width="10%">Stok</th>
-                <th style="text-align: center" width="15%">Harga</th>
-                {{-- <th style="text-align: center" width="10%">Berat</th> --}}
-                <th style="text-align: center" width="8%">Satuan</th>
-                <th style="text-align: center" width="12%">Berat</th>
+                <th style="text-align: center" width="8%">Stok</th>
+                <th style="text-align: center" width="12%">Harga</th>
+                <th style="text-align: center" width="10%">Satuan</th>
+                <th style="text-align: center" width="10%">Jumlah</th>
                 <th style="text-align: center" width="15%">Keterangan</th>
-                <th style="text-align: center" width="25%" colspan="2">Subtotal</th>
+                <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
             </tr>
           </thead>
 
+          <tbody id="tbody">
+              <tr role="row" class="1" id="trow">
+                  <td>
+                      <select required style="width:100%;" class="form-control nama_obat" id="nama1"
+                          name="nama[]" data-stok="#stok1" data-unit="#unit1" data-harga_jual="#harga_jual1"
+                          onchange="coba()">
+
+                          <option disabled selected value>--Pilih nama barang--</option>
+                          @foreach ($data as $item)
+                              <option value="{{ $item->id }}">{{ $item->nama }}
+                              </option>
+                          @endforeach
+                      </select>
+                  </td>
+                  <td><input id="stok1" name="unit[]" class="form-control" readonly=""></td>
+                  <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
+                          onchange="hitung()">
+                  </td>
+                  <td>
+                      <input id="satuan1" name="stok[]" class="form-control stok" readonly="">
+                      <input id="modal1" name="modal[]" class="form-control stok" hidden>
+                  </td>
+                  <td>
+                    <input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
+                        required onchange="hitung()">
+                </td>
+                <td>
+                    <input id="keterangan1" type="text" name="keterangan[]" class="form-control jumlah" required>
+                  </td>
+                  <td colspan="2"><input id="subtotaltampil1"  class="form-control subtotal" readonly></td>
+                  <td hidden><input id="subtotal1" name="subtotal[]" class="form-control subtotal"
+                          onchange="hitungseluruh()"></td>
+                  <td>
+                    <button id="1" class="btn btn-danger hapus" type="button" onclick="hapus(this)">
+                      <span>Hapus</span>
+                    </button>
+                  </td>
+              </tr>
+              
           <tfoot>
             <tr>
                 <td></td>
@@ -117,49 +157,8 @@
             </tr>
           </tfoot>
 
-          <tbody id="tbody">
-              <tr role="row" class="1" id="trow">
-                  <td>
-                      <select required style="width:100%;" class="form-control nama_obat" id="nama1"
-                          name="nama[]" data-stok="#stok1" data-unit="#unit1" data-harga_jual="#harga_jual1"
-                          onchange="coba()">
-
-                          <option disabled selected value>--Pilih nama barang--</option>
-                          @foreach ($data as $item)
-                              <option value="{{ $item->id }}">{{ $item->nama }}
-                              </option>
-                          @endforeach
-                      </select>
-                  </td>
-                  <td><input id="stok1" name="unit[]" class="form-control" readonly=""></td>
-                  <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
-                          onchange="hitung()">
-                  </td>
-                  <td hidden>
-                      <input type="number" id="berat1" name="berat[]" class="form-control berat" readonly>
-                  </td>
-                  <td>
-                      <input id="satuan1" name="stok[]" class="form-control stok" readonly="">
-                      <input id="modal1" name="modal[]" class="form-control stok" hidden>
-                  </td>
-                  <td>
-                    <input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
-                        required onchange="hitung()">
-                </td>
-                <td>
-                    <input id="keterangan1" type="text" name="keterangan[]" class="form-control jumlah" required>
-                  </td>
-                  <td colspan="2"><input id="subtotaltampil1"  class="form-control subtotal" readonly></td>
-                  <td hidden><input id="subtotal1" name="subtotal[]" class="form-control subtotal"
-                          onchange="hitungseluruh()"></td>
-                  <td>
-                    <button id="1" class="btn btn-danger hapus" type="button" onclick="hapus(this)">
-                      <span>Hapus</span>
-                    </button>
-                  </td>
-              </tr>
       </table>
-
+    </div>
       <div class="ln_solid"></div>
       <div class="form-group d-flex justify-content-end">
           <div class="d-flex gap-3">
@@ -275,21 +274,17 @@
                 let total = "subtotal" + i;
                 let tampil = "subtotaltampil" + i;
                 let stk = "stok" + i;
-                let brt = stk * 25;
                 let jumlah = parseInt(document.getElementById(id).value);
                 let satuan = document.getElementById(jual).value;
                 let stok = parseInt(document.getElementById(stk).value);
     
-                if (jumlah > brt) {
+                if (jumlah > stok) {
                     document.getElementById(id).value = " ";
                     document.getElementById(id).placeholder = " ";
                     var element = document.getElementById("alert");
                     element.classList.remove("d-none");
                     element.classList.add("d-flex");
                 } else {
-                    let berat = document.getElementById("jumlah" + i).value * 25;
-                    document.getElementById("berat" + i).value = berat;
-                    // let hasil = document.getElementById(id).value * satuan * 25;
                     let hasil = document.getElementById(id).value * satuan;
                     document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
@@ -324,8 +319,8 @@
                         dataType: 'json',
                         url: "{{ url('/detail-barang-') }}" + id,
                         success: function(data) {
-                            document.querySelector(stok).placeholder = data.data.stok *25;
-                            document.querySelector(stok).value = data.data.stok *25;
+                            document.querySelector(stok).placeholder = data.data.berat;
+                            document.querySelector(stok).value = data.data.berat;
                             document.querySelector(unit).value = data.data.satuan;
     
                             let tes = document.querySelector(harga);

@@ -206,13 +206,13 @@ td{
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nama }}</td>
-                        <td>{{ $item->jumlah * 25 }}</td>
+                        <td>{{ $item->jumlah }}</td>
                         <td>@currency($item->harga_jual)</td>
                         <td>@currency($item->subtotal)</td>
                     </tr>
                     <tr style="border-bottom:1px solid #000; margin-top:2px;margin-bottom:2px ">
                         <td></td>
-                        <td id="kec">{{ $item->keterangan }}</td>
+                        <td id="kec">{{ $item->keterangann }}</td>
                         <td id="kec">{{ $item->satuan }}</td>
                         <td></td>
                         <td></td>

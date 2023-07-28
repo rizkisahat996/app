@@ -2,7 +2,7 @@
 @section('content')
     <div class="text-center fw-semibold fs-5 mb-3">Jurnal Transaksi</div>
     <div class="d-flex justify-content-center ">
-        <div class="col-lg-12 bg-white  p-5">
+        <div class="col-lg-12 bg-white p-5 table-responsive">
             <table class="table mt-5">
                 <thead>
                     <tr>

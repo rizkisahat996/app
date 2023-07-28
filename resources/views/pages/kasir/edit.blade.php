@@ -1,9 +1,22 @@
 @extends('layout.main')
 @section('content')
-<div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size:1.3rem" class="mb-3 py-3 px-4 col-2 col-sm-3 col-lg-2">
-    <div style="text-align: center">
-      <i class="ti ti-building-bank"></i>
-      <span>Kasir Edit</span>
+<div class="container">
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div style="background-color: #273248; border-radius: 5px; box-shadow: 1em; color: white; font-size: 1.3rem"
+          class="mb-3 py-3 px-4">
+          <div style="text-align: center">
+            <i class="ti ti-building-bank"></i>
+            <span>Kasir Edit</span>
+          </div>
+        </div>
+        <div class="text-start mb-3">
+          <a href="/penjualan" class="btn border-2 border border-gray-500 btn-primary text-white">
+            <span>Kembali ke Penjualan</span>
+            <i class="fa-solid fa-print"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
     <form action="/kasir/update/{{ $transaksi->id }}" method="post" class="form-horizontal form-label-left" novalidate>
@@ -68,22 +81,21 @@
           </div>
         </div>
       </div>
+      <div class="table-responsive">
         <table id="prod" class="table table-bordered bg-white mt-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
             <thead>
                 <tr>
-                    <th style="text-align: center" width="20%">Nama Barang</th>
+                    <th style="text-align: center" width="25%">Nama Barang</th>
                     <th style="text-align: center" width="10%">Stok</th>
                     <th style="text-align: center" width="15%">Harga</th>
-                    {{-- <th style="text-align: center" width="10%">Berat</th> --}}
-                    <th style="text-align: center" width="8%">Satuan</th>
-                    <th style="text-align: center" width="12%">Berat</th>
-                    <th style="text-align: center" width="15%">Keterangan</th>
-                    <th style="text-align: center" width="25%" colspan="2">Subtotal</th>
+                    <th style="text-align: center" width="10%">Satuan</th>
+                    <th style="text-align: center" width="15%">Jumlah</th>
+                    <th style="text-align: center" width="25%">Subtotal</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                  <td style="text-align:right; vertical-align: middle" colspan="6">
+                  <td style="text-align:right; vertical-align: middle" colspan="5">
                     <b>Grandtotal</b>
                   </td>
                   <td>
@@ -92,7 +104,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td style="text-align:right; vertical-align: middle" colspan="6">
+                  <td style="text-align:right; vertical-align: middle" colspan="5">
                     <b>Pembayaran</b>
                   </td>
                   <td>
@@ -117,22 +129,12 @@
                                         <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
                                     @endif
                                 @endforeach
-
-                                {{-- @foreach ($obat as $o)
-
-
-                  <option value=" {{$o->id_obat}} "> {{$o->nama_obat}} </option>
-                        @endforeach --}}
                             </select>
                         </td>
                         <td><input id="{{ 'stok' . $loop->iteration }}" name="unit[]" class="form-control"
                                 readonly=""></td>
                         <td><input id="{{ 'harga' . $loop->iteration }}" name="harga_jual[]"
                                 class="form-control harga_jual" readonly="" onchange="hitung()">
-                        </td>
-                        <td hidden>
-                            <input id="{{ 'berat' . $loop->iteration }}" name="berat[]" class="form-control berat"
-                                readonly="">
                         </td>
                         <td>
                             <input id="{{ 'satuan' . $loop->iteration }}" name="stok[]" class="form-control stok"
@@ -143,10 +145,6 @@
                                 class="form-control jumlah" required="required" onchange="hitung()"
                                 value="{{ old('jumlah', $item->jumlah) }}">
                         </td>
-                        <td>
-                            <input id="{{ 'keterangan' . $loop->iteration }}" type="text" name="keterangan[]" class="form-control jumlah"
-                            value="{{ old('keterangan', $item->keterangan) }}" required>
-                          </td>
                         <td><input id="{{ 'subtotaltampil' . $loop->iteration }}" class="form-control subtotal" readonly>
                         </td>
                         <td><input id="{{ 'subtotal' . $loop->iteration }}" name="subtotal[]"
@@ -158,7 +156,7 @@
                     </tr>
                 @endforeach
         </table>
-
+    </div>
         <div class="ln_solid"></div>
         <div class="form-group form-group d-flex justify-content-end">
             <div class="d-flex gap-3">
@@ -237,7 +235,6 @@
             baru.querySelector("#jumlah1").id = 'jumlah' + panjang;
             baru.querySelector("#modal1").id = 'modal' + panjang;
             baru.querySelector("#satuan1").id = 'satuan' + panjang;
-            baru.querySelector("#keterangan1").id = 'keterangan' + panjang;
             baru.querySelector(".hapus").id = panjang;
             baru.className = panjang;
     
@@ -289,7 +286,7 @@
                     element.classList.remove("d-none");
                     element.classList.add("d-flex");
                 } else {
-                    let hasil = document.getElementById(id).value * satuan * 25;
+                    let hasil = document.getElementById(id).value * satuan;
                     document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
                 }
@@ -322,8 +319,8 @@
                         dataType: 'json',
                         url: "{{ url('/detail-barang-') }}" + id,
                         success: function(data) {
-                            document.querySelector(stok).placeholder = data.data.stok * 25;
-                            document.querySelector(stok).value = data.data.stok * 25;
+                            document.querySelector(stok).placeholder = data.data.berat;
+                            document.querySelector(stok).value = data.data.berat;
                             document.querySelector(unit).value = data.data.satuan;
     
                             let tes = document.querySelector(harga);

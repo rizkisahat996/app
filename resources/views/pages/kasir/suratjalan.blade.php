@@ -224,7 +224,7 @@ text-decoration: underline;
                         <td>{{ $item->jumlah }}</td>
                         <td>{{ $item->satuan }}</td>
                         <td>{{ $item->berat }}</td>
-                        <td>keterangan</td>
+                        <td>{{ $item->keterangann }}</td>
                     </tr>
                 @endforeach
                     

@@ -1,22 +1,17 @@
 @extends('layout.main')
 @section('content')
-<div class="d-flex justify-content-start align-items-center me-5 gap-5">
-        
-    <a href="/histori/penjualan">
-        <div class="btn btn-md btn-primary">Histori Penjualan</div>
-    </a>
+<div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="d-flex flex-wrap justify-content-start gap-4">
+            <a href="/histori/jurnal" class="btn btn-md btn-dark">Jurnal Transaksi</a>
+            <a href="/histori/stok" class="btn btn-md btn-secondary">Jurnal Barang</a>
+          <a href="/histori/penjualan" class="btn btn-md btn-primary">Histori Penjualan</a>
+          <a href="/histori/barang" class="btn btn-md btn-success">Histori Barang</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
-    <a href="/histori/barang">
-        <div class="btn btn-md btn-success">Histori barang</div>
-    </a>
-
-    <a href="/histori/jurnal">
-        <div class="btn btn-md btn-dark">Jurnal Transaksi</div>
-    </a>
-
-    <a href="/histori/stok">
-        <div class="btn btn-md btn-secondary">Jurnal Barang</div>
-    </a>
-
-</div>
 @endsection
