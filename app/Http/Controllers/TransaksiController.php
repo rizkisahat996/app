@@ -415,7 +415,7 @@ class TransaksiController extends Controller
             $ket = $request->query('note');
             
             // qr tanda tangan
-            $path = base_path('/../../public_html/assets/images/bobi.png');
+            $path = base_path('/home/mughnil1/public_html/assets/images/bobi.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
