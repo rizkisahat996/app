@@ -260,13 +260,13 @@ class TransaksiController extends Controller
             $ket = $request->query('note');
             
             // qr tanda tangan
-            $path = base_path('/public/assets/images/bobi.png');
+            $path = asset('/public/assets/images/bobi.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             // logo
-            $path2 = base_path('/public/assets/images/logo.png');
+            $path2 = asset('/public/assets/images/logo.png');
             $type2 = pathinfo($path2, PATHINFO_EXTENSION);
             $data2 = file_get_contents($path2);
             $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
@@ -312,13 +312,13 @@ class TransaksiController extends Controller
             $ket = $request->query('note');
             
             // qr tanda tangan
-            $path = base_path('/public/assets/images/bobi.png');
+            $path = asset('/public/assets/images/bobi.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             // logo
-            $path2 = base_path('/public/assets/images/logo.png');
+            $path2 = asset('/public/assets/images/logo.png');
             $type2 = pathinfo($path2, PATHINFO_EXTENSION);
             $data2 = file_get_contents($path2);
             $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
@@ -363,13 +363,13 @@ class TransaksiController extends Controller
             $ket = $request->query('note');
             
             // qr tanda tangan
-            $path = base_path('/public/assets/images/bobi.png');
+            $path = asset('/public/assets/images/bobi.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             // logo
-            $path2 = base_path('/public/assets/images/logo.png');
+            $path2 = asset('/public/assets/images/logo.png');
             $type2 = pathinfo($path2, PATHINFO_EXTENSION);
             $data2 = file_get_contents($path2);
             $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
@@ -415,13 +415,13 @@ class TransaksiController extends Controller
             $ket = $request->query('note');
             
             // qr tanda tangan
-            $path = base_path('/public/assets/images/bobi.png');
+            $path = asset('/public/assets/images/bobi.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $ttd = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
             // logo
-            $path2 = base_path('/public/assets/images/logo.png');
+            $path2 = asset('/public/assets/images/logo.png');
             $type2 = pathinfo($path2, PATHINFO_EXTENSION);
             $data2 = file_get_contents($path2);
             $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);
