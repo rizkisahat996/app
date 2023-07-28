@@ -199,10 +199,6 @@ td{
                 
             </tr>
         </table>
-        {{-- <img src="
-        {{'data:image/png;base64,'.base64_encode(file_get_contents(public_path('assets/images/bobi.png')))}}"
-        > --}}
-        {{-- <img src="{{ public_path("assets/images/bobi.png") }}" alt="" style="width: 150px; height: 150px;"> --}}
         <table class="table table-borderless" id="barang" style="width: 100%; height:100px">
             <thead>
                 <tr>
@@ -213,7 +209,7 @@ td{
                     <th width="40%">Jumlah</th>
                 </tr>
             </thead>
-            <tbody id="bar">
+            <tbody>
                 @foreach ($detail as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>

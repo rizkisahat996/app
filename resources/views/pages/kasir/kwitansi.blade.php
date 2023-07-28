@@ -153,18 +153,10 @@
         <td class="sa"></td> 
         <td class="du">:</td>
         <td style="width: 10%; text-align: right">Rp.</td>
-        <td class="okess" style="text-align: center;">,-</td>
+        <td class="okess" style="text-align: center;">{{ $transaksi->pembayaran }} ,-</td>
       </tr>
       </table>
       <table>
-      <tr>
-        <td class="sa">Uang Sejumlah</td> 
-        <td class="du">:</td>
-        <td class="ti">
-          {{ $transaksi->pembayaran }}<br>
-          <div class="dot-dot-dot">...........................................................................................................</div>
-        </td>
-      </tr>
       <tr>
         <td class="sa">Terbilang</td> 
         <td class="du">:</td>
