@@ -45,24 +45,26 @@ class TransaksiController extends Controller
      */
         public function store(Request $request)
         {
-            $validator = Validator::make($request->all(), [
-                'grandtotal' => 'required|numeric|min:0',
-                'pembayaran' => 'required|numeric|min:' . $request->grandtotal,
-                'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
-                'tgl_beli' => 'required|date', 
-                'nama.*' => 'required', 
-                'jumlah.*' => 'required|numeric|min:1', 
-            ]);
+            // $validator = Validator::make($request->all(), [
+            //     'grandtotal' => 'required|numeric|min:0',
+            //     'pembayaran' => 'required|numeric|min:' . $request->grandtotal,
+            //     'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
+            //     'tgl_beli' => 'required|date', 
+            //     'nama.*' => 'required', 
+            //     'jumlah.*' => 'required|numeric|min:1', 
+            // ]);
     
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
+            // if ($validator->fails()) {
+            //     return redirect()->back()->withErrors($validator)->withInput();
+            // }
     
     
             // try {
                 // code...
-                $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
+                // $jumlah = DB::table('transaksis')->where('created_at', $request->tgl_beli);
+                $jumlah = DB::table('transaksis')->get();
                 $hasil = $jumlah->count() + 1;
+                // dd($hasil);
                 $id = sprintf("%03d", $hasil);
                 $kodefaktur = "NF - TH/" . date('Y') . "/" . sprintf("%03d", $hasil);
                 $kodeproforma = "PRO - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
