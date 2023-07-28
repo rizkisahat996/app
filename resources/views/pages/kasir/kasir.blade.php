@@ -91,6 +91,7 @@
                               <td>{{ $item->nama }}, {{ $item->perusahaan }}</td>
                               <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                               <td>@currency($item->total)</td>
+                              
                               <td class="text-start ms-5 ps-5">{{ $item->jenispembayaran }}</td>
                               <td class="d-flex justify-content-center gap-3"> 
                                 <a target="_blank"

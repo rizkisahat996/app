@@ -110,8 +110,17 @@
                       </tr>
                       <tr>
 
-                          <td colspan="6" class="text-end">Kembalian&nbsp;:</td>
-                          <td class="text-center">@currency($transaksi->kembalian)</td>
+                        @if ($transaksi->kembalian < 0)
+                            <?php 
+                                $oke = $transaksi->kembalian;
+                                $haha = -$oke;
+                            ?>
+                            <td colspan="6" class="text-end">Hutang&nbsp;:</td>
+                            <td class="text-center">@currency($haha)</td>
+                          @else
+                            <td colspan="6" class="text-end">Kembalian&nbsp;:</td>
+                            <td class="text-center">@currency($transaksi->kembalian)</td>
+                          @endif
                       </tr>
                   </tbody>
               </table>
@@ -132,12 +141,16 @@
                     <i class="fa-solid fa-print"></i>
                   </button>
                 </form>
-                <form action="/kwitansi/{{ $transaksi->id }}">
-                    <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
-                        <span>Print Kwitansi</span>
-                        <i class="fa-solid fa-print"></i>
-                      </button>
-                    </form>
+                @if ($transaksi->kembalian < 0)
+                            
+                          @else
+                          <form action="/kwitansi/{{ $transaksi->id }}">
+                              <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+                                  <span>Print Kwitansi</span>
+                                  <i class="fa-solid fa-print"></i>
+                                </button>
+                              </form>
+                          @endif
                 </div>
                 @if ($transaksi->nomor_polisi)
                 <form action="/suratjalan/{{ $transaksi->id }}">

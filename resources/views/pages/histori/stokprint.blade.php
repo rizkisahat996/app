@@ -1,5 +1,12 @@
-@extends('layout.main')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 <style>
     th{
         border: 1px #000 solid;
@@ -10,15 +17,7 @@
         border: 1px #000 solid
     }
 </style>
-<div class="d-flex justify-content-start ml-4">
-    <form action="/stokprint">
-        <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
-          <span>Print Jurnal</span>
-          <i class="fa-solid fa-print"></i>
-        </button>
-    </form>
-        </div>
-    <div class="text-center fw-semibold fs-5">Jurnal Barang</div>
+
     <div class="d-flex justify-content-center ">
         <div class="col-lg-12 bg-white  p-3">
             <table class="table">
@@ -83,4 +82,6 @@
         </div>
     </div>
 
-@endsection
+
+</body>
+</html>

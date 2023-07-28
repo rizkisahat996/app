@@ -40,20 +40,21 @@
                         @foreach ($transaksi as $item)
                             <tr class="text-center">
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->kodefaktur }}</td>
+                                <td>{{ $item->pelanggan->nama }}</td>
                                 <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                 <td class="text-start ms-5 ps-5">{{ $item->jenispembayaran }}</td>
                                 <td class="text-start ms-5 ps-5">
                                     {{ Carbon\Carbon::parse($item->jatuh_tempo)->format('d-m-Y') }}</td>
                                 <td>@currency($item->total)</td>
 
-                                <td class="d-flex gap-2"> <a target="_blank" href="/pdf/{{ $item->id }}">
+                                <td class="d-flex gap-2"> 
+                                    {{-- <a target="_blank" href="/pdf/{{ $item->id }}">
                                         <div class="btn btn-primary text-white mb-1">
                                             <i class="ti ti-printer"></i>
                                             <span>Print</span>
                                         </div>
-                                    </a>
+                                    </a> --}}
                                     @component('components.modal')
                                     @slot('target')
                                         {{ $item->id }}
@@ -67,6 +68,7 @@
                                     @slot('isi')
                                         <form action="/piutang/{{ $item->id }}" method="POST">
                                             @csrf
+                                            <input type="hidden" value="{{ $item->total }}" name="total">
                                             <div class="d-flex justify-content-center text-center">
                                                 <select class="form-select" aria-label="Default select example"
                                                     name="jenispembayaran" onchange="bon()" id="jenispembayaran">

@@ -45,8 +45,8 @@
               </div>
           </div>
           <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Stok</label>
-              <input type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="stok" value="{{ old('stok',$barang->stok) }}">
+              <label for="exampleFormControlInput1" class="form-label">Berat</label>
+              <input type="number" class="form-control border border-secondary border-opacity-50" id="exampleFormControlInput1" name="berat" value="{{ old('berat',$barang->berat) }}">
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Keterangan</label>

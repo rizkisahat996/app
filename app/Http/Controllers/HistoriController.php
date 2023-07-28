@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use str;
+use PDF;
 class HistoriController extends Controller
 {
     public function penjualan(){
@@ -58,4 +59,32 @@ class HistoriController extends Controller
         // dd($detail);
         return view('pages.histori.stok', compact('detail'));
     }
+
+    public function stokprint(){
+       
+        $detail = DB::table('log_barang')
+                ->get();
+    
+            $count = count($detail);
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.histori.stokprint', compact('detail'));
+
+            return $pdf->stream();
+        }
+    public function transprint($id, Request $request){
+       
+        $penjualan = DB::table('log_transaksis')
+            ->where('log_transaksis.id', $id)
+            ->first();
+        
+        $detail = DB::table('log_detail')
+            ->where('id_transaksi', '=', $id)
+            ->join('barangs', 'log_detail.id_barang', '=', 'barangs.id')
+            ->join('log_transaksis', 'log_detail.id_transaksi', '=', 'log_transaksis.id')
+            ->join('pelanggans', 'log_transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->select('log_detail.*', 'barangs.*', 'log_transaksis.*', 'pelanggans.nama AS pelanggan_nama')
+            ->get();
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.histori.transprint', compact('detail', 'penjualan'));
+
+            return $pdf->stream();
+        }
 }

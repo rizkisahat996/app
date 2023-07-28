@@ -87,8 +87,8 @@
           <thead>
             <tr>
                 <th style="text-align: center" width="20%">Nama Barang</th>
-                <th style="text-align: center" width="8%">Stok</th>
-                <th style="text-align: center" width="12%">Harga</th>
+                <th style="text-align: center" width="12%">Stok</th>
+                <th style="text-align: center" width="13%">Harga</th>
                 <th style="text-align: center" width="10%">Satuan</th>
                 <th style="text-align: center" width="10%">Jumlah</th>
                 <th style="text-align: center" width="15%">Keterangan</th>
@@ -190,9 +190,13 @@
             var jenis = document.getElementById("jenispembayaran").value;
             if (jenis === String("belum-dibayar").valueOf()) {
                 var bon = document.getElementById("bon");
+                var pembayaranInput = document.getElementById("pembayaran");
+                pembayaranInput.style.display = "none";
                 bon.classList.remove("d-none");
             } else {
                 var bon = document.getElementById("bon");
+                var pembayaranInput = document.getElementById("pembayaran");
+                pembayaranInput.style.display = "block";
                 bon.classList.add("d-none");
             }
         }
@@ -228,7 +232,6 @@
             baru.querySelector("#stok1").id = 'stok' + panjang;
             baru.querySelector("#subtotal1").id = 'subtotal' + panjang;
             baru.querySelector("#subtotaltampil1").id = 'subtotaltampil' + panjang;
-            baru.querySelector("#berat1").id = 'berat' + panjang;
             baru.querySelector("#jumlah1").id = 'jumlah' + panjang;
             baru.querySelector("#modal1").id = 'modal' + panjang;
             baru.querySelector("#satuan1").id = 'satuan' + panjang;
@@ -290,6 +293,8 @@
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
 
                 }
+
+                jumlah = jumlah/25;
             }
         }
     

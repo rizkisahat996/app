@@ -131,14 +131,51 @@ class BarangController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    barang::where('id', $id)->update([
-      'nama' => $request->nama,
-      'hargabeli' => $request->hargabeli,
-      'untung' => $request->untung,
-      'hargajual' => $request->hargajual,
-      'stok' => $request->stok,
-      'keterangan' => $request->keterangan
-    ]);
+    $barang = barang::where('id', $id)->first();
+    $berat = $request->berat;
+
+    $stoklama = $barang->stok;
+    $tambah = ($request->berat - $barang->berat )/ 25;
+    $updatestok = $tambah + $stoklama;
+
+    $hargalama = $barang->hargabeli * $stoklama * 25;
+    $total = $berat * $request->hargabeli;
+
+    if($stoklama < $updatestok)
+    {
+      barang::where('id', $id)->update([
+        'nama' => $request->nama,
+        'hargabeli' => $request->hargabeli,
+        'untung' => $request->untung,
+        'hargajual' => $request->hargajual,
+        'berat' => $berat,
+        'keterangan' => $request->keterangan,
+        'stok' => $updatestok,
+        'stokawal' => $stoklama,
+        'stokkeluar' => 0,
+        'total_lama' => $hargalama, 
+        'total' => $total,
+        'tambah' => $tambah
+      ]);
+    }
+    elseif($stoklama > $updatestok)
+    {
+      barang::where('id', $id)->update([
+        'nama' => $request->nama,
+        'hargabeli' => $request->hargabeli,
+        'untung' => $request->untung,
+        'hargajual' => $request->hargajual,
+        'berat' => $berat,
+        'keterangan' => $request->keterangan,
+        'stok' => $updatestok,
+        'stokawal' => $stoklama,
+        'stokkeluar' => abs($tambah),
+        'total_lama' => $hargalama, 
+        'total' => $total,
+        'tambah' => 0
+      ]);
+    }
+
     alert()->success('Berhasil', 'Berhasil Memperbarui Data');
     return redirect('/barang');
   }
@@ -166,7 +203,15 @@ class BarangController extends Controller
     $hargalama = $barang->hargabeli * $stoklama * 25;
     $total = $updatestok * $barang->hargabeli * 25;
 
-    barang::where('id', $id)->update(['berat' => $updateberat, 'stok' => $updatestok, 'stokawal' => $stoklama, 'tambah' => $tambah, 'total_lama' => $hargalama, 'total' => $total]);
+    barang::where('id', $id)->update([
+      'berat' => $updateberat, 
+      'stok' => $updatestok, 
+      'stokawal' => $stoklama, 
+      'tambah' => $tambah, 
+      'stokkeluar' => 0, 
+      'total_lama' => $hargalama, 
+      'total' => $total
+    ]);
     alert()->success('Berhasil', 'Berhasil Menambahkan Stok');
     return Redirect::back();
   }

@@ -148,11 +148,11 @@ text-decoration: underline;
 
 <body class="px-2 " onload="window.print()">
     <div>
-        <img style="height:100px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
-        <div class="pp">
-            <p class="pp">Hp. 0812 6455 677</p>
-            <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
-            <p class="pp">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
+        <img style="height:70px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
+        <div>
+            <p>Hp. 0812 6455 677</p>
+            <p>Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
+            <p>Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
     </div>
     <hr>
         <div class="d-flex" id="tek">

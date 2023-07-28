@@ -47,13 +47,16 @@ class TransaksiController extends Controller
         {
             $validator = Validator::make($request->all(), [
                 'grandtotal' => 'required|numeric|min:0',
-                'pembayaran' => 'required|numeric|min:' . $request->grandtotal,
                 'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
                 'tgl_beli' => 'required|date', 
                 'nama.*' => 'required', 
                 'jumlah.*' => 'required|numeric|min:1', 
             ]);
-
+            
+            if ($request->jenispembayaran !== 'belum-dibayar') {
+                $validator->addRules(['pembayaran' => 'required|numeric|min:' . $request->grandtotal]);
+            }
+            
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
@@ -65,19 +68,21 @@ class TransaksiController extends Controller
                 $kodefaktur = "NF - TH/" . date('Y') . "/" . sprintf("%03d", $hasil);
                 $kodeproforma = "PRO - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
                 $kodejalan = "SJ - BY/" . date('Y') . "/" . sprintf("%03d", $hasil);
+
                 for ($i=0; $i <count($request->nama) ; $i++) { 
                     $barang = barang::where('id', $request->nama[$i]);
                     $barang->decrement('stok', $request->jumlah[$i]);
                 }
+                
                 $uuid = str::uuid();
                 $grandtotal = $request->grandtotal;
                 $pembayaran = $request->pembayaran;
                 $kembalian = $pembayaran - $grandtotal;
 
-                if ($pembayaran < $grandtotal) {
-                    alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
-                    return back();
-                }
+                // if ($pembayaran < $grandtotal) {
+                //     alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
+                //     return back();
+                // }
                 
                 $kembalian = $pembayaran - $grandtotal;
 
@@ -455,11 +460,22 @@ class TransaksiController extends Controller
         $transaksi = transaksi::where('jenispembayaran','belum-dibayar')->orderBy('jatuh_tempo')->get();
         return view('pages.kasir.piutang', compact('transaksi'));
     }
+
     public function storepiutang($id, Request $request){
-        transaksi::where('id', $id)->update(['jenispembayaran' => $request->jenispembayaran, 'user_id' => Auth::user()->id]);
+        $validator = Validator::make($request->all(), [
+            'jenispembayaran' => 'required|in:tunai,non-tunai',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        // $total = transaksi::where('id', $id)->select('total')->first();
+        // dd($total);
+        transaksi::where('id', $id)->update(['jenispembayaran' => $request->jenispembayaran, 'user_id' => Auth::user()->id, 'total' => $request->total]);
         alert()->success('Berhasil','Berhasil Mengupdate Piutang');
         return redirect('/penjualan');
     }
+    
     public function preview($id){
         $transaksi = transaksi::where('id',$id)->first();
         $detail = detailtransaksi::where('id_transaksi',$id)->join('barangs', 'detailtransaksis.id_barang', '=', 'barangs.id')->get();

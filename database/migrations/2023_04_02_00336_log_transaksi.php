@@ -18,14 +18,15 @@ return new class extends Migration
             $table->string('kodejalan');
             $table->string('kodeproforma');
             $table->string('nomor_polisi')->nullable();
-            $table->string('jenispembayaran');
-            $table->integer('pembayaran');
-            $table->integer('kembalian');
+            $table->string('jenispembayaran')->nullable();
+            $table->integer('pembayaran')->nullable();
+            $table->integer('kembalian')->nullable();
             $table->string('action');
             $table->string('user_id');
             $table->string('total');
             $table->timestamps();
         });
+
         DB::unprepared('
         CREATE TRIGGER log_insert_transaksi AFTER INSERT ON `transaksis` FOR EACH ROW BEGIN INSERT INTO log_transaksis (`id`, `pelanggan_id`,`kodefaktur`, `kodejalan`, `kodeproforma`, `nomor_polisi`, `jenispembayaran`, `pembayaran`, `kembalian`,`action`, `user_id`, `total`, `created_at`, `updated_at`) 
         VALUES (NEW.id, NEW.pelanggan_id,NEW.kodefaktur,NEW.kodejalan,NEW.kodeproforma,NEW.nomor_polisi,NEW.jenispembayaran,NEW.pembayaran,NEW.kembalian,"Insert", NEW.user_id,NEW.total, now(), null); END;
@@ -35,6 +36,7 @@ return new class extends Migration
         CREATE TRIGGER log_update_transaksi AFTER UPDATE ON `transaksis` FOR EACH ROW BEGIN INSERT INTO log_transaksis (`id`, `pelanggan_id`,`kodefaktur`, `kodejalan`, `kodeproforma`, `nomor_polisi`, `jenispembayaran`, `pembayaran`, `kembalian`,`action`, `user_id`, `total`, `created_at`, `updated_at`) 
         VALUES (NEW.id, NEW.pelanggan_id,NEW.kodefaktur,NEW.kodejalan,NEW.kodeproforma,NEW.nomor_polisi,NEW.jenispembayaran,NEW.pembayaran,NEW.kembalian,"Update", NEW.user_id,NEW.total, now(), null); END;
         ');
+        
     }
 
     /**

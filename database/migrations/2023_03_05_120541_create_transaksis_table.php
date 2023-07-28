@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('nomor_polisi')->nullable();
             $table->enum('jenispembayaran', ['tunai', 'non-tunai','belum-dibayar']);
             $table->date('jatuh_tempo')->nullable();
-            $table->integer('pembayaran')->nullable();
+            $table->integer('pembayaran')->nullable()->default(0);
             $table->string('user_id');
             $table->integer('kembalian')->nullable();
             $table->string('total');

@@ -96,9 +96,6 @@ transform: skew(-45deg);
 transform-origin: top left;
 filter: drop-shadow(0 0 0 transparent);
 }
-.pp{
-margin-bottom: 2px;
-}
 .container {
 display: flex;
 align-items: start;
@@ -137,11 +134,11 @@ td{
 
 <body class="px-2 " onload="window.print()">
     <div>
-        <img style="height:100px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
-        <div class="pp">
-            <p class="pp">Hp. 0812 6455 677</p>
-            <p class="pp">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
-            <p class="pp">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
+        <img style="height:70px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
+        <div>
+            <p>Hp. 0812 6455 677</p>
+            <p>Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
+            <p>Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
     </div>
     <hr>
         <div class="d-flex" id="tek">
@@ -239,8 +236,17 @@ td{
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Sisa&nbsp;:</td>
-                    <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->kembalian)</td>
+                    @if ($transaksi->kembalian < 0)
+                            <?php 
+                                $oke = $transaksi->kembalian;
+                                $haha = -$oke;
+                            ?>
+                            <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Belum Bayar&nbsp;:</td>
+                            <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($haha)</td>
+                          @else
+                          <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Sisa&nbsp;:</td>
+                          <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->kembalian)</td>
+                          @endif
                 </tr>
             </tfoot>
             
