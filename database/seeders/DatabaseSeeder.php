@@ -20,59 +20,36 @@ class DatabaseSeeder extends Seeder
       'password' => Hash::make('password'),
       'jabatan' => 'superadmin',
     ]);
-    DB::table('users')->insert([
-      'name' => 'kasir',
-      'email' => 'kasir@gmail.com',
-      'password' => Hash::make('password'), 
-      'jabatan' => 'kasir',
-    ]);
-    
-    DB::table('pelanggans')->insert([
-      'nama' => 'sahat',
-      'perusahaan' => 'usu',
-      'alamat' => 'medan',
-      'no_telp' => '083115630741'
-    ]);
 
     DB::table('kategoribarangs')->insert([
-      'id' => 'kategori',
-      'kategori' => 'kategori',
+      'id' => '1',
+      'kategori' => 'THERMOPLASTIK TRISULA',
+    ]);
+    DB::table('kategoribarangs')->insert([
+      'id' => '2',
+      'kategori' => 'COLDPLASTIK TUNAS',
+    ]);
+    DB::table('kategoribarangs')->insert([
+      'id' => '3',
+      'kategori' => 'WARNING LIGHT',
+    ]);
+    DB::table('kategoribarangs')->insert([
+      'id' => '4',
+      'kategori' => 'TRAFFIE LIGHT',
+    ]);
+    DB::table('kategoribarangs')->insert([
+      'id' => '5',
+      'kategori' => 'PJU',
+    ]);
+    DB::table('kategoribarangs')->insert([
+      'id' => '6',
+      'kategori' => 'ETC',
+    ]);
+    DB::table('kategoribarangs')->insert([
+      'id' => '7',
+      'kategori' => 'RAMBU RAMBU',
     ]);
 
-    DB::table('barangs')->insert([
-      'id' => '12312',
-      'nama' => 'nama',
-      'satuan' => 'satuan',
-      'jenis' => 'jenis',
-      'stok' => '100.00',
-      'berat' => '2500.00',
-      'hargabeli' => '10000',
-      'id_kategori' => 'kategori',
-      'minimstok' => '10',
-      'untung' => '200',
-      'stokawal' => '0',
-      'tambah' => '200',
-      'total' => '200',
-      'hargajual' => '15000',
-      'keterangan' => 'keterangan',
-    ]);
-    DB::table('barangs')->insert([
-      'id' => '22',
-      'nama' => 'wqw',
-      'satuan' => 'satuan',
-      'jenis' => 'jenis',
-      'stok' => '100.00',
-      'berat' => '2500.00',
-      'hargabeli' => '10000',
-      'id_kategori' => 'kategori',
-      'minimstok' => '10',
-      'untung' => '200',
-      'stokawal' => '0',
-      'tambah' => '200',
-      'total' => '200',
-      'hargajual' => '20000',
-      'keterangan' => 'keterangan',
-    ]);
 
   }
 }

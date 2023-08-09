@@ -88,11 +88,11 @@ function updateUntung() {
   const selectedCategory = kategoriSelect.value;
 
   if (selectedCategory === '1') {
-    untungInput.value = 2000;
+    untungInput.value = 1800;
   } else if (selectedCategory === '2') {
-    untungInput.value = 1500;
+    untungInput.value = 1800;
   } else if (selectedCategory === '3') {
-    untungInput.value = 1000;
+    untungInput.value = 0;
   } else {
     untungInput.value = 0; // Default untung value
   }

@@ -62,7 +62,6 @@ class BarangController extends Controller
         'jenis' => 'required',
         'stok' => 'required',
         'id_kategori' => 'required',
-        'minimstok' => 'required',
         'hargabeli' => 'required',
         'untung' => 'required',
         'hargajual' => 'required',
@@ -77,6 +76,7 @@ class BarangController extends Controller
     $keterangan = $request->keterangan;
     $awal = 0;
 
+    $data['minimstok'] = 10;
     $data['berat'] = $berat;
     $data['tambah'] = $tambah;
     $data['total'] = $total;
