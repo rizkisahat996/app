@@ -58,30 +58,48 @@
   @include('sweetalert::alert')
   <script>
     // Mengambil elemen input harga beli, untung, dan harga jual
-    const hargabeliInput = document.getElementById('hargabeli');
-    const untungInput = document.getElementById('untung');
-    const hargajualInput = document.getElementById('hargajual');
-  
-    // Mendengarkan perubahan pada input harga beli dan untung
-    hargabeliInput.addEventListener('input', hitungHargaJual);
-    untungInput.addEventListener('input', hitungHargaJual);
-  
-    // Fungsi untuk menghitung harga jual
-    function hitungHargaJual() {
-      // Mengambil nilai harga beli dan untung
-      const hargabeli = parseFloat(hargabeliInput.value);
-      const untung = parseFloat(untungInput.value);
-  
-      // Menghitung harga jual termasuk PPN
-      const ppn = 0.11; // 11% atau 11 / 100
-      const harga = hargabeli + untung + (hargabeli + untung) * ppn;
-      const hargaJual = Math.ceil(harga / 100) * 100;
-  
-      // Menetapkan nilai harga jual pada input
-      hargajualInput.value = hargaJual;
-    }
+const hargabeliInput = document.getElementById('hargabeli');
+const untungInput = document.getElementById('untung');
+const hargajualInput = document.getElementById('hargajual');
+const kategoriSelect = document.getElementById('id_kategori');
 
-    
+// Mendengarkan perubahan pada input harga beli, untung, dan kategori
+hargabeliInput.addEventListener('input', hitungHargaJual);
+untungInput.addEventListener('input', hitungHargaJual);
+kategoriSelect.addEventListener('change', updateUntung);
+
+// Fungsi untuk menghitung harga jual
+function hitungHargaJual() {
+  // Mengambil nilai harga beli dan untung
+  const hargabeli = parseFloat(hargabeliInput.value);
+  const untung = parseFloat(untungInput.value);
+
+  // Menghitung harga jual termasuk PPN
+  const ppn = hargabeli * 0.11; // 11% atau 11 / 100
+  const harga = hargabeli + untung + ppn;
+  const hargaJual = Math.ceil(harga / 100) * 100;
+
+  // Menetapkan nilai harga jual pada input
+  hargajualInput.value = hargaJual;
+}
+
+// Fungsi untuk memperbarui nilai "untung" berdasarkan kategori yang dipilih
+function updateUntung() {
+  const selectedCategory = kategoriSelect.value;
+
+  if (selectedCategory === '1') {
+    untungInput.value = 2000;
+  } else if (selectedCategory === '2') {
+    untungInput.value = 1500;
+  } else if (selectedCategory === '3') {
+    untungInput.value = 1000;
+  } else {
+    untungInput.value = 0; // Default untung value
+  }
+
+  hitungHargaJual(); // Update harga jual based on the new "untung" value
+}
+
 
   </script>
 

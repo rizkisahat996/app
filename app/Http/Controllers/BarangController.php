@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\kategoribarang;
 use App\Http\Controllers\Controller;
+use App\Models\kategori;
+use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
@@ -222,10 +224,12 @@ class BarangController extends Controller
   }
   public function kt(Request $request)
   {
+    $kat = DB::table('kategoribarangs')->count() + 1;
+    $id = sprintf("%d", $kat);
     $data = $request->validate([
-      'id' => 'required',
       'kategori' => 'required',
     ]);
+    $data['id'] = $id;
     kategoribarang::insert($data);
     alert()->success('Berhasil', 'Berhasil Menambahkan kategori');
     return redirect('/barang');

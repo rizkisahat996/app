@@ -95,6 +95,7 @@ class PenggunaController extends Controller
             alert()->success('Berhasil','Berhasil Login');
             return redirect('/dashboard');
         }
+        
         else{
             alert()->error('Gagal', 'Username atau password anda salah');
             return back();

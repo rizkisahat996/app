@@ -19,10 +19,6 @@
         <form style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px" action="/kategori" class="bg-white px-4 py-4" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Kode Kategori</label>
-                <input type="text" style="background-color: white" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="id" placeholder="Masukan Kode Kategori" required>
-            </div>
-            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nama Kategori</label>
                 <input type="text" style="background-color: white" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="kategori" placeholder="Masukan Nama Kategori" required>
             </div>
