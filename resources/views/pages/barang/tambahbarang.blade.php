@@ -75,7 +75,7 @@
               <label for="exampleInputEmail1" class="form-label">Untung</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                   <span class="input-group-text">Rp.</span>
-                  <input readonly required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung">
+                  <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung">
               </div>
           </div>
             <div class="mb-3">
@@ -86,11 +86,15 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Harga Jual Per Satuan <span>(termasuk ppn)</span></label>
+              <label for="exampleInputEmail1" class="form-label">Harga Jual Per Satuan</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
                 <span class="input-group-text">Rp.</span>
                 <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual">
               </div>
+              <input class="form-check-input" type="checkbox" id="ppn" checked>
+              <label class="form-check-label" for="ppn">
+                Termasuk PPN
+              </label>
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Keterangan</label>
