@@ -63,6 +63,13 @@
                   </select>
             </div>
             <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
+              <div class="input-group mb-3" id="exampleInputEmail1">
+                <span class="input-group-text">Rp.</span>
+                <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli">
+              </div>
+            </div>
+            <div class="mb-3">
               <label for="id_kategori" class="form-label">Kategori Barang</label>
               <select class="form-select" aria-label="Default select example" name="id_kategori" id="id_kategori">
                   <option selected>==Pilih Kategori==</option>
@@ -78,13 +85,6 @@
                   <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung">
               </div>
           </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
-              <div class="input-group mb-3" id="exampleInputEmail1">
-                <span class="input-group-text">Rp.</span>
-                <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargabeli" id="hargabeli">
-              </div>
-            </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Jual Per Satuan</label>
               <div class="input-group mb-3" id="exampleInputEmail1">

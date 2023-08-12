@@ -65,7 +65,7 @@
     const ppnSelect = document.getElementById('ppn');
 
     // Mendengarkan perubahan pada input harga beli, untung, dan kategori
-    hargabeliInput.addEventListener('input', hitungHargaJual);
+    hargabeliInput.addEventListener('input', hitungHargaJual, updateUntung);
     untungInput.addEventListener('input', hitungHargaJual);
     kategoriSelect.addEventListener('change', updateUntung);
     ppnSelect.addEventListener('input', hitungHargaJual);
@@ -88,15 +88,14 @@
     // Fungsi untuk memperbarui nilai "untung" berdasarkan kategori yang dipilih
     function updateUntung() {
       const selectedCategory = kategoriSelect.value;
+      const hargabeli = parseFloat(hargabeliInput.value);
 
       if (selectedCategory === '1') {
         untungInput.value = 1800;
       } else if (selectedCategory === '2') {
         untungInput.value = 1800;
-      } else if (selectedCategory === '3') {
-        untungInput.value = 0;
       } else {
-        untungInput.value = 0; // Default untung value
+        untungInput.value = hargabeli / 10;
       }
 
       hitungHargaJual(); // Update harga jual based on the new "untung" value
