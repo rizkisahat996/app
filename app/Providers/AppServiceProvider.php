@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Blade;
 use App\View\Components\AlertStok;
 use Illuminate\Support\Facades\Schema;
 use App\Models\TransactionLog;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
