@@ -55,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
                 ];
     
                 TransactionLog::create($logData);
+                Paginator::useBootstrap();
             }
         });
     }
