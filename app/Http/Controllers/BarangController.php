@@ -25,12 +25,12 @@ class BarangController extends Controller
     $get['kategori'] = $request->query('kategori');
 
     if ($get['kategori']) {
-      $data = barang::paginate(15)->where(
+      $data = barang::where(
         'id_kategori',
         $get['kategori']
       );
     } else {
-      $data = barang::paginate(15);
+      $data = barang::get();
     }
     $id = $request->query('kategori');
 

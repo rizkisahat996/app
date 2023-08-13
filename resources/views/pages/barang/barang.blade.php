@@ -129,13 +129,6 @@
                 </tbody>
               </table>
             </div>
-            <div class="d-flex justify-content-center mt-4">
-              <nav aria-label="Page navigation">
-                  <ul class="pagination">
-                      {{ $data->links() }}
-                  </ul>
-              </nav>
-          </div>
           </div>
           
     </div>

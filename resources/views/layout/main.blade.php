@@ -7,6 +7,7 @@
   <title>Toko Bobie</title>
   <link rel="shortcut icon" type="image/png" href="../asset/images/logos/favicon.png" />
   <link rel="stylesheet" href="{{ asset('/asset/css/styles.min.css') }}" />
+  <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 </head>
 
 <body>
