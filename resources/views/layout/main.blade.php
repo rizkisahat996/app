@@ -96,7 +96,7 @@
       } else if (selectedCategory === '2') {
         untungInput.value = 1800;
       } else {
-        untungInput.value = hargabeli / 10;
+        untungInput.value = 10000;
       }
 
       hitungHargaJual(); // Update harga jual based on the new "untung" value
