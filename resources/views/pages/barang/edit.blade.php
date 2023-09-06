@@ -37,6 +37,7 @@
                   <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung" value="{{ old('untung',$barang->untung) }}">
               </div>
           </div>
+          {{-- asdawe --}}
           <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Jual <span>(termasuk ppn)</span></label>
               <div class="input-group mb-3" id="exampleInputEmail1">
