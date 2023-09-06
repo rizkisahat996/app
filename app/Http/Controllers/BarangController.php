@@ -24,18 +24,13 @@ class BarangController extends Controller
     $kategori = kategoribarang::get();
     $get['kategori'] = $request->query('kategori');
 
-    if ($get['kategori']) {
-      $data = barang::where(
-        'id_kategori',
-        $get['kategori']
-      );
-    } else {
-      $data = barang::join('kategoribarangs', 'barangs.id_kategori', '=', 'kategoribarangs.id')->get();
-    }
+    $data = barang::join('kategoribarangs', 'barangs.id_kategori', '=', 'kategoribarangs.id')
+                        ->select('barangs.*', 'kategoribarangs.id as kategori_id', 'kategoribarangs.kategori as namakategori')
+                        ->get();
     $id = $request->query('kategori');
+    // dd($data[0]);
 
     $jumlah = barang::sum(\DB::raw('CAST(stok as UNSIGNED)'));
-    // dd($data);
 
     return view('pages.barang.barang', compact('data', 'kategori', 'id', 'jumlah'));
   }
@@ -85,8 +80,8 @@ class BarangController extends Controller
 
 
     $kodeBarang = $request->input('id');
+    // dd($kodeBarang);
 
-    // Mengecek apakah kode barang sudah ada dalam database
     if (barang::where('id', $kodeBarang)->exists()) {
         return back()->with('error', 'Kode barang sudah ada dalam database.');
     }
@@ -101,8 +96,11 @@ class BarangController extends Controller
     $data['hargabeli'] = $data['hargabeli'];
     $data['untung'] = $data['untung'];
     $data['hargajual'] = $data['hargajual'];
+    $data['id'] = $kodeBarang;
 
-    barang::insert($data);
+    // dd($data['id']);
+
+    $newBarang = barang::create($data);
 
     alert()->success('Berhasil', 'Berhasil Menambahkan Barang');
     return redirect('/barang');
@@ -122,10 +120,10 @@ class BarangController extends Controller
    */
   public function edit(string $id)
   {
-    $idnya = $id;
-    $barang = barang::find($id);
+    $barang = barang::where('id', '=', $id)->first();
+    // dd($barang->id);
 
-    return view('pages.barang.edit', compact('barang', 'idnya'));
+    return view('pages.barang.edit', compact('barang'));
   }
 
   /**

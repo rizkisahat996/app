@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class barang extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public $incrementing = false;
     public function relasi(){
         return $this->hasMany('App\Models\detailtransaksi', 'id_barang');

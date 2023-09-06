@@ -136,13 +136,14 @@
                       @else
                       @foreach ($data as $item)
                       <tr>
+                        {{-- {{ dd($item->id) }} --}}
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->satuan }}</td>
                         <td>{{ $item->stok }}</td>
                         <td>{{ $item->berat }}</td>
-                        <td>{{ $item->kategori }}</td>
+                        <td>{{ $item->namakategori }}</td>
                         <td>
                           <div class="d-flex flex-wrap gap-2 justify-content-center">
                             <a href="barang/{{ $item->id }}/edit">
