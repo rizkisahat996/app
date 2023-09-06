@@ -168,7 +168,6 @@ class TransaksiController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             }
             
-        // try {
             $grandtotal = $request->grandtotal;
             $pembayaran = $request->pembayaran;
             if ($pembayaran < $grandtotal) {
@@ -177,7 +176,6 @@ class TransaksiController extends Controller
             }
             
             $kembalian = $pembayaran - $grandtotal;
-            //code...
             transaksi::where('id',$id )->update([
                 'jenispembayaran'=> $request->jenispembayaran,
                 'total'=>$grandtotal,
@@ -203,10 +201,6 @@ class TransaksiController extends Controller
                 ]);
             }
             return redirect()->route('preview', ['id' => $id]);
-        // } catch (\Throwable $th) {
-        //     alert()->error('Gagal','Data yang anda masukkan tidak valid, Silahkan cek kembali');
-        //     return back();
-        // }
     }
 
     /**

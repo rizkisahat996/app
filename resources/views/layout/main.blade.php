@@ -8,6 +8,9 @@
   <link rel="shortcut icon" type="image/png" href="../asset/images/logos/favicon.png" />
   <link rel="stylesheet" href="{{ asset('/asset/css/styles.min.css') }}" />
   <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+  
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
@@ -110,6 +113,12 @@
   <script src="{{ asset('asset/js/sidebarmenu.js') }}"></script>
   <script src="{{ asset('asset/js/app.min.js') }}"></script>
   <script src="{{ asset('asset/libs/simplebar/dist/simplebar.js') }}"></script>
+  <!-- Page level plugins -->
+      <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+      <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+  
+      <!-- Page level custom scripts -->
+      <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 </body>
 
 </html>

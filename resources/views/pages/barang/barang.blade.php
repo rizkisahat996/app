@@ -34,29 +34,10 @@
                   </a>
                 </div>
               </div>
-              <form class="mt-3 mt-md-0">
-                <div class="form-group mb-0">
-                  <select class="form-select" aria-label="Default select example" name="kategori" onchange="this.form.submit()">
-                    @if ($id)
-                    <option value="">Pilih Kategori</option>
-                    @else
-                    <option selected value="">Pilih Kategori</option>
-                    @endif
-          
-                    @foreach ($kategori as $item)
-                    @if ($id == $item->id)
-                    <option value="{{ $item->id }}" selected>{{ $item->kategori }}</option>
-                    @else
-                    <option value="{{ $item->id }}">{{ $item->kategori }}</option>
-                    @endif
-                    @endforeach
-                  </select>
-                </div>
-              </form>
             </div>
           
-            <div class="table-responsive mt-3">
-              <table class="table text-center">
+            {{-- <div class="table-responsive mt-3">
+              <table class="table text-center" id="dataTable">
                 <thead>
                   <tr>
                     <th scope="col">No.</th>
@@ -128,7 +109,54 @@
                   @endif
                 </tbody>
               </table>
-            </div>
+            </div> --}}
+            <div class="table-responsive mt-3">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th width="5%">No</th>
+                          <th>Kode</th>
+                          <th>Nama Barang</th>
+                          <th>Satuan</th>
+                          <th>Stok</th>
+                          <th>Berat</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    @if ($data->count() == null)
+                      <tr>
+                        <td colspan="8">
+                          <div class="d-flex text-muted justify-content-center text-center">
+                            Barang Belum Ada
+                          </div>
+                        </td>
+                      </tr>
+                      @else
+                      @foreach ($data as $item)
+                      <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $item->id }}</td>
+                        <td>{{ $item->nama }}</td>
+                        <td>{{ $item->satuan }}</td>
+                        <td>{{ $item->stok }}</td>
+                        <td>{{ $item->berat }}</td>
+                        <td>
+                          <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            <a href="barang/{{ $item->id }}/edit">
+                              <div style="border-radius: 5px" class="btn btn-warning text-white mb-1">
+                                <i class="ti ti-edit"></i>
+                                <span>Edit</span>
+                              </div>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                      @endforeach
+                      @endif
+                  </tbody>
+              </table>
+          </div>
           </div>
           
     </div>
