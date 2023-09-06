@@ -120,6 +120,7 @@
                           <th>Satuan</th>
                           <th>Stok</th>
                           <th>Berat</th>
+                          <th>Kategori</th>
                           <th>Action</th>
                       </tr>
                   </thead>
@@ -141,6 +142,7 @@
                         <td>{{ $item->satuan }}</td>
                         <td>{{ $item->stok }}</td>
                         <td>{{ $item->berat }}</td>
+                        <td>{{ $item->kategori }}</td>
                         <td>
                           <div class="d-flex flex-wrap gap-2 justify-content-center">
                             <a href="barang/{{ $item->id }}/edit">

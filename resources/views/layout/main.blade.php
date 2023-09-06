@@ -104,8 +104,6 @@
 
       hitungHargaJual(); // Update harga jual based on the new "untung" value
     }
-
-
   </script>
 
   <script src="{{ asset('asset/libs/jquery/dist/jquery.min.js') }}"></script>
@@ -114,11 +112,11 @@
   <script src="{{ asset('asset/js/app.min.js') }}"></script>
   <script src="{{ asset('asset/libs/simplebar/dist/simplebar.js') }}"></script>
   <!-- Page level plugins -->
-      <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-      <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
   
-      <!-- Page level custom scripts -->
-      <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+  <!-- Page level custom scripts -->
+  <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 </body>
 
 </html>

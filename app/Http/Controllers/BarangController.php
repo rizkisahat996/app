@@ -30,7 +30,7 @@ class BarangController extends Controller
         $get['kategori']
       );
     } else {
-      $data = barang::get();
+      $data = barang::join('kategoribarangs', 'barangs.id_kategori', '=', 'kategoribarangs.id')->get();
     }
     $id = $request->query('kategori');
 
