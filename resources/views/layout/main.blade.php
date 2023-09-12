@@ -61,22 +61,18 @@
   </div>
   @include('sweetalert::alert')
   <script>
-    // Mengambil elemen input harga beli, untung, dan harga jual
     const hargabeliInput = document.getElementById('hargabeli');
     const untungInput = document.getElementById('untung');
     const hargajualInput = document.getElementById('hargajual');
     const kategoriSelect = document.getElementById('id_kategori');
     const ppnSelect = document.getElementById('ppn');
 
-    // Mendengarkan perubahan pada input harga beli, untung, dan kategori
     hargabeliInput.addEventListener('input', hitungHargaJual, updateUntung);
     untungInput.addEventListener('input', hitungHargaJual);
     kategoriSelect.addEventListener('change', updateUntung);
     ppnSelect.addEventListener('input', hitungHargaJual);
 
-    // Fungsi untuk menghitung harga jual
     function hitungHargaJual() {
-      // Mengambil nilai harga beli dan untung
       const hargabeli = parseFloat(hargabeliInput.value);
       const untung = parseFloat(untungInput.value);
 
@@ -89,7 +85,6 @@
 
     }
 
-    // Fungsi untuk memperbarui nilai "untung" berdasarkan kategori yang dipilih
     function updateUntung() {
       const selectedCategory = kategoriSelect.value;
       const hargabeli = parseFloat(hargabeliInput.value);

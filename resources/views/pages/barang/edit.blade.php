@@ -37,7 +37,6 @@
                   <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="untung" id="untung" value="{{ old('untung',$barang->untung) }}">
               </div>
           </div>
-          {{-- asdawe --}}
           <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Jual <span>(termasuk ppn)</span></label>
               <div class="input-group mb-3" id="exampleInputEmail1">
@@ -61,4 +60,29 @@
             </div>
       </form>
     </div>
+
+    <script type="text/javascript">
+      const hargabeliInput = document.getElementById('hargabeli');
+      const untungInput = document.getElementById('untung');
+      const hargajualInput = document.getElementById('hargajual');
+    
+      hargabeliInput.addEventListener('input', hitungHargaJual);
+      untungInput.addEventListener('input', hitungHargaJual);
+    
+      function hitungHargaJual() {
+        const hargabeli = parseFloat(hargabeliInput.value);
+        const untung = parseFloat(untungInput.value);
+    
+        const hargaa = hargabeli + untung;
+        const hargaJual = Math.ceil(hargaa / 100) * 100;
+        hargajualInput.value = hargaJual;
+      }
+    </script>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    </script>
 @endsection

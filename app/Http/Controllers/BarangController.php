@@ -131,6 +131,7 @@ class BarangController extends Controller
    */
   public function update(Request $request, string $id)
   {
+    // dd($request->all());
     $barang = barang::where('id', $id)->first();
     $berat = $request->berat;
 
@@ -140,38 +141,36 @@ class BarangController extends Controller
 
     $hargalama = $barang->hargabeli * $stoklama * 25;
     $total = $berat * $request->hargabeli;
+    $nama = $request->nama;
+    $hargabeli = $request->hargabeli;
+        $untung = $request->untung;
+        $hargajual = $request->hargajual;
+        $keterangan = $request->keterangan;
 
-    if($stoklama < $updatestok)
-    {
-      barang::where('id', $id)->update([
-        'nama' => $request->nama,
-        'hargabeli' => $request->hargabeli,
-        'untung' => $request->untung,
-        'hargajual' => $request->hargajual,
+    $barang->update([
+        'nama' => $nama,
+        'hargabeli' => $hargabeli,
+        'untung' => $untung,
+        'hargajual' => $hargajual,
         'berat' => $berat,
-        'keterangan' => $request->keterangan,
+        'keterangan' => $keterangan,
         'stok' => $updatestok,
         'stokawal' => $stoklama,
-        'stokkeluar' => 0,
         'total_lama' => $hargalama, 
         'total' => $total,
+      ]);
+    if($stoklama < $updatestok)
+    {
+      $barang->update([
+        'stokkeluar' => 0,
         'tambah' => $tambah
       ]);
     }
+
     elseif($stoklama > $updatestok)
     {
-      barang::where('id', $id)->update([
-        'nama' => $request->nama,
-        'hargabeli' => $request->hargabeli,
-        'untung' => $request->untung,
-        'hargajual' => $request->hargajual,
-        'berat' => $berat,
-        'keterangan' => $request->keterangan,
-        'stok' => $updatestok,
-        'stokawal' => $stoklama,
+      $barang->update([
         'stokkeluar' => abs($tambah),
-        'total_lama' => $hargalama, 
-        'total' => $total,
         'tambah' => 0
       ]);
     }
