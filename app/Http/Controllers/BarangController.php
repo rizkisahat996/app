@@ -120,8 +120,11 @@ class BarangController extends Controller
    */
   public function edit(string $id)
   {
-    $barang = barang::where('id', '=', $id)->first();
-    // dd($barang->id);
+    $barang = barang::where('barangs.id', '=', $id)
+              ->join('kategoribarangs', 'barangs.id_kategori', '=', 'kategoribarangs.id')
+              ->select('barangs.*', 'kategoribarangs.id as kategori_id', 'kategoribarangs.kategori as nama_kategori')
+              ->first();
+    // dd($barang);
 
     return view('pages.barang.edit', compact('barang'));
   }

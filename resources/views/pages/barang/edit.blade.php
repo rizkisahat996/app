@@ -23,6 +23,10 @@
               <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
               <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama" value="{{ old('nama',$barang->nama) }}">
           </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Kategori Barang</label>
+            <input disabled type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $barang->nama_kategori }}">
+        </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Harga Beli</label>
               <div class="input-group mb-3" id="exampleInputEmail1">
@@ -43,6 +47,10 @@
                   <span class="input-group-text">Rp.</span>
                   <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual" value="{{ old('hargajual',$barang->hargajual) }}">
               </div>
+              <input class="form-check-input" type="checkbox" id="ppn" checked>
+              <label class="form-check-label" for="ppn">
+                Termasuk PPN
+              </label>
           </div>
           <div class="mb-3">
               <label for="exampleFormControlInput1" class="form-label">Berat</label>
@@ -65,15 +73,19 @@
       const hargabeliInput = document.getElementById('hargabeli');
       const untungInput = document.getElementById('untung');
       const hargajualInput = document.getElementById('hargajual');
+    const ppnSelect = document.getElementById('ppn');
     
       hargabeliInput.addEventListener('input', hitungHargaJual);
       untungInput.addEventListener('input', hitungHargaJual);
+      ppnSelect.addEventListener('input', hitungHargaJual);
     
       function hitungHargaJual() {
         const hargabeli = parseFloat(hargabeliInput.value);
         const untung = parseFloat(untungInput.value);
     
-        const hargaa = hargabeli + untung;
+        const hargaaa = hargabeli + untung;
+        const hargappn =  ppnSelect.checked ? hargabeli * 0.11 : 0;
+        const hargaa = hargaaa + hargappn;
         const hargaJual = Math.ceil(hargaa / 100) * 100;
         hargajualInput.value = hargaJual;
       }
