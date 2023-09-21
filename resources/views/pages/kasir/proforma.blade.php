@@ -147,9 +147,9 @@ td{
     <div>
         <img style="height:70px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
         <div>
-            <p>Hp. 0812 6455 677</p>
-            <p>Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
-            <p>Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
+            <p style="height: 5px">Hp. 0812 6455 677</p>
+            <p style="height: 5px">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
+            <p style="height: 5px">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
     </div>
     <hr>
         <div class="d-flex" id="tek">
