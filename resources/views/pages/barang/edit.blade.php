@@ -47,7 +47,15 @@
                   <span class="input-group-text">Rp.</span>
                   <input readonly="" type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="hargajual" id="hargajual" value="{{ old('hargajual',$barang->hargajual) }}">
               </div>
-              <input class="form-check-input" type="checkbox" id="ppn" checked>
+              <?php
+                $hargappn = $barang->hargabeli * 0.11;
+                $hargaawal = $barang->hargabeli + $barang->untung;
+                $harga = $barang->hargabeli + $barang->untung + $hargappn;
+                $tes = "okeoekoek";
+
+                $harga = intval($harga);
+                ?>
+              <input class="form-check-input" type="checkbox" id="ppn" {{ $barang->hargajual == $harga ? 'checked' : '' }}>
               <label class="form-check-label" for="ppn">
                 Termasuk PPN
               </label>
@@ -73,7 +81,7 @@
       const hargabeliInput = document.getElementById('hargabeli');
       const untungInput = document.getElementById('untung');
       const hargajualInput = document.getElementById('hargajual');
-    const ppnSelect = document.getElementById('ppn');
+      const ppnSelect = document.getElementById('ppn');
     
       hargabeliInput.addEventListener('input', hitungHargaJual);
       untungInput.addEventListener('input', hitungHargaJual);
