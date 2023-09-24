@@ -157,7 +157,7 @@ class BarangController extends Controller
         'hargajual' => $hargajual,
         'berat' => $berat,
         'keterangan' => $keterangan,
-        'stok' => $updatestok,
+        'stok' => $berat / 25,
         'stokawal' => $stoklama,
         'total_lama' => $hargalama, 
         'total' => $total,

@@ -112,7 +112,7 @@ class TransaksiController extends Controller
                         'harga_jual' => $request->harga_jual[$i],
                         'modal'=>$request->modal[$i],
                         'keterangann' => $keterangan,
-                        'barang_awal' => $request->unit[$i],
+                        'barang_awal' => $request->unit[$i] * 25,
                         'created_at' => $request->tgl_beli,
                     ]);
                 }

@@ -87,11 +87,12 @@
           <thead>
             <tr>
                 <th style="text-align: center" width="20%">Nama Barang</th>
-                <th style="text-align: center" width="12%">Stok</th>
+                <th style="text-align: center" width="8%">Stok</th>
+                <th style="text-align: center" width="12%">Berat</th>
                 <th style="text-align: center" width="13%">Harga</th>
                 <th style="text-align: center" width="10%">Satuan</th>
-                <th style="text-align: center" width="10%">Jumlah</th>
-                <th style="text-align: center" width="15%">Keterangan</th>
+                <th style="text-align: center" width="10%">Jumlah Per Sak</th>
+                <th style="text-align: center" width="10%">Keterangan</th>
                 <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
             </tr>
           </thead>
@@ -100,7 +101,7 @@
               <tr role="row" class="1" id="trow">
                   <td>
                       <select required style="width:100%;" class="form-control nama_obat" id="nama1"
-                          name="nama[]" data-stok="#stok1" data-unit="#unit1" data-harga_jual="#harga_jual1"
+                          name="nama[]" data-stok="#berat1" data-unit="#unit1" data-harga_jual="#harga_jual1"
                           onchange="coba()">
 
                           <option disabled selected value>--Pilih nama barang--</option>
@@ -110,13 +111,14 @@
                           @endforeach
                       </select>
                   </td>
-                  <td><input id="stok1" name="unit[]" class="form-control" readonly=""></td>
+                  <td><input id="berat1" name="unit[]" class="form-control" readonly=""></td>
+                  <td><input id="stok1" name="stok[]" class="form-control" readonly=""></td>
                   <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
                           onchange="hitung()">
                   </td>
                   <td>
-                      <input id="satuan1" name="stok[]" class="form-control stok" readonly="">
-                      <input id="modal1" name="modal[]" class="form-control stok" hidden>
+                      <input id="satuan1" name="berat[]" class="form-control berat" readonly="">
+                      <input id="modal1" name="modal[]" class="form-control berat" hidden>
                   </td>
                   <td>
                     <input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
@@ -216,7 +218,6 @@
     
             rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
-            // return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
     
         function tambah() {
@@ -229,6 +230,7 @@
     
             baru.querySelector("#harga1").id = 'harga' + panjang;
             baru.querySelector("#nama1").id = 'nama' + panjang;
+            baru.querySelector("#berat1").id = 'berat' + panjang;
             baru.querySelector("#stok1").id = 'stok' + panjang;
             baru.querySelector("#subtotal1").id = 'subtotal' + panjang;
             baru.querySelector("#subtotaltampil1").id = 'subtotaltampil' + panjang;
@@ -245,11 +247,11 @@
     
         function incrementJumlah(id) {
             let jumlah = document.getElementById('jumlah' + id);
-            let stok = document.getElementById('stok' + id);
+            let berat = document.getElementById('berat' + id);
             let currentJumlah = parseInt(jumlah.value);
-            let currentStok = parseInt(stok.value);
+            let currentBerat = parseInt(berat.value);
     
-            if (currentJumlah < currentStok) {
+            if (currentJumlah < currentBerat) {
                 jumlah.value = currentJumlah + 1;
                 hitung();
             }
@@ -276,12 +278,12 @@
                 let jual = "harga" + i;
                 let total = "subtotal" + i;
                 let tampil = "subtotaltampil" + i;
-                let stk = "stok" + i;
-                let jumlah = parseInt(document.getElementById(id).value);
+                let stk = "berat" + i;
+                let jumlah = parseInt(document.getElementById(id).value * 25);
                 let satuan = document.getElementById(jual).value;
-                let stok = parseInt(document.getElementById(stk).value);
+                let berat = parseInt(document.getElementById(stk).value);
     
-                if (jumlah > stok) {
+                if (jumlah > berat * 25) {
                     document.getElementById(id).value = " ";
                     document.getElementById(id).placeholder = " ";
                     var element = document.getElementById("alert");
@@ -293,8 +295,6 @@
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
 
                 }
-
-                jumlah = jumlah/25;
             }
         }
     
@@ -311,10 +311,11 @@
     
             for (let i = 1; i <= panjang; i++) {
                 let id = "#nama" + i;
-                let stok = "#stok" + i;
+                let berat = "#berat" + i;
                 let harga = '#harga' + i;
                 let unit = '#satuan' + i;
                 let modal = '#modal' + i;
+                let stok = '#stok' + i;
     
                 $(id).each(function() {
                     var id = $(this).val();
@@ -324,13 +325,14 @@
                         dataType: 'json',
                         url: "{{ url('/detail-barang-') }}" + id,
                         success: function(data) {
-                            document.querySelector(stok).placeholder = data.data.berat;
-                            document.querySelector(stok).value = data.data.berat;
+                            document.querySelector(berat).placeholder = data.data.berat /25;
+                            document.querySelector(berat).value = data.data.berat /25;
                             document.querySelector(unit).value = data.data.satuan;
     
                             let tes = document.querySelector(harga);
                             let c = data.data.hargajual;
                             document.querySelector(modal).value = data.data.hargabeli;
+                            document.querySelector(stok).value = data.data.berat;
                             tes.value = c;
                         }
                     });

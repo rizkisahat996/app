@@ -74,9 +74,6 @@ return new class extends Migration
                 SET NEW.stokawal = OLD.stok;
 
                 SET NEW.total_lama = OLD.total;
-                
-                -- Calculate and set the new berat value
-                SET NEW.berat = NEW.stok * 25;
             END;
         ');
 
