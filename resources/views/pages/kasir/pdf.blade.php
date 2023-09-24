@@ -33,7 +33,7 @@ h1{
 }
 
 #barang td {
-    text-align: center !important;
+    text-align: center;
     font-size: 15px;
 }
 #fott{
@@ -52,7 +52,7 @@ padding-top:4rem;
 margin-top: -1rem !important;
 }
 #total{
-    text-align: center !important;
+    text-align: center;
     border-collapse: collapse
 }
 .page-break {
@@ -90,7 +90,7 @@ text-decoration: underline;
 .dash-2 {
 border: none;
 height: 5px;
-background: #B6EE05;
+background-color: #B6EE05;
 background: repeating-linear-gradient(90deg, #B6EE05 0, #B6EE05 5px, transparent 5px, transparent 15px);
 transform: skew(-45deg);
 transform-origin: top left;
@@ -125,7 +125,7 @@ td{
 
 #kec{
     font-weight: lighter;
-    font-size: smaller
+    font-size:  5px;
 }
 
 @media print {}
@@ -139,8 +139,8 @@ td{
             <p style="height: 5px">Hp. 0812 6455 677</p>
             <p style="height: 5px">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
             <p style="height: 5px">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
-    </div>
-    <hr>
+    </div> 
+    <hr style="color:#B6EE05">
         <div class="d-flex" id="tek">
             <h2><i>FAKTUR</i></h2>
         </div>
@@ -169,8 +169,8 @@ td{
                 <td></td>
             </tr>
             <tr>
-                <td>Tanggal Faktur</td>
-                <td>{{ $transaksi->created_at->format('d-m-Y') }}</td>
+                <td>Nomor HP</td>
+                <td>{{ $transaksi->pelanggan->no_telp }}</td>
             </tr>
             <tr>
                 @if (($transaksi->jatuh_tempo == null))
@@ -188,6 +188,7 @@ td{
                 
             </tr>
         </table>
+        <br>
         <table class="table table-borderless" id="barang" style="width: 100%; height:100px">
             <thead>
                 <tr>
@@ -202,15 +203,15 @@ td{
                 @foreach ($detail as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->jumlah }}</td>
-                        <td>@currency($item->harga_jual)</td>
-                        <td>@currency($item->subtotal)</td>
+                        <td style="text-align:left;">{{ $item->nama }}</td>
+                        <td>{{ intval($item->jumlah) }}</td>
+                        <td>{{ number_format($item->hargajual, 0, '.', '.') }}</td>
+                        <td style="text-align:right;">{{ number_format($item->subtotal, 0, '.', '.') }}</td>
                     </tr>
-                    <tr style="border-bottom:1px solid #000; margin-top:2px;margin-bottom:2px ">
+                    <tr style="border-bottom:0.5px solid #000; margin-top:2px;margin-bottom:2px ">
                         <td></td>
                         <td id="kec">{{ $item->keterangann }}</td>
-                        <td id="kec">{{ $item->satuan }}</td>
+                        <td id="kec" style="font-size: 12px;">{{ $item->satuan }}</td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -222,15 +223,15 @@ td{
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">Jumlah Total&nbsp;:</td>
-                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->total)</td>
+                    <td id="total" class="text-start fw-semibold" style="text-align: center;font-weight:500">Jumlah Total&nbsp;:</td>
+                    <td id="total" class="text-end fw-semibold" style="text-align: right;font-weight:500">@currency($transaksi->total)</td>
                 </tr>
                 <tr class="">
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">Bayar&nbsp;:</td>
-                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->pembayaran)</td>
+                    <td id="bayar" class="text-start fw-semibold" style="text-align: center;font-weight:500">Bayar&nbsp;:</td>
+                    <td id="bayar" class="text-end fw-semibold" style="text-align: right;font-weight:500">@currency($transaksi->pembayaran)</td>
                 </tr>
                 <tr class="">
                     <td></td>
@@ -241,11 +242,11 @@ td{
                                 $oke = $transaksi->kembalian;
                                 $haha = -$oke;
                             ?>
-                            <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Belum Bayar&nbsp;:</td>
-                            <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($haha)</td>
+                            <td id="sisa" class="text-start fw-semibold" style="text-align: center;font-weight:500">Belum Bayar&nbsp;:</td>
+                            <td id="sisa" class="text-start fw-semibold" style="text-align: right;font-weight:500">@currency($haha)</td>
                           @else
-                          <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Sisa&nbsp;:</td>
-                          <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->kembalian)</td>
+                          <td id="sisa" class="text-start fw-semibold" style="text-align: center;font-weight:500">Sisa&nbsp;:</td>
+                          <td id="sisa" class="text-start fw-semibold" style="text-align: right;font-weight:500">@currency($transaksi->kembalian)</td>
                           @endif
                 </tr>
             </tfoot>
@@ -255,15 +256,16 @@ td{
    
         <div class="container">
             <div class="catatan">
+                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div> <br><br>
                 <div class="text-start"><b>Catatan :</b></div>
                 <div class="text-start">1. Barang yang sudah dibeli tidak dapat dikembalikan</div>
                 <div class="text-start">2. Harap diperiksa dengan seksama</div>
                 <div class="text-start">3. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
-                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div>
                 <div class="text-start">MANDIRI : 106.0055.4466.71</div>
                 <div class="text-start">BNI : 1264.666.777</div>
             </div>
             <div style="text-align:center">
+                <br> <br> <br> <br> <br>
                 <img src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
                 </div>
                 <div style="text-align:center"><b>{{ Auth::user()->name; }}</b></div>

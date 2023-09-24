@@ -267,6 +267,7 @@ class TransaksiController extends Controller
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket', 'ttd', 'logo'));
 
             return $pdf->download($transaksi['kodefaktur'].'.pdf');
+            // return $pdf->preview();
             // return view('pages.kasir.pdf', compact('transaksi','detail', 'count', 'tes','ket'));
         }
     public function proforma($id, Request $request){

@@ -180,8 +180,8 @@ td{
                 <td></td>
             </tr>
             <tr>
-                <td>Tanggal Faktur</td>
-                <td>{{ $transaksi->created_at->format('d-m-Y') }}</td>
+                <td>Nomor HP</td>
+                <td>{{ $transaksi->pelanggan->no_telp }}</td>
             </tr>
             <tr>
                 @if (($transaksi->jatuh_tempo == null))
