@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 use Session;
 class PenggunaController extends Controller
@@ -39,6 +39,7 @@ class PenggunaController extends Controller
         ]);
  
         $validatedData['password'] = Hash::make($validatedData['password']);
+        // dd($validatedData);
  
         User::create($validatedData);
         alert()->success('Berhasil','Berhasil Menambahkan Pengguna');
@@ -58,7 +59,10 @@ class PenggunaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = User::where('id', '=', $id)->first();
+        // dd($data);
+        
+        return view('pages.pengguna.edit', compact('data'));
     }
 
     /**
@@ -66,7 +70,37 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $pengguna = User::where('id', '=', $id);
+
+        $pengguna->update([
+            'name' => $request->name,
+            'email' => $request->email
+        ]);
+
+        if ($request->has('password'))
+        {
+            $pengguna->update([
+                'password' => Hash::make($request->password)
+            ]);
+        }
+
+        alert()->success('Berhasil', 'Berhasil Mengedit Pengguna');
+
+        return redirect('/pengguna');
     }
 
     /**

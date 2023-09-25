@@ -49,6 +49,12 @@
                                     <td>{{ $item->jabatan }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
+                                            <a target="_blank" href="/pengguna/{{ $item->id }}/edit">
+                                            <div class="btn btn-secondary btn-sm text-white mb-1">
+                                                <i class="ti ti-brand-cashapp"></i>
+                                                <span>Edit</span>
+                                            </div>
+                                        </a>
                                             @component('components.modal')
                                                 @slot('target')
                                                     {{ $item->id }}

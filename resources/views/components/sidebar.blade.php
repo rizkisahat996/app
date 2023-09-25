@@ -76,14 +76,14 @@
                 <span class="hide-menu">Data Pelanggan</span>
               </a>
             </li>
-            <li class="sidebar-item">
+            {{-- <li class="sidebar-item">
               <a style="color: white;" class="sidebar-link" href="/laporan" aria-expanded="false">
                 <span>
                   <i class="ti ti-checkup-list"></i>
                 </span>
                 <span class="hide-menu">Manajemen Laporan</span>
               </a>
-            </li>
+            </li> --}}
             <li class="sidebar-item">
               <a style="color: white;" class="sidebar-link" href="/logout" aria-expanded="false">
                 <span>

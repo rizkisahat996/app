@@ -6,6 +6,7 @@ use App\Models\pelanggan;
 use App\Http\Requests\StorepelangganRequest;
 use App\Http\Requests\UpdatepelangganRequest;
 use App\Models\transaksi;
+use Illuminate\Support\Facades\Redirect;
 
 class PelangganController extends Controller
 {
@@ -74,6 +75,9 @@ class PelangganController extends Controller
      */
     public function destroy(pelanggan $pelanggan)
     {
-        //
+        pelanggan::where('id', '=', $pelanggan->id)->delete();
+        alert()->success('Berhasil', 'Berhasil Menghapus Pengguna');
+
+        return Redirect::back();
     }
 }
