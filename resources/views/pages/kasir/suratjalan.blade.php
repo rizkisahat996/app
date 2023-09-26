@@ -33,7 +33,7 @@
         }
 
         #barang td {
-            text-align: center !important;
+            text-align: center;
             font-size: 15px;
         }
         #fott{
@@ -52,7 +52,7 @@ padding-top:4rem;
     margin-top: -1rem !important;
 }
     #total{
-            text-align: center !important;
+            text-align: center;
             border-collapse: collapse
         }
         .page-break {
@@ -154,7 +154,7 @@ text-decoration: underline;
             <p style="height: 5px">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
             <p style="height: 5px">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
     </div>
-    <hr>
+    <hr style="color:#B6EE05">
         <div class="d-flex" id="tek">
             <h2><i>SURAT JALAN</i></h2>
         </div>
@@ -186,8 +186,8 @@ text-decoration: underline;
                 <td></td>
             </tr>
             <tr>
-                <td>Tanggal Faktur</td>
-                <td>{{ $transaksi->created_at->format('d-m-Y') }}</td>
+                <td>Nomor HP</td>
+                <td>{{ $transaksi->pelanggan->no_telp }}</td>
             </tr>
             <tr>
                 @if (($transaksi->jatuh_tempo == null))
@@ -237,7 +237,7 @@ text-decoration: underline;
             <tr>    
                 <td style="text-align: center"><b>SUPIR</b></td>
                 <td></td>
-                <td></td>
+                <td></td><br><br>
                 <td style="text-align: center; position: relative;margin-top: -20px;">
                     <img style="display: inline-block" src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
                 </td>
