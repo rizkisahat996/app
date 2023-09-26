@@ -237,7 +237,8 @@ text-decoration: underline;
             <tr>    
                 <td style="text-align: center"><b>SUPIR</b></td>
                 <td></td>
-                <td></td><br><br>
+                <td></td>
+                <td></td>
                 <td style="text-align: center; position: relative;margin-top: -20px;">
                     <img style="display: inline-block" src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
                 </td>
@@ -250,6 +251,7 @@ text-decoration: underline;
                 <td style="text-align: center;">
                     <div><b>{{ Auth::user()->name }}</b></div>
                 </td>
+                <td></td>
             </tr>
             <tr style="position: relative;margin-top: -20px;">
                 <td></td>
