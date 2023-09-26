@@ -290,7 +290,7 @@
                     element.classList.remove("d-none");
                     element.classList.add("d-flex");
                 } else {
-                    let hasil = document.getElementById(id).value * satuan;
+                    let hasil = document.getElementById(id).value * satuan * 25;
                     document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
 

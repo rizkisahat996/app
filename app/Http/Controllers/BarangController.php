@@ -149,15 +149,16 @@ class BarangController extends Controller
         $untung = $request->untung;
         $hargajual = $request->hargajual;
         $keterangan = $request->keterangan;
+    $tok = $berat/25;
 
     $barang->update([
         'nama' => $nama,
         'hargabeli' => $hargabeli,
         'untung' => $untung,
         'hargajual' => $hargajual,
-        'berat' => $berat,
+        'berat' => floatval($berat),
         'keterangan' => $keterangan,
-        'stok' => $berat / 25,
+        'stok' => floatval($tok),
         'stokawal' => $stoklama,
         'total_lama' => $hargalama, 
         'total' => $total,
