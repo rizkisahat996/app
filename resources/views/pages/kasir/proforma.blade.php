@@ -199,6 +199,7 @@ td{
                 
             </tr>
         </table>
+        <br>
         <table class="table table-borderless" id="barang" style="width: 100%; height:100px">
             <thead>
                 <tr>
@@ -266,17 +267,18 @@ td{
    
         <div class="container">
             <div class="catatan">
+                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div>
                 <div class="text-start"><b>Catatan :</b></div>
                 <div class="text-start">1. Barang yang sudah dipabrikasi, tidak dapat dibatalkan pembeliannya</div>
                 <div class="text-start">2. Hanya berlaku selama 14 {{ "(" }}empat belas{{ ")" }} hari</div>
                 <div class="text-start">3. Harga belum termasuk Pajak-Pajak</div>
                 <div class="text-start">4. Pembayaran Barang, 50 % DP, selebihnya 50 % saat barang akan dikirim</div>
                 <div class="text-start">5. Pembayaran Transfer melalui rekening an. <b>BOBBY NUSANTARA PRIBADI</b></div>
-                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div>
                 <div class="text-start">MANDIRI : 106.0055.4466.71</div>
                 <div class="text-start">BNI : 1264.666.777</div>
             </div>
             <div style="text-align:center">
+                <br><br><br><br><br>
                 <img src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
                 </div>
                 <div style="text-align:center"><b>{{ Auth::user()->name; }}</b></div>
