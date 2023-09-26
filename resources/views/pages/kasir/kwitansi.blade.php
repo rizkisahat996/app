@@ -164,11 +164,11 @@
             @foreach ($detail as $item)
                 {{ $item->nama }}, &nbsp;
             @endforeach<br>
-          <div class="dot-dot-dot"></div>
+          <div class="dot-dot-dot">...........................................................................................................</div>
         </td>
       </tr>
   </table>
-    <br>
+    <br><br><br><br><br>
   <table>
     <tr class="en">
         <td class="em"></td>

@@ -45,6 +45,15 @@
                       <td style="text-align: start">{{ $transaksi->pelanggan->nama }}</td>
                   </tr>
                   <tr class="">
+                      <td width="20%">Nomor Surat Jalan</td>
+                      <td width="5%">:</td>
+                      <td>{{ $transaksi->kodejalan }}</td>
+                      <td width="10%"></td>
+                      <td width="20%">Nomor Proforma</td>
+                      <td width="5%">:</td>
+                      <td style="text-align: start">{{ $transaksi->kodeproforma }}</td>
+                  </tr>
+                  <tr class="">
                       <td width="20%">Tanggal Faktur</td>
                       <td width="5%">:</td>
                       <td>{{ $transaksi->created_at->format('d-m-Y') }}</td>

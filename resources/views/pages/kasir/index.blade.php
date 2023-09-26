@@ -91,8 +91,8 @@
                 <th style="text-align: center" width="12%">Berat</th>
                 <th style="text-align: center" width="13%">Harga</th>
                 <th style="text-align: center" width="8%">Satuan</th>
-                <th style="text-align: center" width="10%">Jumlah Per Sak</th>
-                <th style="text-align: center" width="10%">Keterangan</th>
+                <th style="text-align: center" width="12%">Jumlah Per Sak</th>
+                <th style="text-align: center" width="8%">Keterangan</th>
                 <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
             </tr>
           </thead>
