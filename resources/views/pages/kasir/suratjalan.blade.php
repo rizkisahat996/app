@@ -227,7 +227,6 @@ text-decoration: underline;
                         <td>{{ $item->keterangann }}</td>
                     </tr>
                 @endforeach
-                    
             </tbody>
             
         </table>
@@ -240,6 +239,7 @@ text-decoration: underline;
                 <td></td>
                 <td></td>
                 <td style="text-align: center; position: relative;margin-top: -20px;">
+                    <br><br><br>
                     <img style="display: inline-block" src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
                 </td>
             </tr>
@@ -248,12 +248,13 @@ text-decoration: underline;
                 <td style="text-align: center;margin-top:20px">{{ "(........................................)" }}</td>
                 <td></td>
                 <td></td>
+                <td></td>
                 <td style="text-align: center;">
                     <div><b>{{ Auth::user()->name }}</b></div>
                 </td>
-                <td></td>
             </tr>
             <tr style="position: relative;margin-top: -20px;">
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
