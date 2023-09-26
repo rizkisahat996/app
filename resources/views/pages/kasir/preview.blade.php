@@ -138,19 +138,38 @@
               </div> --}}
             </div>
             <div class="d-flex justify-content-start ml-4">
-            <form action="/pdf/{{ $transaksi->id }}">
-                <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
-                  <span>Print Faktur</span>
-                  <i class="fa-solid fa-print"></i>
-                </button>
-            </form>
-            <form action="/proforma/{{ $transaksi->id }}">
-                <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
-                    <span>Print Proforma</span>
-                    <i class="fa-solid fa-print"></i>
-                  </button>
-                </form>
-                @if ($transaksi->kembalian < 0)
+                    <form action="/pdf/{{ $transaksi->id }}">
+                        <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+                        <span>Print Faktur</span>
+                        <i class="fa-solid fa-print"></i>
+                        </button>
+                    </form>
+                    <form action="/proforma/{{ $transaksi->id }}">
+                        <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+                            <span>Print Proforma</span>
+                            <i class="fa-solid fa-print"></i>
+                        </button>
+                        </form>
+                        @if ($transaksi->kwit)
+                        <form action="/kwitansi/{{ $transaksi->id }}">
+                            <button type="submit" class="btn border-2 border border-gray-500 btn-primary py-2 text-white px-3 mt-4">
+                                <span>Print Kwitansi</span>
+                                <i class="fa-solid fa-print"></i>
+                            </button>
+                            </form>
+                        @else
+                        <div class="d-flex justify-content-start ml-4 mt-4">
+                        <form action="/kasir/kwit/{{ $transaksi->id }}" method="POST">
+                            @csrf
+                            <input class="form-control mb-2 w-400" type="text" name="kwit" placeholder="Masukkan Keterangan Kwitansi">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ti ti-plus"></i>
+                            <span>Tambah Keterangan Kwitansi</span>
+                        </button>
+                    </form>
+                    </div>
+                @endif
+                {{-- @if ($transaksi->kembalian < 0)
                             
                           @else
                           <form action="/kwitansi/{{ $transaksi->id }}">
@@ -159,7 +178,7 @@
                                   <i class="fa-solid fa-print"></i>
                                 </button>
                               </form>
-                          @endif
+                          @endif --}}
                 </div>
                 @if ($transaksi->nomor_polisi)
                 <form action="/suratjalan/{{ $transaksi->id }}">

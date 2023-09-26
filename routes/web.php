@@ -45,6 +45,7 @@ Route::get('/kasir/edit/{id}', [TransaksiController::class, 'edit'])->middleware
 Route::get('/kasir/delete/{id}', [TransaksiController::class, 'destroy'])->middleware('auth');
 Route::post('/kasir/update/{id}', [TransaksiController::class, 'update'])->middleware('auth');
 Route::post('/kasir/polisi/{id}', [TransaksiController::class, 'polisi'])->middleware('auth');
+Route::post('/kasir/kwit/{id}', [TransaksiController::class, 'kwit'])->middleware('auth');
 Route::post('/kasir', [TransaksiController::class, 'store'])->middleware('auth');
 Route::post('/piutang/{id}', [TransaksiController::class, 'storepiutang'])->middleware('auth');
 Route::get('detail-barang-{id_barang}', [TransaksiController::class, 'detail'])->middleware('auth');

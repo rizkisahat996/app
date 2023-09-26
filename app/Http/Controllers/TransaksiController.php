@@ -129,6 +129,16 @@ class TransaksiController extends Controller
         return redirect()->route('preview', ['id' => $id]);
     }
 
+    public function kwit(Request $request, string $id)
+    {
+        // dd($request->kwit);
+        transaksi::where('id', $id)->update([
+            'kwit' => $request->kwit
+        ]);
+
+        return redirect()->route('preview', ['id' => $id]);
+    }
+
 
     /**
      * Display the specified resource.
