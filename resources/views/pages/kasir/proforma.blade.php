@@ -267,7 +267,7 @@ td{
    
         <div class="container">
             <div class="catatan">
-                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div>
+                <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div><br><br>
                 <div class="text-start"><b>Catatan :</b></div>
                 <div class="text-start">1. Barang yang sudah dipabrikasi, tidak dapat dibatalkan pembeliannya</div>
                 <div class="text-start">2. Hanya berlaku selama 14 {{ "(" }}empat belas{{ ")" }} hari</div>
