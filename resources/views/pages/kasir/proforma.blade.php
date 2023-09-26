@@ -29,7 +29,7 @@
         }
 
         #info {
-            width: 100%;
+            width: 100% !important;
         }
 
         #barang td {
@@ -38,18 +38,18 @@
         }
         #fott{
             width: 100%;
-            margin-left: 0.5rem;
+            margin-left: 0.5rem !important;
         }
         #barang th {
            
-            text-align: center;
-            font-size: 18px;
+            text-align: center !important;
+            font-size: 18px !important;
         }
 #a{
 padding-top:4rem;
 }
 #ak{
-    margin-top: -1rem;
+    margin-top: -1rem !important;
 }
     #total{
             text-align: center;
@@ -60,7 +60,7 @@ padding-top:4rem;
         }
 
         #bawah td {
-            padding-bottom: 0rem;
+            padding-bottom: 0rem !important;
             font-size: 18px
         }
       
@@ -69,7 +69,7 @@ padding-top:4rem;
             background-color: #B6EE05;
             color: white;
             font-size: 20px;
-            width = 100%;
+            width = 100% !important;
         }
 
         #barang tbody {
@@ -79,8 +79,8 @@ padding-top:4rem;
         #barang {
             border-collapse: collapse; 
             border-spacing: -1px;
-	width = 500%;
-padding :        0 0 0 0;
+	width = 500% !important;
+padding :        0 0 0 0 !important;
         }
         #bar tr td{
             border-bottom: 1px solid #000000;
@@ -90,7 +90,7 @@ padding :        0 0 0 0;
         background-size: 8px 1px;
         }
 #tek {
-font-weight:500 ;
+font-weight:500 !important ;
 text-align: center;
 text-decoration: underline;
 }
