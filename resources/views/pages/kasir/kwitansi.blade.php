@@ -111,15 +111,6 @@
 </head>
 
 <body class="px-2 " onload="window.print()">
-    <div class="keranjang">
-      <div>
-        <img style="height:70px;padding: 0;margin:0;" src="<?php echo $logo ?>" alt="logo" width="130px">
-        <div>
-          <p style="height: 5px">Hp. 0812 6466 677</p>
-            <p style="height: 5px">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
-            <p style="height: 5px">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
-    </div>
-    <hr>
     <h2><u>KWITANSI</u></h2>
     <h2>OFFICIAL RECEIPT</h2>
   <table>
@@ -156,6 +147,7 @@
         <td class="okess" style="text-align: center;">@currency($transaksi->pembayaran) ,-</td>
       </tr>
       </table>
+    <br>
       <table>
       <tr>
         <td class="sa">Terbilang</td> 
@@ -172,42 +164,23 @@
             @foreach ($detail as $item)
                 {{ $item->nama }}, &nbsp;
             @endforeach<br>
-          <div class="dot-dot-dot">...........................................................................................................</div>
-        </td>
-      </tr>
-      <tr>
-        <td class="sa"></td> 
-        <td class="du">:</td>
-        <td class="ti">
-          <br>
-          <div class="dot-dot-dot">...........................................................................................................</div>
-        </td>
-      </tr>
-      <tr>
-        <td class="sa"></td> 
-        <td class="du">:</td>
-        <td class="ti">
-          <br>
-          <div class="dot-dot-dot">...........................................................................................................</div>
-        </td>
-      </tr>
-      <tr>
-        <td class="sa"></td> 
-        <td class="du">:</td>
-        <td class="ti">
-          <br>
-          <div class="dot-dot-dot">...........................................................................................................</div>
+          <div class="dot-dot-dot"></div>
         </td>
       </tr>
   </table>
+    <br>
   <table>
     <tr class="en">
         <td class="em"></td>
         <td class="li"></td>
     </tr>
+    @php
+        $tanggal = \Carbon\Carbon::parse($transaksi->created_at);
+        $tgl = $tanggal->locale('id_ID')->isoFormat('D MMMM Y');;
+    @endphp
     <tr class="en">
         <td class="em"></td>
-        <td class="li">Medan, Tanggal</td>
+        <td class="li">Medan, Tanggal {{ $tgl }}</td>
     </tr>
     <tr class="en">
         <td class="em"></td>
