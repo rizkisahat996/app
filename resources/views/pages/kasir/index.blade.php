@@ -87,10 +87,10 @@
           <thead>
             <tr>
                 <th style="text-align: center" width="20%">Nama Barang</th>
-                <th style="text-align: center" width="12%">Stok</th>
+                <th style="text-align: center" width="10%">Stok</th>
                 <th style="text-align: center" width="12%">Berat</th>
                 <th style="text-align: center" width="13%">Harga</th>
-                <th style="text-align: center" width="6%">Satuan</th>
+                <th style="text-align: center" width="8%">Satuan</th>
                 <th style="text-align: center" width="10%">Jumlah Per Sak</th>
                 <th style="text-align: center" width="10%">Keterangan</th>
                 <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
