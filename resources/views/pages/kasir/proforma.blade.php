@@ -29,30 +29,30 @@
         }
 
         #info {
-            width: 100% !important;
+            width: 100%;
         }
 
         #barang td {
-            text-align: center !important;
+            text-align: center;
             font-size: 15px;
         }
         #fott{
             width: 100%;
-            margin-left: 0.5rem !important;
+            margin-left: 0.5rem;
         }
         #barang th {
            
-            text-align: center !important;
-            font-size: 18px !important;
+            text-align: center;
+            font-size: 18px;
         }
 #a{
 padding-top:4rem;
 }
 #ak{
-    margin-top: -1rem !important;
+    margin-top: -1rem;
 }
     #total{
-            text-align: center !important;
+            text-align: center;
             border-collapse: collapse
         }
         .page-break {
@@ -60,7 +60,7 @@ padding-top:4rem;
         }
 
         #bawah td {
-            padding-bottom: 0rem !important;
+            padding-bottom: 0rem;
             font-size: 18px
         }
       
@@ -69,7 +69,7 @@ padding-top:4rem;
             background-color: #B6EE05;
             color: white;
             font-size: 20px;
-            width = 100% !important;
+            width = 100%;
         }
 
         #barang tbody {
@@ -79,8 +79,8 @@ padding-top:4rem;
         #barang {
             border-collapse: collapse; 
             border-spacing: -1px;
-	width = 500% !important;
-padding :        0 0 0 0 !important;
+	width = 500%;
+padding :        0 0 0 0;
         }
         #bar tr td{
             border-bottom: 1px solid #000000;
@@ -90,7 +90,7 @@ padding :        0 0 0 0 !important;
         background-size: 8px 1px;
         }
 #tek {
-font-weight:500 !important ;
+font-weight:500 ;
 text-align: center;
 text-decoration: underline;
 }
@@ -151,7 +151,7 @@ td{
             <p style="height: 5px">Jl. Tanjung Raya Pasar 6 Helvetia Marelan</p>
             <p style="height: 5px">Desa Manunggal Kec. Labuhan Deli Kab. Deli Serdang - Sumut</p></div>
     </div>
-    <hr>
+    <hr style="color:#B6EE05">
         <div class="d-flex" id="tek">
             <h2><i>PROFORMA</i></h2>
         </div>
@@ -210,22 +210,22 @@ td{
                     <th width="40%">Jumlah</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="bar">
                 @foreach ($detail as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama }}</td>
-                    <td>{{ $item->jumlah }}</td>
-                    <td>@currency($item->harga_jual)</td>
-                    <td>@currency($item->subtotal)</td>
-                </tr>
-                <tr style="border-bottom:1px solid #000; margin-top:2px;margin-bottom:2px ">
-                    <td></td>
-                    <td id="kec">{{ $item->keterangann }}</td>
-                    <td id="kec">{{ $item->satuan }}</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td style="text-align:left;">{{ $item->nama }}</td>
+                        <td>{{ intval($item->jumlah) }}</td>
+                        <td>{{ number_format($item->hargajual, 0, '.', '.') }}</td>
+                        <td style="text-align:right;">{{ number_format($item->subtotal, 0, '.', '.') }}</td>
+                    </tr>
+                    <tr style="border-bottom:0.5px solid #000; margin-top:2px;margin-bottom:2px ">
+                        <td></td>
+                        <td id="kec">{{ $item->keterangann }}</td>
+                        <td id="kec" style="font-size: 12px;">{{ $item->satuan }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 @endforeach
                     
             </tbody>
@@ -234,15 +234,15 @@ td{
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">Jumlah Total&nbsp;:</td>
-                    <td id="total" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->total)</td>
+                    <td id="total" class="text-start fw-semibold" style="text-align: center;font-weight:500">Jumlah Total&nbsp;:</td>
+                    <td id="total" class="text-end fw-semibold" style="text-align: right;font-weight:500">@currency($transaksi->total)</td>
                 </tr>
                 <tr class="">
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">Bayar&nbsp;:</td>
-                    <td id="bayar" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->pembayaran)</td>
+                    <td id="bayar" class="text-start fw-semibold" style="text-align: center;font-weight:500">Bayar&nbsp;:</td>
+                    <td id="bayar" class="text-end fw-semibold" style="text-align: right;font-weight:500">@currency($transaksi->pembayaran)</td>
                 </tr>
                 <tr class="">
                     <td></td>
@@ -253,11 +253,11 @@ td{
                                 $oke = $transaksi->kembalian;
                                 $haha = -$oke;
                             ?>
-                            <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Belum Bayar&nbsp;:</td>
-                            <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($haha)</td>
+                            <td id="sisa" class="text-start fw-semibold" style="text-align: center;font-weight:500">Belum Bayar&nbsp;:</td>
+                            <td id="sisa" class="text-start fw-semibold" style="text-align: right;font-weight:500">@currency($haha)</td>
                           @else
-                          <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">Sisa&nbsp;:</td>
-                          <td id="sisa" class="text-start fw-semibold" style="text-align: left;font-weight:500">@currency($transaksi->kembalian)</td>
+                          <td id="sisa" class="text-start fw-semibold" style="text-align: center;font-weight:500">Sisa&nbsp;:</td>
+                          <td id="sisa" class="text-start fw-semibold" style="text-align: right;font-weight:500">@currency($transaksi->kembalian)</td>
                           @endif
                 </tr>
             </tfoot>
