@@ -26,16 +26,8 @@
                 </div>
               </a>
             </div>
-            <form>
+            {{-- <form>
                 <div class="d-flex flex-column flex-sm-row gap-3 justify-content-sm-end align-items-end pb-3">
-                  <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3 mb-sm-0">
-                    <select class="form-select" aria-label="Default select example" name="jenispembayaran">
-                      <option value="" selected>Semua Pembayaran</option>
-                      <option value="tunai">Tunai</option>
-                      <option value="non-tunai">Non-Tunai</option>
-                      <option value="belum-dibayar">Belum Dibayar</option>
-                    </select>
-                  </div>
                   <div class="col-12 col-sm-8 col-md-9 col-lg-10">
                     <div class="d-flex flex-column flex-sm-row gap-3">
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3 mb-sm-0">
@@ -58,7 +50,7 @@
                     </div>
                   </div>
                 </div>
-              </form>
+              </form> --}}
               
       
             <div class="table-responsive">
