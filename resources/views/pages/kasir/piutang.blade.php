@@ -23,7 +23,7 @@
                         <th scope="col">Tanggal Pembeli</th>
                         <th scope="col">Metode Pembayaran</th>
                         <th scope="col">Tanggal Tempo</th>
-                        <th scope="col">Total</th>
+                        <th scope="col">Sisa</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -46,7 +46,7 @@
                                 <td class="text-start ms-5 ps-5">{{ $item->jenispembayaran }}</td>
                                 <td class="text-start ms-5 ps-5">
                                     {{ Carbon\Carbon::parse($item->jatuh_tempo)->format('d-m-Y') }}</td>
-                                <td>@currency($item->total)</td>
+                                <td>@currency($item->total - $item->pembayaran)</td>
 
                                 <td class="d-flex gap-2"> 
                                     {{-- <a target="_blank" href="/pdf/{{ $item->id }}">
@@ -68,14 +68,18 @@
                                     @slot('isi')
                                         <form action="/piutang/{{ $item->id }}" method="POST">
                                             @csrf
-                                            <input type="hidden" value="{{ $item->total }}" name="total">
+                                            <div id="cicil">
+                                                <input type="hidden" value="{{ $item->total }}" name="total">
+                                            </div>
                                             <div class="d-flex justify-content-center text-center">
                                                 <select class="form-select" aria-label="Default select example"
-                                                    name="jenispembayaran" onchange="bon()" id="jenispembayaran">
+                                                    name="jenispembayaran" id="jenispembayaran">
                                                     <option selected>Pilih Metode Pembayaran</option>
                                                     <option value="tunai">Tunai</option>
                                                     <option value="non-tunai">Non-Tunai</option>
-                                                </select>
+                                                    <option value="belum-dibayar">Cicil</option>
+                                                </select>   
+                                                <input type="number" class="form-control mx-2" placeholder="Masukkan Jumlah" name="pembayaran" >
                                             </div>
                                             <div class="d-flex justify-content-end mt-3">
                                                 <button type="submit" class="btn btn-success btn-sm">

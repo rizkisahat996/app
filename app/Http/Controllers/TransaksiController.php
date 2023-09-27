@@ -466,20 +466,50 @@ class TransaksiController extends Controller
         return view('pages.kasir.piutang', compact('transaksi'));
     }
 
-    public function storepiutang($id, Request $request){
+    public function storepiutang($id, Request $request)
+    {
+        $trans = transaksi::find($id);
+
         $validator = Validator::make($request->all(), [
-            'jenispembayaran' => 'required|in:tunai,non-tunai',
+            'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
+            'pembayaran' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        // $total = transaksi::where('id', $id)->select('total')->first();
-        // dd($total);
-        transaksi::where('id', $id)->update(['jenispembayaran' => $request->jenispembayaran, 'user_id' => Auth::user()->id, 'total' => $request->total]);
-        alert()->success('Berhasil','Berhasil Mengupdate Piutang');
+
+        $sisa = $trans->total - $trans->pembayaran;
+
+        if ($request->jenispembayaran == 'belum-dibayar') {
+            
+            $validator = Validator::make($request->all(), [
+                'pembayaran' => 'numeric|max:' . ($sisa - 1),
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+        } elseif ($request->jenispembayaran == 'tunai' || $request->jenispembayaran == 'non-tunai') {
+
+            if ($request->pembayaran < $sisa) {
+                return redirect()->back()->withErrors(['pembayaran' => 'Pembayaran harus sama atau lebih dari sisa.'])->withInput();
+            }
+        }
+
+        // Update the transaksi record
+        $trans->update([
+            'jenispembayaran' => $request->jenispembayaran,
+            'pembayaran' => $request->pembayaran + $trans->pembayaran,
+            'kembalian' => $request->pembayaran + $trans->kembalian,
+            'user_id' => Auth::user()->id,
+            'total' => $request->total,
+        ]);
+
+        alert()->success('Berhasil', 'Berhasil Mengupdate Piutang');
         return redirect('/penjualan');
     }
+
     
     public function preview($id){
         $transaksi = transaksi::where('id',$id)->first();

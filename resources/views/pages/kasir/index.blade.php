@@ -193,7 +193,6 @@
             if (jenis === String("belum-dibayar").valueOf()) {
                 var bon = document.getElementById("bon");
                 var pembayaranInput = document.getElementById("pembayaran");
-                pembayaranInput.style.display = "none";
                 bon.classList.remove("d-none");
             } else {
                 var bon = document.getElementById("bon");
