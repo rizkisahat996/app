@@ -10,6 +10,7 @@ use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SuratJalanController;
 use App\Http\Controllers\TransaksiController;
 use App\Models\SuratJalan;
+use Illuminate\Foundation\Console\ScopeMakeCommand;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +25,12 @@ use App\Models\SuratJalan;
 
 Route::resource('/pelanggan', PelangganController::class)->middleware('auth');
 
+Route::get('/', [HomeController::class, 'welcome']);
 Route::get('/dashboard', [HomeController::class, 'index'])->middleware('su');
 Route::get('/harinih', [HomeController::class, 'harinih'])->middleware('su');
 Route::get('/bulannih', [HomeController::class, 'bulannih'])->middleware('su');
 Route::get('/tahunnih', [HomeController::class, 'tahunnih'])->middleware('su');
-Route::get('/', [PenggunaController::class, 'login'])->name('login');
+Route::get('/login', [PenggunaController::class, 'login'])->name('login');
 Route::post('/login', [PenggunaController::class, 'attemp']);
 Route::get('/logout', [PenggunaController::class, 'logout'])->middleware('auth');
 Route::resource('/barang', BarangController::class)->middleware('auth');
