@@ -78,6 +78,31 @@
                                 <span>Edit</span>
                               </div>
                             </a>
+                            @component('components.modal')
+                                    @slot('target')
+                                        {{ $item->id }}
+                                    @endslot
+                                    @slot('icon')
+                                        <div type="submit" class="btn btn-success text-white mb-1">
+                                            <i class="ti ti-plus"></i>
+                                            <span>Tambah</span>
+                                        </div>
+                                    @endslot
+                                    @slot('isi')
+                                        <form action="/barang/tambah/{{ $item->id }}" method="POST">
+                                            @csrf
+                                            <div class="d-flex justify-content-center text-center">  
+                                                <input type="number" class="form-control mx-2" placeholder="Masukkan Jumlah Barang (berat)" name="berat" >
+                                            </div>
+                                            <div class="d-flex justify-content-end mt-3">
+                                                <button type="submit" class="btn btn-success btn-sm">
+                                                    <span>Submit</span>
+                                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    @endslot
+                                @endcomponent
                           </div>
                         </td>
                       </tr>

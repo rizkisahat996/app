@@ -197,12 +197,12 @@ class BarangController extends Controller
   public function tambah(Request $request, $id)
   {
     $barang = barang::where('id', $id)->first();
-    $stoklama = (int)$barang->stok;
+    $stoklama = $barang->stok;
 
     $tambah = $request->berat / 25;
 
     $updatestok = $tambah + $stoklama;
-    $updateberat = $updatestok * 25;
+    $updateberat = $request->berat + $barang->berat;
     $hargalama = $barang->hargabeli * $stoklama * 25;
     $total = $updatestok * $barang->hargabeli * 25;
 
