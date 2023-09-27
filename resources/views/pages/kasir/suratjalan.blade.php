@@ -60,7 +60,7 @@ padding-top:4rem;
         }
 
         #bawah td {
-            padding-bottom: 0rem !important;
+            padding-bottom: 1rem !important;
             font-size: 18px
         }
       
@@ -142,6 +142,9 @@ text-decoration: underline;
     padding-top: 2px;
 }
 
+#bar tr {
+        border-bottom: 0.3px solid #000; /* You can adjust the border style and color as needed */
+    }
         @media print {}
     </style>
 </head>
