@@ -25,6 +25,7 @@ use Illuminate\Foundation\Console\ScopeMakeCommand;
 
 Route::resource('/pelanggan', PelangganController::class)->middleware('auth');
 
+Route::post('/barang/aktif/{id}', [BarangController::class, 'aktif'])->middleware('su');
 Route::get('/', [HomeController::class, 'welcome']);
 Route::get('/dashboard', [HomeController::class, 'index'])->middleware('su');
 Route::get('/harinih', [HomeController::class, 'harinih'])->middleware('su');

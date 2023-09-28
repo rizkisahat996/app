@@ -11,7 +11,7 @@
                         <th scope="col">Harga Beli </th>
                         {{-- <th scope="col">Harga Eceran</th> --}}
                         {{-- <th scope="col">Harga Retail</th> --}}
-                        <th scope="col">Harga Stok</th>
+                        <th scope="col">Jumlah Stok</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Action</th>
                     </tr>

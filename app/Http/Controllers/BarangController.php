@@ -24,9 +24,10 @@ class BarangController extends Controller
     $kategori = kategoribarang::get();
     $get['kategori'] = $request->query('kategori');
 
-    $data = barang::join('kategoribarangs', 'barangs.id_kategori', '=', 'kategoribarangs.id')
+    $data = barang::where('aktif', '=', 'ya')->join('kategoribarangs', 'barangs.id_kategori', '=', 'kategoribarangs.id')
                         ->select('barangs.*', 'kategoribarangs.id as kategori_id', 'kategoribarangs.kategori as namakategori')
                         ->get();
+    // dd($data);
     $id = $request->query('kategori');
     // dd($data[0]);
 
@@ -183,6 +184,18 @@ class BarangController extends Controller
     return redirect('/barang');
   }
 
+  public function aktif(string $id, Request $request)
+  {
+    $barang = barang::find($id);
+    $barang->update([
+      'aktif' => 'tidak'
+    ]);
+
+    alert()->success('Berhasil', 'Berhasil Menghapus Data');
+
+    return Redirect::back();
+  }
+
   /**
    * Remove the specified resource from storage.
    */
@@ -211,7 +224,7 @@ class BarangController extends Controller
       'stok' => $updatestok, 
       'stokawal' => $stoklama, 
       'tambah' => $tambah, 
-      'stokkeluar' => 0, 
+      'stokkeluar' => 0,
       'total_lama' => $hargalama, 
       'total' => $total
     ]);

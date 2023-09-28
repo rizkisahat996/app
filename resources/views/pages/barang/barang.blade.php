@@ -62,7 +62,6 @@
                       @else
                       @foreach ($data as $item)
                       <tr>
-                        {{-- {{ dd($item->id) }} --}}
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->nama }}</td>
@@ -72,6 +71,29 @@
                         <td>{{ $item->namakategori }}</td>
                         <td>
                           <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            @component('components.modal')
+                                    @slot('target')
+                                        {{ $item->id }}
+                                    @endslot
+                                    @slot('icon')
+                                        <div type="submit" class="btn btn-success text-white mb-1">
+                                            <i class="ti ti-plus"></i>
+                                            <span>Hapus</span>
+                                        </div>
+                                    @endslot
+                                    @slot('isi')
+                                        <form action="/barang/aktif/{{ $item->id }}" method="post">
+                                            @csrf
+                                            @method('post')
+                                            <div class="d-flex justify-content-end mt-3">
+                                                <button type="submit" class="btn btn-success btn-sm">
+                                                    <span>Apakah yakin ingin menghapus?</span>
+                                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    @endslot
+                                @endcomponent
                             <a href="barang/{{ $item->id }}/edit">
                               <div style="border-radius: 5px" class="btn btn-warning text-white mb-1">
                                 <i class="ti ti-edit"></i>
@@ -103,6 +125,7 @@
                                         </form>
                                     @endslot
                                 @endcomponent
+                                
                           </div>
                         </td>
                       </tr>
