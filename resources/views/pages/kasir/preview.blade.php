@@ -124,7 +124,7 @@
                                 $oke = $transaksi->kembalian;
                                 $haha = -$oke;
                             ?>
-                            <td colspan="6" class="text-end">Hutang&nbsp;:</td>
+                            <td colspan="6" class="text-end">Sisa&nbsp;:</td>
                             <td class="text-center">@currency($haha)</td>
                           @else
                             <td colspan="6" class="text-end">Kembalian&nbsp;:</td>
