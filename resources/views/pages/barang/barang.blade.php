@@ -94,14 +94,6 @@
                                         </form>
                                     @endslot
                                 @endcomponent --}}
-                                <form action="/barang/aktif/{{ $item->id }}" method="post">
-                                  @csrf
-                                  @method('post')
-                                      <button style="border-radius: 5px" type="submit" class="btn btn-danger text-white mb-1">
-                                          <i class="ti ti-trash"></i>
-                                          <span>Hapus</span>
-                                      </button>
-                              </form>
                             <a href="barang/{{ $item->id }}/edit">
                               <div style="border-radius: 5px" class="btn btn-warning text-white mb-1">
                                 <i class="ti ti-edit"></i>
@@ -134,6 +126,14 @@
                                     @endslot
                                 @endcomponent
                                 
+                                <form action="/barang/aktif/{{ $item->id }}" method="post">
+                                  @csrf
+                                  @method('post')
+                                      <button style="border-radius: 5px" type="submit" class="btn btn-danger text-white mb-1">
+                                          <i class="ti ti-trash"></i>
+                                          <span>Hapus</span>
+                                      </button>
+                              </form>
                           </div>
                         </td>
                       </tr>
