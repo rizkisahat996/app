@@ -71,7 +71,7 @@
                         <td>{{ $item->namakategori }}</td>
                         <td>
                           <div class="d-flex flex-wrap gap-2 justify-content-center">
-                            @component('components.modal')
+                            {{-- @component('components.modal')
                                     @slot('target')
                                         {{ $item->id }}
                                     @endslot
@@ -93,7 +93,15 @@
                                             </div>
                                         </form>
                                     @endslot
-                                @endcomponent
+                                @endcomponent --}}
+                                <form action="/barang/aktif/{{ $item->id }}" method="post">
+                                  @csrf
+                                  @method('post')
+                                      <button style="border-radius: 5px" type="submit" class="btn btn-danger text-white mb-1">
+                                          <i class="ti ti-trash"></i>
+                                          <span>Hapus</span>
+                                      </button>
+                              </form>
                             <a href="barang/{{ $item->id }}/edit">
                               <div style="border-radius: 5px" class="btn btn-warning text-white mb-1">
                                 <i class="ti ti-edit"></i>
