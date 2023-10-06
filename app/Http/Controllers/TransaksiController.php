@@ -23,7 +23,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $data = barang::orderBy('nama')->get();
+        $data = barang::orderBy('nama')->where('aktif', '=', 'ya')->get();
         $pelanggan = pelanggan::get();
         return view('pages.kasir.index', compact('data', 'pelanggan'));
     }
@@ -78,11 +78,6 @@ class TransaksiController extends Controller
                 $grandtotal = $request->grandtotal;
                 $pembayaran = $request->pembayaran;
                 $kembalian = $pembayaran - $grandtotal;
-
-                // if ($pembayaran < $grandtotal) {
-                //     alert()->error('Pembayaran Tidak Valid', 'Jumlah pembayaran kurang dari grand total.');
-                //     return back();
-                // }
                 
                 $kembalian = $pembayaran - $grandtotal;
 
@@ -93,7 +88,7 @@ class TransaksiController extends Controller
                     'kodefaktut'=> $uuid,
                     'kodeproforma'=> $kodeproforma,
                     'kodejalan'=> $kodejalan,
-                    'jenispembayaran'=> $request->jenispembayaran,
+                    'jenispembayaran'=> Str::lower($request->jenispembayaran),
                     'total'=> $grandtotal,
                     'pembayaran'=> $pembayaran,
                     'user_id'=> Auth::user()->id,
@@ -154,8 +149,12 @@ class TransaksiController extends Controller
     public function edit(string $id)
     {
         $transaksi = transaksi::find($id);
-        $hasil = barang::select('nama', 'id')->get();
-        $data = detailtransaksi::where('id_transaksi',$id)->join('barangs', 'detailtransaksis.id_barang', '=', 'barangs.id')->select('detailtransaksis.*', 'barangs.nama')->get();
+        $hasil = barang::where('aktif', '=', 'ya')->select('nama', 'id')->get();
+        $data = detailtransaksi::where('id_transaksi',$id)
+                ->join('barangs', 'detailtransaksis.id_barang', '=', 'barangs.id')
+                ->where('barangs.aktif', '=', 'ya')
+                ->select('detailtransaksis.*', 'barangs.nama')
+                ->get();
         // dd($hasil);
         return view('pages.kasir.edit', compact('data', 'transaksi', 'hasil'));
     }
@@ -165,14 +164,21 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-            $validator = Validator::make($request->all(), [
-                'grandtotal' => 'required|numeric|min:0',
-                'pembayaran' => 'required|numeric|min:' . $request->grandtotal,
-                'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
-                'tgl_beli' => 'required|date', 
-                'nama.*' => 'required', 
-                'jumlah.*' => 'required|numeric|min:1', 
-            ]);
+        $validator = Validator::make($request->all(), [
+            'grandtotal' => 'required|numeric|min:0',
+            'jenispembayaran' => 'required|in:tunai,non-tunai,belum-dibayar',
+            'tgl_beli' => 'required|date', 
+            'jumlah.*' => 'required|numeric|min:1', 
+        ]);
+        
+        if ($request->jenispembayaran !== 'belum-dibayar') {
+            $validator->addRules(['pembayaran' => 'required|numeric|min:' . $request->grandtotal]);
+        }
+        $krg = $request->grandtotal - 1;
+        // dd($krg);
+        if ($request->jenispembayaran === 'belum-dibayar') {
+            $validator->addRules(['pembayaran' => 'required|numeric|lte:' . $krg]);
+        }
     
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -187,7 +193,7 @@ class TransaksiController extends Controller
             
             $kembalian = $pembayaran - $grandtotal;
             transaksi::where('id',$id )->update([
-                'jenispembayaran'=> $request->jenispembayaran,
+                'jenispembayaran'=> Str::lower($request->jenispembayaran),
                 'total'=>$grandtotal,
                 'pembayaran'=> $pembayaran,
                 'user_id'=> Auth::user()->id,

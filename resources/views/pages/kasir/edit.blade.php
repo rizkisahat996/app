@@ -85,76 +85,80 @@
         <table id="prod" class="table table-bordered bg-white mt-4" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 5px">
             <thead>
                 <tr>
-                    <th style="text-align: center" width="25%">Nama Barang</th>
+                    <th style="text-align: center" width="20%">Nama Barang</th>
                     <th style="text-align: center" width="10%">Stok</th>
-                    <th style="text-align: center" width="15%">Harga</th>
-                    <th style="text-align: center" width="10%">Satuan</th>
-                    <th style="text-align: center" width="15%">Jumlah</th>
-                    <th style="text-align: center" width="25%">Subtotal</th>
+                    <th style="text-align: center" width="12%">Berat</th>
+                    <th style="text-align: center" width="13%">Harga</th>
+                    <th style="text-align: center" width="8%">Satuan</th>
+                    <th style="text-align: center" width="12%">Jumlah Per Sak</th>
+                    <th style="text-align: center" width="8%">Keterangan</th>
+                    <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                  <td style="text-align:right; vertical-align: middle" colspan="5">
-                    <b>Grandtotal</b>
-                  </td>
-                  <td>
-                    <input id="grandtotal2" type="text" class="form-control grandtotal" value="0" readonly>
-                    <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="text-align:right; vertical-align: middle" colspan="5">
-                    <b>Pembayaran</b>
-                  </td>
-                  <td>
-                    <input type="number" name="pembayaran" class="form-control" value="{{ $transaksi->pembayaran }}"  id="pembayaran">
-                  </td>
-                </tr>
-              </tfoot>
 
             <tbody id="tbody">
                 @foreach ($data as $item)
                     <tr role="row" class="1" id="trow">
                         <td>
-                            <select required="required" style="width:100%;" class="form-control nama_obat"
-                                id="{{ 'nama' . $loop->iteration }}" name="nama[]" data-stok="#stok1" data-unit="#unit1"
-                                data-harga_jual="#harga_jual1" onchange="coba()">
+                                    <select required="required" style="width:100%;" class="form-control nama_obat"
+                                    id="{{ 'nama' . $loop->iteration }}" name="nama[]" data-stok="#stok1" data-unit="#unit1"
+                                    data-harga_jual="#harga_jual1" onchange="coba()">
 
-                                <option value="{{ old('id_barang', $item->id_barang) }}" selected>
-                                    {{ old('nama', $item->nama) }}</option>
-                                @foreach ($hasil as $barang)
+                                    <option value="{{ old('id_barang', $item->id_barang) }}" selected>
+                                        {{ old('nama', $item->nama) }}</option>
+                                    @foreach ($hasil as $barang)
 
-                                    @if ($barang->id !== old('id_barang', $item->id_barang))
-                                        <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </td>
-                        <td><input id="{{ 'stok' . $loop->iteration }}" name="unit[]" class="form-control"
-                                readonly=""></td>
-                        <td><input id="{{ 'harga' . $loop->iteration }}" name="harga_jual[]"
-                                class="form-control harga_jual" readonly="" onchange="hitung()">
-                        </td>
-                        <td>
-                            <input id="{{ 'satuan' . $loop->iteration }}" name="stok[]" class="form-control stok"
-                                readonly="">
-                            <input id="{{ 'modal' . $loop->iteration }}" name="modal[]" class="form-control stok" hidden>
-                        </td>
+                                        @if ($barang->id !== old('id_barang', $item->id_barang))
+                                            <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td><input id="{{ 'berat' . $loop->iteration }}" name="unit[]" class="form-control" readonly=""></td>
+                            <td><input id="{{ 'stok' . $loop->iteration }}" name="stok[]" class="form-control" readonly=""></td>
+                            <td><input id="{{ 'harga' . $loop->iteration }}" name="harga_jual[]" class="form-control harga_jual" readonly=""
+                                    onchange="hitung()">
+                            </td>
+                            <td>
+                                <input id="{{ 'satuan' . $loop->iteration }}" name="berat[]" class="form-control berat" readonly="">
+                                <input id="{{ 'modal' . $loop->iteration }}" name="modal[]" class="form-control berat" hidden>
+                            </td>
                         <td><input type="number" id="{{ 'jumlah' . $loop->iteration }}" name="jumlah[]"
-                                class="form-control jumlah" required="required" onchange="hitung()"
-                                value="{{ old('jumlah', $item->jumlah) }}">
-                        </td>
-                        <td><input id="{{ 'subtotaltampil' . $loop->iteration }}" class="form-control subtotal" readonly>
-                        </td>
-                        <td><input id="{{ 'subtotal' . $loop->iteration }}" name="subtotal[]"
-                                class="form-control subtotal" hidden onchange="hitungseluruh()"></td>
-                        <td><button id="1" class="btn btn-danger btn-sm hapus" type="button"
-                                onclick="hapus(this)">
-                                <span class="fa fa-trash"></span> Hapus</button>
-                        </td>
-                    </tr>
+                            class="form-control jumlah" required="required" onchange="hitung()"
+                            value="{{ old('jumlah', $item->jumlah) }}">
+                    </td>
+                          <td>
+                              <input id="{{ 'keterangan' . $loop->iteration }}" type="text" name="keterangan[]" class="form-control jumlah" required>
+                            </td>
+                            <td><input id="{{ 'subtotaltampil' . $loop->iteration }}" class="form-control subtotal" readonly>
+                            </td>
+                            <td><input id="{{ 'subtotal' . $loop->iteration }}" name="subtotal[]"
+                                    class="form-control subtotal" hidden onchange="hitungseluruh()"></td>
+                            <td><button id="1" class="btn btn-danger btn-sm hapus" type="button"
+                                    onclick="hapus(this)">
+                                    <span class="fa fa-trash"></span> Hapus</button>
+                            </td>
+                </tr>
                 @endforeach
+                <tfoot>
+                    <tr>
+                      <td style="text-align:right; vertical-align: middle" colspan="7">
+                        <b>Grandtotal</b>
+                      </td>
+                      <td>
+                        <input id="grandtotal2" type="text" class="form-control grandtotal" value="0" readonly>
+                        <input id="grandtotal" name="grandtotal" type="text" class="form-control grandtotal" hidden>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:right; vertical-align: middle" colspan="7">
+                        <b>Pembayaran</b>
+                      </td>
+                      <td>
+                        <input type="number" name="pembayaran" class="form-control" value="{{ $transaksi->pembayaran }}"  id="pembayaran">
+                      </td>
+                    </tr>
+                  </tfoot>
         </table>
     </div>
         <div class="ln_solid"></div>
@@ -182,25 +186,21 @@
             hitung();
             coba();
             hitungseluruh();
-            kembalian();
         }, 1000);
-    
+
         function bon() {
             var jenis = document.getElementById("jenispembayaran").value;
             if (jenis === String("belum-dibayar").valueOf()) {
                 var bon = document.getElementById("bon");
+                var pembayaranInput = document.getElementById("pembayaran");
                 bon.classList.remove("d-none");
             } else {
                 var bon = document.getElementById("bon");
+                var pembayaranInput = document.getElementById("pembayaran");
+                pembayaranInput.style.display = "block";
                 bon.classList.add("d-none");
             }
         }
-    
-        var balek = document.getElementById("kembali");
-        var balektampil = document.getElementById("kembalian");
-        balek.addEventListener("keyup", function(e) {
-            balektampil.value = formatRupiah(balek.value, "Rp. ");
-        });
     
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, "").toString(),
@@ -229,12 +229,14 @@
     
             baru.querySelector("#harga1").id = 'harga' + panjang;
             baru.querySelector("#nama1").id = 'nama' + panjang;
+            baru.querySelector("#berat1").id = 'berat' + panjang;
             baru.querySelector("#stok1").id = 'stok' + panjang;
             baru.querySelector("#subtotal1").id = 'subtotal' + panjang;
             baru.querySelector("#subtotaltampil1").id = 'subtotaltampil' + panjang;
             baru.querySelector("#jumlah1").id = 'jumlah' + panjang;
             baru.querySelector("#modal1").id = 'modal' + panjang;
             baru.querySelector("#satuan1").id = 'satuan' + panjang;
+            baru.querySelector("#keterangan1").id = 'keterangan' + panjang;
             baru.querySelector(".hapus").id = panjang;
             baru.className = panjang;
     
@@ -244,11 +246,11 @@
     
         function incrementJumlah(id) {
             let jumlah = document.getElementById('jumlah' + id);
-            let stok = document.getElementById('stok' + id);
+            let berat = document.getElementById('berat' + id);
             let currentJumlah = parseInt(jumlah.value);
-            let currentStok = parseInt(stok.value);
+            let currentBerat = parseInt(berat.value);
     
-            if (currentJumlah < currentStok) {
+            if (currentJumlah < currentBerat) {
                 jumlah.value = currentJumlah + 1;
                 hitung();
             }
@@ -263,6 +265,7 @@
                 hitung();
             }
         }
+
     
         function hitung() {
             let a = document.querySelectorAll("#trow");
@@ -274,21 +277,22 @@
                 let jual = "harga" + i;
                 let total = "subtotal" + i;
                 let tampil = "subtotaltampil" + i;
-                let stk = "stok" + i;
-                let jumlah = parseInt(document.getElementById(id).value);
+                let stk = "berat" + i;
+                let jumlah = parseInt(document.getElementById(id).value * 25);
                 let satuan = document.getElementById(jual).value;
-                let stok = parseInt(document.getElementById(stk).value);
+                let berat = parseInt(document.getElementById(stk).value);
     
-                if (jumlah > stok) {
+                if (jumlah > berat * 25) {
                     document.getElementById(id).value = " ";
                     document.getElementById(id).placeholder = " ";
                     var element = document.getElementById("alert");
                     element.classList.remove("d-none");
                     element.classList.add("d-flex");
                 } else {
-                    let hasil = document.getElementById(id).value * satuan;
+                    let hasil = document.getElementById(id).value * satuan * 25;
                     document.getElementById(total).value = hasil;
                     document.getElementById(tampil).value = formatRupiah(document.getElementById(total).value, "Rp. ");
+
                 }
             }
         }
@@ -306,10 +310,12 @@
     
             for (let i = 1; i <= panjang; i++) {
                 let id = "#nama" + i;
-                let stok = "#stok" + i;
+                let berat = "#berat" + i;
                 let harga = '#harga' + i;
                 let unit = '#satuan' + i;
                 let modal = '#modal' + i;
+                let stok = '#stok' + i;
+                let keterangan = '#keterangan' + i;
     
                 $(id).each(function() {
                     var id = $(this).val();
@@ -319,13 +325,15 @@
                         dataType: 'json',
                         url: "{{ url('/detail-barang-') }}" + id,
                         success: function(data) {
-                            document.querySelector(stok).placeholder = data.data.berat;
-                            document.querySelector(stok).value = data.data.berat;
+                            document.querySelector(berat).placeholder = data.data.berat /25;
+                            document.querySelector(berat).value = data.data.berat /25;
                             document.querySelector(unit).value = data.data.satuan;
     
                             let tes = document.querySelector(harga);
                             let c = data.data.hargajual;
                             document.querySelector(modal).value = data.data.hargabeli;
+                            document.querySelector(stok).value = data.data.berat;
+                            document.querySelector(keterangan).value = data.data.keterangan;
                             tes.value = c;
                         }
                     });
