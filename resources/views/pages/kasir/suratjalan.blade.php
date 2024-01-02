@@ -162,52 +162,41 @@ text-decoration: underline;
             <h2><i>SURAT JALAN</i></h2>
         </div>
         <table class="table table-borderless" id="info">
-            <tr>
-                <td width="15%"><b>Kepada Yth,</b><br>&nbsp;</td>
-                <td>{{ $transaksi->pelanggan->nama }}
-                    <br> {{ $transaksi->pelanggan->perusahaan }}
-                </td>
-                <td style="text-align: right;">
-                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->kodejalan }}</div>
-                </td>
-            </tr>
-            <tr>
-                <td width="15%">&nbsp;</td>
-                <td>{{ $transaksi->nama }}</td>
-                <td style="text-align: right;">
-                    <div style="display: inline-block; text-align: left;">Medan, {{ $transaksi->created_at->format('d-m-Y') }}</div>
-                </td>
-            </tr>
-            <tr>
-                    <td rowspan="2">Alamat</td>
-                    <td rowspan="2">{{ $transaksi->pelanggan->alamat }}</td>
-                    <td style="text-align: right;">
-                        <div style="display: inline-block; text-align: left;">Nomor Polisi : {{ $transaksi->nomor_polisi }}</div>
-                    </td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Nomor HP</td>
-                <td>{{ $transaksi->pelanggan->no_telp }}</td>
-            </tr>
-            <tr>
-                @if (($transaksi->jatuh_tempo == null))
-                <td></td>
-                <td></td>
-                <td></td>
-                @else
-                <td>Tanggal Tempo</td>
-                <td>:</td>
-                <td>{{ Carbon\Carbon::parse($transaksi->jatuh_tempo)->format('d-m-Y') }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                @endif
-                
-            </tr>
-        </table>
+        <tr>
+            <td width="15%"><b>Kepada Yth,</b><br>&nbsp;</td>
+            <td>
+                <b>{{$transaksi->pelanggan->nama}}</b><br>
+                <b>{{$transaksi->pelanggan->perusahaan}}</b>
+            </td>
+            <td style="text-align: right;">
+                <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->kodefaktur }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td width="15%">&nbsp;</td>
+            <td>{{ $transaksi->nama }}</td>
+            <td style="text-align: right;">
+                <div style="display: inline-block; text-align: left;">Medan, {{ $transaksi->created_at->format('d-m-Y') }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">Alamat</td>
+            <td rowspan="2">{{ $transaksi->pelanggan->alamat }}</td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Nomor HP</td>
+            <td>{{ $transaksi->pelanggan->no_telp }}</td>
+        <!--</tr>-->
+        <!--<tr>-->
+            <td style="text-align: right;">
+                <div style="display: inline-block; text-align: left;">Nomor Polisi : {{$transaksi->nomor_polisi }}</div>
+            </td>
+        </tr>
+        
+    </table>
         <table class="table table-borderless" id="barang" style="width: 100%; height:100px">
             <thead>
                 <tr>
@@ -224,7 +213,7 @@ text-decoration: underline;
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->nama }}</td>
-                        <td>{{ $item->jumlah }}</td>
+                        <td>{{ $item->jumlah * 25 }}</td>
                         <td>{{ $item->satuan }}</td>
                         <td>{{ $item->berat }}</td>
                         <td>{{ $item->keterangann }}</td>

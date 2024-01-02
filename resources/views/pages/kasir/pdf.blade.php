@@ -115,6 +115,7 @@
             float: left;
             margin-top: 15px;
             padding-top: 15px;
+            
         }
 
         .black {
@@ -212,7 +213,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td style="text-align:left;">{{ $item->nama }}</td>
-                <td>{{ intval($item->jumlah) }}</td>
+                <td>{{ intval($item->jumlah * 25) }}</td>
                 <td>{{ number_format($item->hargajual, 0, '.', '.') }}</td>
                 <td style="text-align:right;">{{ number_format($item->subtotal, 0, '.', '.') }}</td>
             </tr>
@@ -265,7 +266,7 @@
     </table>
 
     <div class="container">
-        <div class="catatan">
+        <div class="catatan" style="font-size:10px">
             <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div> <br><br>
             <div class="text-start"><b>Catatan :</b></div>
             <div class="text-start">1. Barang yang sudah dibeli tidak dapat dikembalikan</div>
@@ -274,12 +275,16 @@
             <div class="text-start">MANDIRI : 106.0055.4466.71</div>
             <div class="text-start">BNI : 1264.666.777</div>
         </div>
-        <div style="text-align:center">
+        <div style="text-align:right">
             <br> <br> <br> <br> <br>
             <img src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
         </div>
-        <div style="text-align:center"><b>{{ Auth::user()->name; }}</b></div>
-        <div style="text-align:center">{{ Auth::user()->jabatan; }}</div>
+        <div style="text-align:right;margin-right:27px"><b>{{ Auth::user()->name; }}</b></div>
+        @if(Auth::user()->jabatan == 'superadmin')
+        <div style="text-align:right;margin-right:13px">{{ Auth::user()->jabatan; }}</div>
+        @else
+        <div style="text-align:right;margin-right:30px">{{ Auth::user()->jabatan; }}</div>
+        @endif
     </div>
 
 </body>

@@ -88,10 +88,10 @@
             <tr>
                 <th style="text-align: center" width="20%">Nama Barang</th>
                 <th style="text-align: center" width="10%">Stok</th>
-                <th style="text-align: center" width="12%">Berat</th>
-                <th style="text-align: center" width="13%">Harga</th>
                 <th style="text-align: center" width="8%">Satuan</th>
-                <th style="text-align: center" width="12%">Jumlah Per Sak</th>
+                <th style="text-align: center" width="12%">Quantity</th>
+                <th style="text-align: center" width="12%">Volume</th>
+                <th style="text-align: center" width="13%">Harga</th>
                 <th style="text-align: center" width="8%">Keterangan</th>
                 <th style="text-align: center" width="30%" colspan="2">Subtotal</th>
             </tr>
@@ -112,10 +112,6 @@
                       </select>
                   </td>
                   <td><input id="berat1" name="unit[]" class="form-control" readonly=""></td>
-                  <td><input id="stok1" name="stok[]" class="form-control" readonly=""></td>
-                  <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
-                          onchange="hitung()">
-                  </td>
                   <td>
                       <input id="satuan1" name="berat[]" class="form-control berat" readonly="">
                       <input id="modal1" name="modal[]" class="form-control berat" hidden>
@@ -124,6 +120,10 @@
                     <input type="number" id="jumlah1" name="jumlah[]" class="form-control jumlah"
                         required onchange="hitung()">
                 </td>
+                  <td><input id="stok1" name="stok[]" class="form-control" readonly=""></td>
+                  <td><input id="harga1" name="harga_jual[]" class="form-control harga_jual" readonly=""
+                          onchange="hitung()">
+                  </td>
                 <td>
                     <input id="keterangan1" type="text" name="keterangan[]" class="form-control jumlah" required>
                   </td>

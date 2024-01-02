@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function welcome()
     {
-        $path2 = public_path('assets/images/logo.png');
+        $path2 = public_path('assets/images/mughni.png');
         $type2 = pathinfo($path2, PATHINFO_EXTENSION);
         $data2 = file_get_contents($path2);
         $logo = 'data:image/' . $type2 . ';base64,' . base64_encode($data2);

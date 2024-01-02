@@ -156,49 +156,47 @@ td{
             <h2><i>PROFORMA</i></h2>
         </div>
         <table class="table table-borderless" id="info">
-            <tr>
-                <td width="15%"><b>Kepada Yth,</b><br>&nbsp;</td>
-                <td>{{ $transaksi->pelanggan->nama }}
-                    <br> {{ $transaksi->pelanggan->perusahaan }}
-                </td>
-                <td style="text-align: right;">
-                    <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->kodeproforma }}</div>
-                </td>
-            </tr>
-            <tr>
-                <td width="15%">&nbsp;</td>
-                <td>{{ $transaksi->nama }}</td>
-                <td style="text-align: right;">
-                    <div style="display: inline-block; text-align: left;">Medan, {{ $transaksi->created_at->format('d-m-Y') }}</div>
-                </td>
-            </tr>
-            <tr>
-                    <td rowspan="2">Alamat</td>
-                    <td rowspan="2">{{ $transaksi->pelanggan->alamat }}</td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Nomor HP</td>
-                <td>{{ $transaksi->pelanggan->no_telp }}</td>
-            </tr>
-            <tr>
-                @if (($transaksi->jatuh_tempo == null))
-                <td></td>
-                <td></td>
-                <td></td>
-                @else
-                <td>Tanggal Tempo</td>
-                <td>:</td>
-                <td>{{ Carbon\Carbon::parse($transaksi->jatuh_tempo)->format('d-m-Y') }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                @endif
-                
-            </tr>
-        </table>
+        <tr>
+            <td width="15%"><b>Kepada Yth,</b><br>&nbsp;</td>
+            <td>
+                <b>{{$transaksi->pelanggan->nama}}</b><br>
+                <b>{{$transaksi->pelanggan->perusahaan}}</b>
+            </td>
+            <td style="text-align: right;">
+                <div style="display: inline-block; text-align: left;">Nomor : {{ $transaksi->kodeproforma }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td width="15%">&nbsp;</td>
+            <td>{{ $transaksi->nama }}</td>
+            <td style="text-align: right;">
+                <div style="display: inline-block; text-align: left;">Medan, {{ $transaksi->created_at->format('d-m-Y') }}</div>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2">Alamat</td>
+            <td rowspan="2">{{ $transaksi->pelanggan->alamat }}</td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Nomor HP</td>
+            <td>{{ $transaksi->pelanggan->no_telp }}</td>
+        <!--</tr>-->
+        <!--<tr>-->
+            @if (($transaksi->jatuh_tempo == null))
+            <td style="text-align: right;">
+                <div style="display: inline-block; text-align: left;"></div>
+            </td>
+            @else
+            <td style="text-align: right;">
+                <div style="display: inline-block; text-align: left;">Tanggal Tempo : {{ Carbon\Carbon::parse($transaksi->jatuh_tempo)->format('d-m-Y') }}</div>
+            </td>
+            @endif
+        </tr>
+        
+    </table>
         <br>
         <table class="table table-borderless" id="barang" style="width: 100%; height:100px">
             <thead>
@@ -215,7 +213,7 @@ td{
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td style="text-align:left;">{{ $item->nama }}</td>
-                        <td>{{ intval($item->jumlah) }}</td>
+                        <td>{{ intval($item->jumlah * 25) }}</td>
                         <td>{{ number_format($item->hargajual, 0, '.', '.') }}</td>
                         <td style="text-align:right;">{{ number_format($item->subtotal, 0, '.', '.') }}</td>
                     </tr>
@@ -266,7 +264,7 @@ td{
 	
    
         <div class="container">
-            <div class="catatan">
+            <div class="catatan" style="font-size:10px">
                 <div class="text-start">terbilang {{ terbilang($transaksi->total) }} Rupiah</div><br><br>
                 <div class="text-start"><b>Catatan :</b></div>
                 <div class="text-start">1. Barang yang sudah dipabrikasi, tidak dapat dibatalkan pembeliannya</div>
@@ -277,12 +275,12 @@ td{
                 <div class="text-start">MANDIRI : 106.0055.4466.71</div>
                 <div class="text-start">BNI : 1264.666.777</div>
             </div>
-            <div style="text-align:center">
+            <div style="text-align:right">
                 <br><br><br><br><br>
                 <img src="<?php echo $ttd ?>" alt="ttd" height="100px" width="100px">
                 </div>
-                <div style="text-align:center"><b>{{ Auth::user()->name; }}</b></div>
-                <div style="text-align:center">{{ Auth::user()->jabatan; }}</div>
+        <div style="text-align:right;margin-right:27px"><b>{{ Auth::user()->name; }}</b></div>
+        <div style="text-align:right;margin-right:13px">{{ Auth::user()->jabatan; }}</div>
             </div>
         </div>
         

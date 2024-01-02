@@ -51,8 +51,8 @@
 <body>
     <div class="d-flex flex-column justify-content-center w-100 h-100">
     <div class="center">
-        <h1>-WELCOME TO GUDANG-</h1>
-        <img src="<?php echo $logo ?>" alt="logo" height="150px" width="550px"><br>
+        <!--<h1>-WELCOME TO GUDANG-</h1>-->
+        <img src="<?php echo $logo ?>" alt="logo" height="500px" width="500px"><br>
         <a href="/login" class="btn btn-warning btn-lg shadow"><span>START</span></a>
     </div>
 </div>
